@@ -1,0 +1,27 @@
+{
+  "name": "owasp-threat-dragon-desktop",
+  "version": "0.0.1",
+  "description": "Desktop client for OWASP Threat Dragon",
+  "main": "main.js",
+  "scripts": {
+    "start": "./node_modules/.bin/electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": {
+    "name": "mike.goodwin",
+    "email": "mike.goodwin@owasp.org"
+  },
+  "license": "Apache-2.0",
+  "homepage": "http://docs.threatdragon.org/",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mike-goodwin/owasp-threat-dragon-desktop.git"
+  },
+  "devDependencies": {
+    "electron": "1.6.2"
+  },
+  "dependencies": {
+    "electron-debug": "^1.1.0",
+    "owasp-threat-dragon-core": "0.4.8"
+  }
+}
