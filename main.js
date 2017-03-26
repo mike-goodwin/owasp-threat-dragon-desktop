@@ -18,7 +18,9 @@ function onClosed() {
 function createMainWindow() {
 	const win = new electron.BrowserWindow({
 		width: 600,
-		height: 400
+		height: 400,
+		title: "OWASP Threat Dragon Desktop",
+		icon: "./app/images/threatdragon.ico"
 	});
 
 	win.loadURL(`file://${__dirname}/index.html`);
