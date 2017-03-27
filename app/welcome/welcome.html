@@ -1,36 +1,33 @@
-﻿<div data-ng-controller="welcome as vm" class="container-fluid">
+﻿<div data-ng-controller="welcome as vm">
     <row>
-        <div class="jumbotron">
-            <h1>Welcome!</h1>
-            <p>
-            You're ready to start making your application designs more secure. You can open an existing threat model or create a new one by choosing one of
-            the options below.
-            </p>
-            <p>
-            <icon class="fa fa-exclamation-triangle text-primary"></icon> <strong class="text-primary">Warning!</strong> Threat Dragon is still in early development (it is an <a target="_blank" href="https://www.owasp.org/index.php/OWASP_Threat_Dragon">
-            OWASP incubator project</a>) so it might have some bugs and the data model could change without warning, leaving you
-            unable to open your threat models.
-            </p>
-        </div>
-    </row>
-    <row> 
-        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-            <div class="jumbotron">
-                <div class="text-center">
-                    <a href="#/threatmodel">
-                        <span title="Open a Model From GitHub" class="fa fa-github fa-5x text-primary"></span>
-                    </a>
-                </div>
-                <div>
-                    <br>
-                    <p>
-                        Open an existing threat model from a GitHub repo
-                    </p>
-                </div>
+        <div class="jumbotron container-fluid">
+            <div class="col-md-4">
+                <img class="img-responsive" src="./content/images/threatdragon_logo_image.svg" />
+            </div>
+            <div class="col-md-8">
+                <h1>Welcome!</h1>
+                <p>
+                    Threat Dragon is a free, open-source threat modeling tool from OWASP. You are using the standalone desktop app for Windows,
+                    Macs and Linux. It can also be used as a <a target="_blank" href="https://threatdragon.azurewebsites.net">web application</a>.
+                    The desktop app is great for local use, but if your project is in GitHub you should consider the web
+                    app for better integration with your dev workflow.
+                </p>
+                <p>
+                    Now. You're ready to start making your application designs more secure. Use the file menu or the buttons below to make a
+                    new model or to open a model from a file. You can also down load a demo model.
+                </p>
+                <p>
+                    <icon class="fa fa-exclamation-triangle text-primary"></icon> <strong class="text-primary">Warning!</strong> Threat Dragon is still in early development (it
+                    is an <a target="_blank" href="https://www.owasp.org/index.php/OWASP_Threat_Dragon">
+                OWASP incubator project</a>) so it might have some bugs and the data model could change without warning,
+                    leaving you unable to open your threat models.
+                </p>
             </div>
         </div>
+    </row>
+    <row>
         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-            <div class="jumbotron">
+            <div class="jumbotron container-fluid">
                 <div class="text-center">
                     <a href="#/new/threatmodel">
                         <span title="Create a new model" class="fa fa-plus fa-5x text-primary"></span>
@@ -39,13 +36,28 @@
                 <div>
                     <br>
                     <p>
-                        Create a completely new, empty threat model
+                        Get started by creating a completely new, empty threat model.
                     </p>
                 </div>
             </div>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-            <div class="jumbotron">
+            <div class="jumbotron container-fluid">
+                <div class="text-center">
+                    <a href="#/threatmodel">
+                        <span title="Open a Model From A File" class="fa fa-folder-open fa-5x text-primary"></span>
+                    </a>
+                </div>
+                <div>
+                    <br>
+                    <p>
+                        Open an existing threat model from a file on your file system.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <div class="jumbotron container-fluid">
                 <div class="text-center">
                     <a href="" ng-click="vm.loadDemoModel()">
                         <span title="Download and explore a sample threat model" class="fa fa-cloud-download fa-5x text-primary"></span>
@@ -54,7 +66,7 @@
                 <div>
                     <br>
                     <p>
-                        Download and explore a sample threat model
+                        Open a sample model. This is a good option if you are new to the Threat Dragon.
                     </p>
                 </div>
             </div>

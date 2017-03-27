@@ -25,6 +25,10 @@ function createMainWindow() {
 
 	window.loadURL(`file://${__dirname}/index.html`);
 	window.on('closed', onClosed);
+	window.webContents.on('new-window', function (e, url) {
+		e.preventDefault();
+		require('electron').shell.openExternal(url);
+	});
 
 	return window;
 }
