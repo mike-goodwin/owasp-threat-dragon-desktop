@@ -17,18 +17,19 @@ function onClosed() {
 
 function createMainWindow() {
 	var window = new electron.BrowserWindow({
-		width: 600,
-		height: 400,
 		title: "OWASP Threat Dragon Desktop",
 		icon: "./content/images/threatdragon.ico"
 	});
 
+	window.maximize();
 	window.loadURL(`file://${__dirname}/index.html`);
 	window.on('closed', onClosed);
 	window.webContents.on('new-window', function (e, url) {
 		e.preventDefault();
 		require('electron').shell.openExternal(url);
 	});
+
+	require('./app/layout/menu');
 
 	return window;
 }
