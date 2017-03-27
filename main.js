@@ -16,17 +16,17 @@ function onClosed() {
 }
 
 function createMainWindow() {
-	const win = new electron.BrowserWindow({
+	var window = new electron.BrowserWindow({
 		width: 600,
 		height: 400,
 		title: "OWASP Threat Dragon Desktop",
-		icon: "./app/images/threatdragon.ico"
+		icon: "./content/images/threatdragon.ico"
 	});
 
-	win.loadURL(`file://${__dirname}/index.html`);
-	win.on('closed', onClosed);
+	window.loadURL(`file://${__dirname}/index.html`);
+	window.on('closed', onClosed);
 
-	return win;
+	return window;
 }
 
 app.on('window-all-closed', () => {
