@@ -6,19 +6,20 @@ require('angular-route');
 require('angular-xeditable');
 require('angular-animate');
 window.jQuery = require('jquery');
+require('owasp-threat-dragon-core');
 
 //temporary fix for Chrome/Jointjs problem
 SVGElement.prototype.getTransformToElement = SVGElement.prototype.getTransformToElement || function (toElement) {
     return toElement.getScreenCTM().inverse().multiply(this.getScreenCTM());
 };
 
-var app = angular.module('app', ['ui.bootstrap', 'ngRoute', 'xeditable', 'ngAnimate', 'templates', 'common']);
+var app = angular.module('app', ['ui.bootstrap', 'ngRoute', 'xeditable', 'ngAnimate', 'templates', 'common', 'owasp-threat-dragon-core']);
 
 //require custom modules, services, controllers and directives
-require('./config.route');
-require('owasp-threat-dragon-core');
-require('./layout');
-require('./welcome');
+require('./app/config.route');
+require('./app/layout');
+require('./app/welcome');
+require('./app/threatmodel');
 
 app.config(['$qProvider', function ($qProvider) {
     $qProvider.errorOnUnhandledRejections(false);

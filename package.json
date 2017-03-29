@@ -41,6 +41,6 @@
     "electron-debug": "1.1.0",
     "font-awesome": "4.7.0",
     "jquery": "3.0.0",
-    "owasp-threat-dragon-core": "0.4.8"
+    "owasp-threat-dragon-core": "0.4.9"
   }
 }

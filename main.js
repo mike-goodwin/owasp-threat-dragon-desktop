@@ -29,8 +29,6 @@ function createMainWindow() {
 		require('electron').shell.openExternal(url);
 	});
 
-	require('./app/layout/menu');
-
 	return window;
 }
 

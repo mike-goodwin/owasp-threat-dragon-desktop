@@ -42,6 +42,14 @@ function getRoutes() {
                 settings: {
                 }
             }
+        }, {
+            url: '/test',
+            config: {
+                templateUrl: './app/threatmodel/test.html',
+                title: 'Test Route',
+                settings: {
+                }
+            }
         }
     ];
 }
