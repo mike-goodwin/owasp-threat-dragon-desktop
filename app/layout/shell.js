@@ -48,9 +48,7 @@ function shell($rootScope, $scope, $location, common, config) {
                         label: 'Open Demo Model',
                         accelerator: 'CmdOrCtrl+D',
                         click() {
-                            console.log($location.path());
                             $location.path('/test');
-                            console.log($location.path());
                             $scope.$apply();
                         }
                     },
