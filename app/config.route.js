@@ -43,6 +43,14 @@ function getRoutes() {
                 }
             }
         }, {
+            url: '/threatmodel/:action',
+            config: {
+                templateUrl: 'threatmodels/threatmodeldetail.html',
+                title: 'Threat Model Page',
+                settings: {
+                }
+            }
+        }, {
             url: '/test',
             config: {
                 templateUrl: './app/threatmodel/test.html',

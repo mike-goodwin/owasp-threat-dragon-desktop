@@ -2,7 +2,7 @@
 
 var _ = require('lodash');
 
-function datacontext($q, $http) {
+function datacontextdemo($q, $http) {
 
     var threatModel = null;
     var threatModelUri = 'https://raw.githubusercontent.com/mike-goodwin/owasp-threat-dragon-demo/master/ThreatDragonModels/Demo%20Threat%20Model/Demo%20Threat%20Model.json';
@@ -14,7 +14,7 @@ function datacontext($q, $http) {
 
     return service;
 
-    function load(forceQuery) {
+    function load(location, forceQuery) {
 
         if (service.threatModel && !forceQuery) {
             return $q.when(service.threatModel);
@@ -38,4 +38,4 @@ function datacontext($q, $http) {
     }
 }
 
-module.exports = datacontext;
+module.exports = datacontextdemo;

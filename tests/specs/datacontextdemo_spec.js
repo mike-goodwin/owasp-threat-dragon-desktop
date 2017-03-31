@@ -62,7 +62,7 @@ describe('datacontextdemo service:', function () {
         $httpBackend.whenGET(threatModelUri, { Accept: 'application/json' })
             .respond(200, modelData);
         datacontext.load();
-        datacontext.load(true);
+        datacontext.load(null, true);
         $httpBackend.flush(2);
         expect(datacontext.threatModel.data).toEqual('model');
     });
