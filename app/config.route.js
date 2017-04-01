@@ -51,6 +51,15 @@ function getRoutes() {
                 }
             }
         }, {
+            url: '/threatmodel/:action/diagram/:diagramId',
+            config: {
+                title: 'Threat Model Diagram',
+                templateUrl: 'diagrams/diagrameditor.html',
+                reloadOnSearch: false,
+                settings: {
+                }
+            }
+        }, {
             url: '/test',
             config: {
                 templateUrl: './app/threatmodel/test.html',

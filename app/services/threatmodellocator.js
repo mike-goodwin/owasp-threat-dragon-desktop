@@ -20,7 +20,6 @@ function threatmodellocator() {
     }
 
     function getModelPath(params) {
-
         return params.action;
     }
 }
