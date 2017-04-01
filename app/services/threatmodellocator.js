@@ -5,7 +5,7 @@ function threatmodellocator() {
     var service = {
         getModelLocation: getModelLocation,
         getModelPath: getModelPath,
-        newModelLocation: '/new'
+        newModelLocation: '/threatmodel/new'
     };
 
     return service;

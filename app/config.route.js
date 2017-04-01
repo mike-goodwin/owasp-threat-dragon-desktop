@@ -42,6 +42,14 @@ function getRoutes() {
                 settings: {
                 }
             }
+        },{
+            url: '/threatmodel/new',
+            config: {
+                templateUrl: 'threatmodels/threatmodeledit.html',
+                title: 'Threat Model Page',
+                settings: {
+                }
+            }
         }, {
             url: '/threatmodel/:action',
             config: {

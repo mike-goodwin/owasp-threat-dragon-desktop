@@ -1,18 +1,25 @@
 'use strict';
 
-function datacontext(datacontextdemo) {
-
-    var threatModel = null;
+function datacontext(datacontextdemo, datacontextfile) {
 
     var service = {
-        load: load,
-        threatModel: threatModel
+        load: load
     };
 
     return service;
 
     function load(location, forceQuery) {
-        return datacontextdemo.load(location, forceQuery)
+
+        var context;
+
+        if (location.action === 'demo')
+        {
+            context = datacontextdemo;
+        } else {
+            context = datacontextfile;
+        }
+
+        return context.load(forceQuery)
     }
 }
 

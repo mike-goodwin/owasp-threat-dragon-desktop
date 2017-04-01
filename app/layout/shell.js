@@ -42,7 +42,11 @@ function shell($rootScope, $scope, $location, common, config) {
                     },
                     {
                         label: 'Open',
-                        accelerator: 'CmdOrCtrl+O'
+                        accelerator: 'CmdOrCtrl+O',
+                        click() {
+                            $location.path('/threatmodel/open');
+                            $scope.$apply();
+                        }
                     },
                     {
                         label: 'Open Demo Model',

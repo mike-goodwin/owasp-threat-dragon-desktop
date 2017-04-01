@@ -20,7 +20,7 @@ describe('threatmodellocator service:', function () {
     });
 
     it('should return the new model location', function () {
-        expect(threatmodellocator.newModelLocation).toEqual('/new');
+        expect(threatmodellocator.newModelLocation).toEqual('/threatmodel/new');
     });
 
     it('should return a model location object', function () {

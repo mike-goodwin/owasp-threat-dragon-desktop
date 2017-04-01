@@ -26,6 +26,11 @@ app.config(['$qProvider', function ($qProvider) {
     $qProvider.errorOnUnhandledRejections(false);
 }]);
 
+app.run(['$q',
+    function ($q) {
+        require('any-promise/register')('$q', { Promise: $q });
+    }]);
+
 app.run(['$rootScope', '$location',
     function ($rootScope, $location) {
         $rootScope.location = $location;
