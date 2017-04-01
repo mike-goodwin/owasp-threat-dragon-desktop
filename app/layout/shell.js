@@ -38,7 +38,11 @@ function shell($rootScope, $scope, $location, common, config) {
                 submenu: [
                     {
                         label: 'New',
-                        accelerator: 'CmdOrCtrl+N'
+                        accelerator: 'CmdOrCtrl+N',
+                        click() {
+                            $location.path('/threatmodel/new');
+                            $scope.$apply();
+                        }
                     },
                     {
                         label: 'Open',
