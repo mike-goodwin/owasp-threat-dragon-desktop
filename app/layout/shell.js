@@ -84,14 +84,16 @@ function shell($rootScope, $scope, $location, common, config) {
                         label: 'Reload',
                         accelerator: 'CmdOrCtrl+R',
                         click(item, focusedWindow) {
-                            if (focusedWindow) focusedWindow.reload()
+                            if (focusedWindow) focusedWindow.reload();
                         }
                     },
                     {
                         label: 'Toggle Developer Tools',
                         accelerator: process.platform === 'darwin' ? 'Alt+Command+I' : 'Ctrl+Shift+I',
                         click(item, focusedWindow) {
-                            if (focusedWindow) focusedWindow.webContents.toggleDevTools()
+                            if (focusedWindow) {
+                                focusedWindow.webContents.toggleDevTools();
+                            }
                         }
                     },
                     {
@@ -130,15 +132,21 @@ function shell($rootScope, $scope, $location, common, config) {
                 submenu: [
                     {
                         label: 'Documentation',
-                        click() { electron.shell.openExternal('http://docs.threatdragon.org') }
+                        click() {
+                            electron.shell.openExternal('http://docs.threatdragon.org');
+                        }
                     },
                     {
                         label: 'Submit an Issue',
-                        click() { electron.shell.openExternal('https://github.com/mike-goodwin/owasp-threat-dragon-desktop/issues/new') }
+                        click() {
+                            electron.shell.openExternal('https://github.com/mike-goodwin/owasp-threat-dragon-desktop/issues/new');
+                        }
                     },
                     {
                         label: 'Visit us on GitHub',
-                        click() { electron.shell.openExternal('https://github.com/mike-goodwin/owasp-threat-dragon-desktop') }
+                        click() {
+                            electron.shell.openExternal('https://github.com/mike-goodwin/owasp-threat-dragon-desktop');
+                        }
                     }
                 ]
             }

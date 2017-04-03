@@ -1,7 +1,5 @@
 'use strict';
 
-var _ = require('lodash');
-
 function datacontextdemo($q, $http) {
 
     var threatModel = null;

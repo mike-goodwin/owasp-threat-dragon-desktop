@@ -2,13 +2,27 @@
 
 function datacontext(datacontextdemo, datacontextfile) {
 
+    var threatModelLocation = null;
+
     var service = {
-        load: load
+        threatModelLocation: threatModelLocation,
+        load: load,
+        create: create
     };
 
     return service;
 
     function load(location, forceQuery) {
+
+        service.threatModelLocation = location;
+        return getContext(location).load(forceQuery);
+    }
+
+    function create(location, model) {
+        return datacontextfile.save(model);
+    }
+
+    function getContext(location) {
 
         var context;
 
@@ -19,7 +33,7 @@ function datacontext(datacontextdemo, datacontextfile) {
             context = datacontextfile;
         }
 
-        return context.load(forceQuery)
+        return context;
     }
 }
 
