@@ -1,6 +1,11 @@
 ﻿'use strict';
 
-function welcome($location, common, commonConfig) {
+function welcome($scope, $location, common, commonConfig) {
+
+    var _ = require('lodash');
+    const electron = require('electron');
+    const remote = electron.remote;
+    const dialog = remote.dialog;
 
     /*jshint validthis: true */
     var controllerId = 'welcome';
@@ -10,7 +15,7 @@ function welcome($location, common, commonConfig) {
 
     // Bindable properties and functions are placed on vm
     vm.title = 'Welcome';
-    vm.loadDemoModel = loadDemoModel;
+    vm.openModel = openModel;
 
     activate();
 
@@ -18,13 +23,13 @@ function welcome($location, common, commonConfig) {
         common.activateController([], controllerId).then(function () { log('Activated Welcome View'); });
     }
 
-    function loadDemoModel() {
-        var loc = 'threatmodel/';
-        loc += commonConfig.config.demoModelLocation.organisation + '/';
-        loc += commonConfig.config.demoModelLocation.repo + '/';
-        loc += commonConfig.config.demoModelLocation.branch + '/';
-        loc += commonConfig.config.demoModelLocation.model;
-        $location.path(loc);
+    function openModel() {
+        dialog.showOpenDialog(function (fileNames) {
+            if (!_.isUndefined(fileNames)) {
+                $location.path('/threatmodel/' + fileNames[0]);
+                $scope.$apply();
+            }
+        });
     }
 }
 

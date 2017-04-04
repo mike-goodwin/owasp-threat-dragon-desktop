@@ -46,12 +46,20 @@ function getRoutes() {
             url: '/threatmodel/new',
             config: {
                 templateUrl: 'threatmodels/threatmodeledit.html',
-                title: 'Threat Model Page',
+                title: 'New Threat Model Page',
+                settings: {
+                }
+            }
+        },{
+            url: '/threatmodel/edit/:file',
+            config: {
+                templateUrl: 'threatmodels/threatmodeledit.html',
+                title: 'Threat Model Edit Page',
                 settings: {
                 }
             }
         }, {
-            url: '/threatmodel/:action',
+            url: '/threatmodel/:file',
             config: {
                 templateUrl: 'threatmodels/threatmodeldetail.html',
                 title: 'Threat Model Page',
@@ -59,7 +67,7 @@ function getRoutes() {
                 }
             }
         }, {
-            url: '/threatmodel/:action/diagram/:diagramId',
+            url: '/threatmodel/:file/diagram/:diagramId',
             config: {
                 title: 'Threat Model Diagram',
                 templateUrl: 'diagrams/diagrameditor.html',

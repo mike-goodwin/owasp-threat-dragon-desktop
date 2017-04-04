@@ -12,7 +12,7 @@ function datacontextdemo($q, $http) {
 
     return service;
 
-    function load(forceQuery) {
+    function load(location, forceQuery) {
 
         if (service.threatModel && !forceQuery) {
             return $q.when(service.threatModel);

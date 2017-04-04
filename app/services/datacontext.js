@@ -13,20 +13,18 @@ function datacontext(datacontextdemo, datacontextfile) {
     return service;
 
     function load(location, forceQuery) {
-
-        service.threatModelLocation = location;
-        return getContext(location).load(forceQuery);
+        return getContext(location).load(location, forceQuery);
     }
 
     function create(location, model) {
-        return datacontextfile.save(model);
+        return datacontextfile.save(model, service.threatModelLocation);
     }
 
     function getContext(location) {
 
         var context;
 
-        if (location.action === 'demo')
+        if (location === 'demo')
         {
             context = datacontextdemo;
         } else {

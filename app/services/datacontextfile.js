@@ -2,49 +2,41 @@
 
 function datacontextfile($q) {
 
-    var electron = require('electron');
-    var remote = electron.remote;
-    var dialog = remote.dialog;
     var _ = require('lodash');
-    var threatModel = null;
     var fsp = require('fs-promise');
-    var fs = require('fs');
+    var threatModel = null;
     var filePath = null;
 
     var service = {
         load: load,
         save: save,
-        threatModel: threatModel
+        saveThreatModelDiagram: saveThreatModelDiagram,
+        threatModel: threatModel,
+        filePath: filePath
     };
 
     return service;
 
-    function load(forceQuery) {
+    function load(location, forceQuery) {
 
-        if (service.threatModel && !forceQuery) {
+        if (service.threatModel && !forceQuery && service.filePath === location) {
             return $q.when(service.threatModel);
         }
 
         var deferred = $q.defer();
-
-        dialog.showOpenDialog(function (fileNames) {
-            if (_.isUndefined(fileNames)) {
-                onLoadError('No file selected');
-            } else {
-                fsp.readFile(fileNames[0], 'utf8').then(onLoadedThreatModel, onLoadError);
-            }
-        });
+        service.filePath = location;
+        fsp.readFile(service.filePath, 'utf8').then(onLoadedThreatModel, onLoadError);
 
         return deferred.promise;
 
         function onLoadedThreatModel(result) {
             service.threatModel = JSON.parse(result);
-            //filePath =  fileNames[0];
             deferred.resolve(service.threatModel);
         }
 
         function onLoadError(err) {
             service.threatModel = null;
+            service.filePath = null;
             deferred.reject(err);
         }
     }
@@ -53,25 +45,38 @@ function datacontextfile($q) {
 
         var deferred = $q.defer();
 
-        dialog.showSaveDialog(function (fileName) {
-            if (_.isUndefined(fileName)) {
-                onSaveError('No file selected');
-            } else {
-                fsp.writeJson(fileName, model).then(onSavedThreatModel, onSaveError);
-            }
-        });
+        if (service.filePath) {
+            doSave(service.filePath);
+        } else {
+            dialog.showSaveDialog(function (fileName) {
+                if (_.isUndefined(fileName)) {
+                    onSaveError('No file selected');
+                } else {
+                    service.filePath = filename;
+                    doSave(fileName);
+                }
+            });
+        }
 
         return deferred.promise;
 
+        function doSave(fileName) {
+            fsp.writeJson(fileName, model).then(onSavedThreatModel, onSaveError);
+        }
+
         function onSavedThreatModel() {
-            //filePath =  fileNames[0];
             service.threatModel = model;
             deferred.resolve(service.threatModel);
         }
 
         function onSaveError(err) {
+            service.filePath = null;
             deferred.reject(err);
         }
+    }
+
+    function saveThreatModelDiagram() {
+        return save();
     }
 }
 

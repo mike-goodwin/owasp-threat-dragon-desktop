@@ -4,10 +4,11 @@ function shell($rootScope, $scope, $location, common, config) {
     var controllerId = 'shell';
     var logSuccess = common.logger.getLogFn(controllerId, 'success');
     var events = config.events;
-
+    var _ = require('lodash');
     const electron = require('electron');
     const remote = electron.remote;
     const Menu = remote.Menu;
+    const dialog = remote.dialog;
 
     menuConfigurator();
 
@@ -48,8 +49,12 @@ function shell($rootScope, $scope, $location, common, config) {
                         label: 'Open',
                         accelerator: 'CmdOrCtrl+O',
                         click() {
-                            $location.path('/threatmodel/open');
-                            $scope.$apply();
+                            dialog.showOpenDialog(function (fileNames) {
+                                if (!_.isUndefined(fileNames)) {
+                                    $location.path('/threatmodel/' + fileNames[0]);
+                                    $scope.$apply();
+                                }
+                            });
                         }
                     },
                     {
@@ -66,7 +71,11 @@ function shell($rootScope, $scope, $location, common, config) {
                     },
                     {
                         label: 'Close',
-                        accelerator: 'CmdOrCtrl+X'
+                        accelerator: 'CmdOrCtrl+X',
+                        click() {
+                            $location.path('/');
+                            $scope.$apply();
+                        }
                     },
                     {
                         type: 'separator'
