@@ -4,12 +4,16 @@ function datacontextfile($q) {
 
     var _ = require('lodash');
     var fsp = require('fs-promise');
+    const electron = require('electron');
+    const remote = electron.remote;
+    const dialog = remote.dialog;
     var threatModel = null;
     var filePath = null;
 
     var service = {
         load: load,
         save: save,
+        update: update,
         saveThreatModelDiagram: saveThreatModelDiagram,
         threatModel: threatModel,
         filePath: filePath
@@ -52,7 +56,7 @@ function datacontextfile($q) {
                 if (_.isUndefined(fileName)) {
                     onSaveError('No file selected');
                 } else {
-                    service.filePath = filename;
+                    service.filePath = fileName;
                     doSave(fileName);
                 }
             });
@@ -66,13 +70,17 @@ function datacontextfile($q) {
 
         function onSavedThreatModel() {
             service.threatModel = model;
-            deferred.resolve(service.threatModel);
+            deferred.resolve({model: service.threatModel, location: { file: service.filePath}});
         }
 
         function onSaveError(err) {
             service.filePath = null;
             deferred.reject(err);
         }
+    }
+
+    function update() {
+        return save(service.threatModel);
     }
 
     function saveThreatModelDiagram() {
