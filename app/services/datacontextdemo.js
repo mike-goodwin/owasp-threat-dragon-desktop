@@ -6,13 +6,12 @@ function datacontextdemo($q, $http) {
     var threatModelUri = 'https://raw.githubusercontent.com/mike-goodwin/owasp-threat-dragon-demo/master/ThreatDragonModels/Demo%20Threat%20Model/Demo%20Threat%20Model.json';
 
     var service = {
-        load: load,
-        threatModel: threatModel
+        load: load
     };
 
     return service;
 
-    function load(location, forceQuery) {
+    function load(forceQuery) {
 
         if (service.threatModel && !forceQuery) {
             return $q.when(service.threatModel);
