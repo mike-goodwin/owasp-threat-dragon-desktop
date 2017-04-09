@@ -16,12 +16,15 @@ function onClosed() {
 }
 
 function createMainWindow() {
+
+	const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize
 	var window = new electron.BrowserWindow({
-		title: "OWASP Threat Dragon Desktop",
-		icon: "./content/images/threatdragon.ico"
+		title: "OWASP Threat Dragon",
+		icon: "./content/images/threatdragon.ico",
+		width: width,
+		height: height
 	});
 
-	window.maximize();
 	window.loadURL(`file://${__dirname}/index.html`);
 	window.on('closed', onClosed);
 	window.webContents.on('new-window', function (e, url) {
