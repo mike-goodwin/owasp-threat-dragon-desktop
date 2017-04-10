@@ -15,6 +15,7 @@ function datacontext($q, datacontextdemo) {
         create: create,
         update: update,
         saveThreatModelDiagram: saveThreatModelDiagram,
+        deleteModel: deleteModel,
         threatModelLocation: threatModelLocation,
         threatModel: threatModel
     };
@@ -75,6 +76,22 @@ function datacontext($q, datacontextdemo) {
             return update();
         } else {
             return $q.reject(new Error('invalid diagram id'));
+        }
+    }
+
+    function deleteModel() {
+
+        if(service.threatModelLocation) {
+            return fsp.unlink(service.threatModelLocation).then(onDeleted);
+        } else {
+            return $q.reject('No file specified');
+        }
+
+        function onDeleted() {
+
+            service.threatModel = null;
+            service.threatModelLocation = null;
+            return $q.resolve(null);
         }
     }
 
