@@ -25,24 +25,35 @@ describe('threatmodellocator service:', function () {
 
     it('should return a model location object', function () {
 
-        var action = 'action';
+        var file = 'file';
 
         var params = {
-            action: action
+            file: file
         };
 
         var location = threatmodellocator.getModelLocation(params);
-        expect(location.action).toEqual(action);
+        expect(location.file).toEqual(file);
     });
 
     it('should return a model path', function () {
 
-        var action = 'action'
+        var file = 'unencoded file'
 
         var params = {
-            action: action
+            file: file
         };
 
-        expect(threatmodellocator.getModelPath(params)).toEqual(action);
+        expect(threatmodellocator.getModelPath(params)).toEqual(encodeURI(file));
+    });
+
+    it('should return a model path based on route params', function () {
+
+        var file = 'unencoded file'
+
+        var params = {
+            file: file
+        };
+
+        expect(threatmodellocator.getModelPathFromRouteParams(params)).toEqual(file);
     });
 });

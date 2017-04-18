@@ -2,7 +2,6 @@
 
 function datacontextdemo($q, $http) {
 
-    var threatModel = null;
     var threatModelUri = 'https://raw.githubusercontent.com/mike-goodwin/owasp-threat-dragon-demo/master/ThreatDragonModels/Demo%20Threat%20Model/Demo%20Threat%20Model.json';
 
     var service = {

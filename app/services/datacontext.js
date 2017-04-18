@@ -26,10 +26,10 @@ function datacontext($q, datacontextdemo) {
 
         var result;
 
-        if (location === 'demo') {
+        if (location.file === 'demo') {
             result = datacontextdemo.load(forceQuery);
         } else {
-            result = loadFromFile(location, forceQuery);
+            result = loadFromFile(location.file, forceQuery);
         }
 
         return result.then(onLoaded, onLoadError);
@@ -37,11 +37,8 @@ function datacontext($q, datacontextdemo) {
         function onLoaded(model) {
 
             service.threatModel = model;
+            service.threatModelLocation = location.file;
 
-            //don't set the location for demo model so subsequent save will show a save dialog
-            if (!location === 'demo') {
-                service.threatModelLocation = location;
-            }
             return $q.resolve(service.threatModel);
         }
 
@@ -99,7 +96,7 @@ function datacontext($q, datacontextdemo) {
 
         var deferred = $q.defer();
 
-        if (service.threatModelLocation) {
+        if (service.threatModelLocation && service.threatModelLocation != 'demo') {
             doSave(service.threatModelLocation);
         } else {
             dialog.showSaveDialog(function (fileName) {

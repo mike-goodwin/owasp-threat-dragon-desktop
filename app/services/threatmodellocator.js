@@ -5,6 +5,7 @@ function threatmodellocator() {
     var service = {
         getModelLocation: getModelLocation,
         getModelPath: getModelPath,
+        getModelPathFromRouteParams: getModelPathFromRouteParams,
         willMoveModel: willMoveModel,
         newModelLocation: '/threatmodel/new'
     };
@@ -12,13 +13,17 @@ function threatmodellocator() {
     return service;
 
     function getModelLocation(params) {
-        var location = decodeURI(params.file);
+        var location = { file: decodeURI(params.file) };
         return location;
     }
 
     function getModelPath(params) {
         var path = encodeURI(params.file);
         return path;
+    }
+
+    function getModelPathFromRouteParams(params) {
+        return params.file;
     }
 
     function willMoveModel(params, changes) {
