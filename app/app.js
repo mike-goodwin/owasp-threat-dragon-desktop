@@ -19,7 +19,6 @@ var app = angular.module('app', ['ui.bootstrap', 'ngRoute', 'xeditable', 'ngAnim
 require('./app/config.route');
 require('./app/layout');
 require('./app/welcome');
-require('./app/threatmodel');
 require('./app/services');
 
 app.config(['$qProvider', function ($qProvider) {
