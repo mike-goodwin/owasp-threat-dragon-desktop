@@ -7,6 +7,7 @@ function datacontext($q, datacontextdemo) {
     const electron = require('electron');
     const remote = electron.remote;
     const dialog = remote.dialog;
+    var loadedLocation = null;
     var threatModelLocation = null;
     var threatModel = null;
 
@@ -24,28 +25,25 @@ function datacontext($q, datacontextdemo) {
 
     return service;
 
-    function load(location, forceQuery) {
-
+    function load(params, forceQuery) {
         var result;
 
-        if (location.file === 'demo') {
+        if (params.location === 'demo') {
             result = datacontextdemo.load(forceQuery);
         } else {
-            result = loadFromFile(location.file, forceQuery);
+            result = loadFromFile(forceQuery);
         }
 
         return result.then(onLoaded, onLoadError);
 
         function onLoaded(model) {
-
             service.threatModel = model;
-            service.threatModelLocation = location.file;
+            service.loadedLocation = service.threatModelLocation;
 
             return $q.resolve(service.threatModel);
         }
 
         function onLoadError(error) {
-
             service.threatModel = null;
             service.threatModelLocation = null;
             return $q.reject(error);
@@ -53,18 +51,15 @@ function datacontext($q, datacontextdemo) {
     }
 
     function create(location, model) {
-
         service.threatModelLocation = null;
         return save(model);
     }
 
     function update() {
-
         return save(service.threatModel);
     }
 
     function saveThreatModelDiagram(diagramId, diagramData) {
-
         var diagramToSave = service.threatModel.detail.diagrams.find(function (diagram) {
             return diagram.id == diagramId;
         });
@@ -100,23 +95,22 @@ function datacontext($q, datacontextdemo) {
     }
 
     function saveAs() {
-        var relocate = true;
-        return save(service.threatModel, relocate);
+        service.threatModelLocation = null;
+        return save(service.threatModel);
     }
 
-    function save(model, relocate) {
-
+    function save(model) {
         var deferred = $q.defer();
 
-        if (service.threatModelLocation && service.threatModelLocation != 'demo' && !relocate) {
-            doSave(service.threatModelLocation);
+        if (service.threatModelLocation && service.threatModelLocation != 'demo') {
+            doSave();
         } else {
             dialog.showSaveDialog(function (fileName) {
                 if (_.isUndefined(fileName)) {
                     onCancel();
                 } else {
                     service.threatModelLocation = fileName;
-                    doSave(fileName);
+                    doSave();
                 }
             });
         }
@@ -124,32 +118,31 @@ function datacontext($q, datacontextdemo) {
         return deferred.promise;
 
         function onCancel() {
+            service.threatModelLocation = service.loadedLocation;
             deferred.resolve({ model: service.threatModel, location: { file: service.threatModelLocation } });
         }
 
-        function doSave(fileName) {
-            fsp.writeJson(fileName, model).then(onSavedThreatModel, onSaveError);
+        function doSave() {
+            fsp.writeJson(service.threatModelLocation, model).then(onSavedThreatModel, onSaveError);
         }
 
         function onSavedThreatModel() {
-            service.threatModel = model;
+            service.loadedLocation = service.threatModelLocation;
             deferred.resolve({ model: service.threatModel, location: { file: service.threatModelLocation } });
         }
 
         function onSaveError(err) {
-            service.threatModelLocation = null;
+            service.threatModelLocation = service.loadedLocation;
             deferred.reject(err);
         }
     }
 
-    function loadFromFile(location, forceQuery) {
-
-        if (service.threatModel && !forceQuery && service.threatModelLocation === location) {
+    function loadFromFile(forceQuery) {
+        if (service.threatModel && !forceQuery && service.threatModelLocation === service.loadedLocation) {
             return $q.when(service.threatModel);
         }
 
         var deferred = $q.defer();
-        service.threatModelLocation = location;
         fsp.readFile(service.threatModelLocation, 'utf8').then(onLoadedThreatModel, onLoadError);
 
         return deferred.promise;
