@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-function shell($rootScope, $scope, $location, common, config, datacontext, threatmodellocator) {
+function shell($rootScope, $scope, $location, $route, common, config, datacontext) {
     var controllerId = 'shell';
     var logSuccess = common.logger.getLogFn(controllerId, 'success');
     var logError = common.logger.getLogFn(controllerId, 'error');
@@ -52,7 +52,12 @@ function shell($rootScope, $scope, $location, common, config, datacontext, threa
                         click() {
                             dialog.showOpenDialog(function (fileNames) {
                                 if (!_.isUndefined(fileNames)) {
-                                    $location.path('/threatmodel/' + threatmodellocator.getModelPath({file: fileNames[0]}));
+                                    datacontext.threatModelLocation = fileNames[0];
+                                    if ($location.path() == '/threatmodel/file') {
+                                        $route.reload();
+                                    } else {
+                                        $location.path('/threatmodel/file');
+                                    }
                                     $scope.$apply();
                                 }
                             });
@@ -77,7 +82,7 @@ function shell($rootScope, $scope, $location, common, config, datacontext, threa
                         label: 'Save As',
                         click() {
                             datacontext.saveAs().then(onSaveAs, onSaveError);
-                            
+
                             function onSaveAs(result) {
                                 $location.path($location.path('/threatmodel/' + threatmodellocator.getModelPath(result.location.file)));
                             }

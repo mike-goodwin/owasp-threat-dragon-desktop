@@ -13,20 +13,18 @@ function threatmodellocator() {
     return service;
 
     function getModelLocation(params) {
-        var location = { file: decodeURI(params.file) };
-        return location;
+        return params;
     }
 
     function getModelPath(params) {
-        var path = encodeURI(params.file);
-        return path;
+        return params.location;
     }
 
     function getModelPathFromRouteParams(params) {
-        return params.file;
+        return params.location;
     }
 
-    function willMoveModel(params, changes) {
+    function willMoveModel() {
         return false;
     }
 }
