@@ -16,6 +16,8 @@ function datacontext($q, datacontextdemo) {
         update: update,
         saveThreatModelDiagram: saveThreatModelDiagram,
         deleteModel: deleteModel,
+        close: close,
+        saveAs: saveAs,
         threatModelLocation: threatModelLocation,
         threatModel: threatModel
     };
@@ -78,7 +80,7 @@ function datacontext($q, datacontextdemo) {
 
     function deleteModel() {
 
-        if(service.threatModelLocation) {
+        if (service.threatModelLocation) {
             return fsp.unlink(service.threatModelLocation).then(onDeleted);
         } else {
             return $q.reject('No file specified');
@@ -92,16 +94,26 @@ function datacontext($q, datacontextdemo) {
         }
     }
 
-    function save(model) {
+    function close() {
+        service.threatModel = null;
+        service.threatModelLocation = null;
+    }
+
+    function saveAs() {
+        var relocate = true;
+        return save(service.threatModel, relocate);
+    }
+
+    function save(model, relocate) {
 
         var deferred = $q.defer();
 
-        if (service.threatModelLocation && service.threatModelLocation != 'demo') {
+        if (service.threatModelLocation && service.threatModelLocation != 'demo' && !relocate) {
             doSave(service.threatModelLocation);
         } else {
             dialog.showSaveDialog(function (fileName) {
                 if (_.isUndefined(fileName)) {
-                    onSaveError('No file selected');
+                    onCancel();
                 } else {
                     service.threatModelLocation = fileName;
                     doSave(fileName);
@@ -110,6 +122,10 @@ function datacontext($q, datacontextdemo) {
         }
 
         return deferred.promise;
+
+        function onCancel() {
+            deferred.resolve({ model: service.threatModel, location: { file: service.threatModelLocation } });
+        }
 
         function doSave(fileName) {
             fsp.writeJson(fileName, model).then(onSavedThreatModel, onSaveError);

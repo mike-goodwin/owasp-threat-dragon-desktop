@@ -1,8 +1,9 @@
 ﻿'use strict';
 
-function shell($rootScope, $scope, $location, common, config) {
+function shell($rootScope, $scope, $location, common, config, datacontext, threatmodellocator) {
     var controllerId = 'shell';
     var logSuccess = common.logger.getLogFn(controllerId, 'success');
+    var logError = common.logger.getLogFn(controllerId, 'error');
     var events = config.events;
     var _ = require('lodash');
     const electron = require('electron');
@@ -51,7 +52,7 @@ function shell($rootScope, $scope, $location, common, config) {
                         click() {
                             dialog.showOpenDialog(function (fileNames) {
                                 if (!_.isUndefined(fileNames)) {
-                                    $location.path('/threatmodel/' + fileNames[0]);
+                                    $location.path('/threatmodel/' + threatmodellocator.getModelPath({file: fileNames[0]}));
                                     $scope.$apply();
                                 }
                             });
@@ -67,12 +68,30 @@ function shell($rootScope, $scope, $location, common, config) {
                     },
                     {
                         label: 'Save',
-                        accelerator: 'CmdOrCtrl+C'
+                        accelerator: 'CmdOrCtrl+C',
+                        click() {
+                            datacontext.update();
+                        }
+                    },
+                    {
+                        label: 'Save As',
+                        click() {
+                            datacontext.saveAs().then(onSaveAs, onSaveError);
+                            
+                            function onSaveAs(result) {
+                                $location.path($location.path('/threatmodel/' + threatmodellocator.getModelPath(result.location.file)));
+                            }
+
+                            function onSaveError(error) {
+                                logError(error);
+                            }
+                        }
                     },
                     {
                         label: 'Close',
                         accelerator: 'CmdOrCtrl+X',
                         click() {
+                            datacontext.close();
                             $location.path('/');
                             $scope.$apply();
                         }

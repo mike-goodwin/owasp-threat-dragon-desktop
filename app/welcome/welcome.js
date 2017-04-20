@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-function welcome($scope, $location, common, commonConfig) {
+function welcome($scope, $location, common, commonConfig, threatmodellocator) {
 
     var _ = require('lodash');
     const electron = require('electron');
@@ -26,7 +26,7 @@ function welcome($scope, $location, common, commonConfig) {
     function openModel() {
         dialog.showOpenDialog(function (fileNames) {
             if (!_.isUndefined(fileNames)) {
-                $location.path('/threatmodel/' + fileNames[0]);
+                $location.path('/threatmodel/' + threatmodellocator.getModelPath({file: fileNames[0]}));
                 $scope.$apply();
             }
         });
