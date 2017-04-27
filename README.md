@@ -8,4 +8,17 @@ Threat Dragon is an threat modelling application including system diagramming an
 
 This repository contains the files for the desktop variant. For more info, go to [the main project repo](https://github.com/mike-goodwin/owasp-threat-dragon).
 
+The desktop variant is a work-in progress, but it basically works. There is not installer (yet) so you have to clone the repo and install it:
+
+`git clone https://github.com/mike-goodwin/owasp-threat-dragon-desktop`
+`npm install`
+
+Then to run it on a Mac:
+
+`./node_modules/.bin/electron .`
+
+Or on Windows:
+
+`.\node_modules\.bin\electron .`
+
 **Project leader:** Mike Goodwin (mike.goodwin@owasp.org)
