@@ -1,15 +1,10 @@
 ﻿'use strict';
 
-function shell($rootScope, $scope, $location, $route, common, config, datacontext) {
+function shell($rootScope, $scope, $location, $route, common, config, datacontext, electron) {
     var controllerId = 'shell';
     var logSuccess = common.logger.getLogFn(controllerId, 'success');
     var logError = common.logger.getLogFn(controllerId, 'error');
     var events = config.events;
-    var _ = require('lodash');
-    const electron = require('electron');
-    const remote = electron.remote;
-    const Menu = remote.Menu;
-    const dialog = remote.dialog;
 
     menuConfigurator();
 
@@ -50,17 +45,16 @@ function shell($rootScope, $scope, $location, $route, common, config, datacontex
                         label: 'Open',
                         accelerator: 'CmdOrCtrl+O',
                         click() {
-                            dialog.showOpenDialog(function (fileNames) {
-                                if (!_.isUndefined(fileNames)) {
-                                    datacontext.threatModelLocation = fileNames[0];
-                                    if ($location.path() == '/threatmodel/file') {
-                                        $route.reload();
-                                    } else {
-                                        $location.path('/threatmodel/file');
-                                    }
-                                    $scope.$apply();
+                            electron.dialog.open(function (fileNames) {
+                                datacontext.threatModelLocation = fileNames[0];
+                                if ($location.path() == '/threatmodel/file') {
+                                    $route.reload();
+                                } else {
+                                    $location.path('/threatmodel/file');
                                 }
-                            });
+                                $scope.$apply();
+                            },
+                                function () { });
                         }
                     },
                     {
@@ -84,7 +78,6 @@ function shell($rootScope, $scope, $location, $route, common, config, datacontex
                             datacontext.saveAs().then(onSaveAs, onSaveError);
 
                             function onSaveAs(result) {
-                                $location.path($location.path('/threatmodel/' + threatmodellocator.getModelPath(result.location.file)));
                             }
 
                             function onSaveError(error) {
@@ -185,8 +178,8 @@ function shell($rootScope, $scope, $location, $route, common, config, datacontex
             }
         ];
 
-        const menu = Menu.buildFromTemplate(template);
-        Menu.setApplicationMenu(menu);
+        const menu = electron.Menu.buildFromTemplate(template);
+        electron.Menu.setApplicationMenu(menu);
 
     }
 }

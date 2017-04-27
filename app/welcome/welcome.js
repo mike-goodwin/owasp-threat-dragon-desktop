@@ -1,11 +1,6 @@
 ﻿'use strict';
 
-function welcome($scope, $location, $route, common, commonConfig, datacontext) {
-
-    var _ = require('lodash');
-    const electron = require('electron');
-    const remote = electron.remote;
-    const dialog = remote.dialog;
+function welcome($scope, $location, $route, common, commonConfig, datacontext, electron) {
 
     /*jshint validthis: true */
     var controllerId = 'welcome';
@@ -24,18 +19,16 @@ function welcome($scope, $location, $route, common, commonConfig, datacontext) {
     }
 
     function openModel() {
-        dialog.showOpenDialog(function (fileNames) {
-            if (!_.isUndefined(fileNames)) {
-                datacontext.threatModelLocation = fileNames[0];
-
-                if ($location.path() == '/threatmodel/file') {
-                    $route.reload();
-                } else {
-                    $location.path('/threatmodel/file');
-                }
-                $scope.$apply();
+        electron.dialog.open(function (fileNames) {
+            datacontext.threatModelLocation = fileNames[0];
+            if ($location.path() == '/threatmodel/file') {
+                $route.reload();
+            } else {
+                $location.path('/threatmodel/file');
             }
-        });
+            $scope.$apply();
+        },
+        function() {});
     }
 }
 
