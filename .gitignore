@@ -52,3 +52,5 @@ node_modules/
 coverage/
 typings/
 npm-debug.log
+packages/
+installers/

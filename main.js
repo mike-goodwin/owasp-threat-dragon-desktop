@@ -1,7 +1,16 @@
 'use strict';
-const electron = require('electron');
 
+const path = require('path');
+const electron = require('electron');
 const app = electron.app;
+
+
+//handle auto update etc.
+const setupEvents = require('./config/autoupdate');
+if (setupEvents.handleSquirrelEvent()) {
+	// squirrel event handled and app will exit in 1000ms, so don't do anything else
+	app.quit();
+}
 
 // adds debug features like hotkeys for triggering dev tools and reload
 require('electron-debug')();
@@ -17,10 +26,10 @@ function onClosed() {
 
 function createMainWindow() {
 
-	const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize
+	const { width, height } = electron.screen.getPrimaryDisplay().workAreaSize
 	var window = new electron.BrowserWindow({
 		title: "OWASP Threat Dragon",
-		icon: "./content/images/threatdragon.ico",
+		icon: path.join(__dirname, 'cupcakes.ico'),
 		width: width,
 		height: height
 	});
