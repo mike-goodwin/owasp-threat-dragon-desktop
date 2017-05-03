@@ -2,7 +2,38 @@
 
 const electron = require('electron')
 const app = electron.app
+const fs = require('fs');
+const path = require('path');
+const dialog = electron.dialog;
 
+//autoupdater setup
+
+//only do this when executing from the installed location
+//https://github.com/electron/electron/issues/4535
+if (fs.existsSync(path.resolve(path.dirname(process.execPath), '..', 'update.exe'))) {
+
+    const autoUpdater = electron.autoUpdater;
+    const feedURL = 'https://threatdragondownloads.azurewebsites.net/update/win32/0.1.6';
+    autoUpdater.setFeedURL(feedURL);
+    autoUpdater.on('update-downloaded', function () {
+
+        var options = {
+            type: 'question',
+            buttons: ['Not Now', 'Install'],
+            defaultId: 1,
+            title: 'Install Update?',
+            message: 'A new version of OWASP Threat Dragon is available. Do you want to restart and install it?',
+            icon: './content/icons/png/256x256.png'
+        };
+        if (dialog.showMessageBox(electron.BrowserWindow.getCurrentWindow(), options) === 1) {
+            autoUpdater.quitAndInstall();
+        }
+    });
+
+    autoUpdater.checkForUpdates();
+}
+
+//squirrel events
 module.exports = {
     handleSquirrelEvent: function () {
         if (process.argv.length === 1) {

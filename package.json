@@ -1,6 +1,6 @@
 {
   "name": "threatdragon",
-  "version": "0.1.3",
+  "version": "0.1.6",
   "description": "Desktop version OWASP Threat Dragon",
   "main": "main.js",
   "scripts": {
@@ -18,9 +18,8 @@
     "citest": "./node_modules/.bin/karma start --single-run false --browsers Chrome",
     "codecov": "./node_modules/.bin/codecov",
     "build-win": "npm run package-win && npm run installer-win",
-    "installer-win": "node ./build/installer.js",
-    "package-win": "node ./build/package-win.js",
-    "package-win-cli": "./node_modules/.bin/electron-packager . --overwrite --ignore=\"tests|build|.vscode|coverage\" --out=./build/packages --asar=true --platform=win32 --arch=x64 --prune=true  --icon=cupcakes.ico --win32metadata.CompanyName=OWASP --win32metadata.FileDescription=OWASP --win32metadata.ProductName=\"OWASP Threat Dragon\""
+    "installer-win": "node ./installers/installer.js",
+    "package-win": "./node_modules/.bin/electron-packager . --asar --overwrite  --out=./packages --ignore=\"installers|tests|.vscode|coverage\" --platform=win32 --arch=x64 --prune=true  --icon=cupcakes.ico --win32metadata.CompanyName=OWASP --win32metadata.FileDescription=\"OWASP Threat Dragon\" --win32metadata.ProductName=\"OWASP Threat Dragon\""
   },
   "author": {
     "name": "mike.goodwin",
