@@ -14,7 +14,7 @@ const nativeImage = electron.nativeImage;
 if (fs.existsSync(path.resolve(path.dirname(process.execPath), '..', 'update.exe'))) {
 
     const autoUpdater = electron.autoUpdater;
-    const feedURL = 'https://threatdragondownloads.azurewebsites.net/update/win32/0.1.10';
+    const feedURL = 'https://threatdragondownloads.azurewebsites.net/update/win32/0.1.11';
     autoUpdater.setFeedURL(feedURL);
     autoUpdater.on('update-downloaded', function () {
 
