@@ -13,7 +13,7 @@ const dialog = electron.dialog;
 if (fs.existsSync(path.resolve(path.dirname(process.execPath), '..', 'update.exe'))) {
 
     const autoUpdater = electron.autoUpdater;
-    const feedURL = 'https://threatdragondownloads.azurewebsites.net/update/win32/0.1.7';
+    const feedURL = 'https://threatdragondownloads.azurewebsites.net/update/win32/0.1.9';
     autoUpdater.setFeedURL(feedURL);
     autoUpdater.on('update-downloaded', function () {
 
@@ -25,7 +25,7 @@ if (fs.existsSync(path.resolve(path.dirname(process.execPath), '..', 'update.exe
             message: 'A new version of OWASP Threat Dragon is available. Do you want to restart and install it?',
             icon: './content/icons/png/256x256.png'
         };
-        if (dialog.showMessageBox(electron.BrowserWindow.getCurrentWindow(), options) === 1) {
+        if (dialog.showMessageBox(electron.BrowserWindow.getFocusedWindow(), options) === 1) {
             autoUpdater.quitAndInstall();
         }
     });
