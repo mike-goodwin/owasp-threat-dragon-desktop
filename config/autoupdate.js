@@ -13,7 +13,7 @@ const dialog = electron.dialog;
 if (fs.existsSync(path.resolve(path.dirname(process.execPath), '..', 'update.exe'))) {
 
     const autoUpdater = electron.autoUpdater;
-    const feedURL = 'https://threatdragondownloads.azurewebsites.net/update/win32/0.1.6';
+    const feedURL = 'https://threatdragondownloads.azurewebsites.net/update/win32/0.1.7';
     autoUpdater.setFeedURL(feedURL);
     autoUpdater.on('update-downloaded', function () {
 
