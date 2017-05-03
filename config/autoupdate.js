@@ -5,6 +5,7 @@ const app = electron.app
 const fs = require('fs');
 const path = require('path');
 const dialog = electron.dialog;
+const nativeImage = electron.nativeImage;
 
 //autoupdater setup
 
@@ -13,7 +14,7 @@ const dialog = electron.dialog;
 if (fs.existsSync(path.resolve(path.dirname(process.execPath), '..', 'update.exe'))) {
 
     const autoUpdater = electron.autoUpdater;
-    const feedURL = 'https://threatdragondownloads.azurewebsites.net/update/win32/0.1.9';
+    const feedURL = 'https://threatdragondownloads.azurewebsites.net/update/win32/0.1.10';
     autoUpdater.setFeedURL(feedURL);
     autoUpdater.on('update-downloaded', function () {
 
@@ -23,7 +24,7 @@ if (fs.existsSync(path.resolve(path.dirname(process.execPath), '..', 'update.exe
             defaultId: 1,
             title: 'Install Update?',
             message: 'A new version of OWASP Threat Dragon is available. Do you want to restart and install it?',
-            icon: './content/icons/png/256x256.png'
+            icon: nativeImage.createFromPath('./content/icons/png/256x256.png')
         };
         if (dialog.showMessageBox(electron.BrowserWindow.getFocusedWindow(), options) === 1) {
             autoUpdater.quitAndInstall();
