@@ -25,7 +25,7 @@ function createMainWindow() {
 	const { width, height } = electron.screen.getPrimaryDisplay().workAreaSize
 	var window = new electron.BrowserWindow({
 		title: "OWASP Threat Dragon",
-		icon: path.join(__dirname, 'cupcakes.ico'),
+		icon: path.join(__dirname, './content/icons/png/64x64.png'),
 		width: width,
 		height: height
 	});

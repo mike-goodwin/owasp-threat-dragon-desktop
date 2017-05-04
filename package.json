@@ -1,6 +1,6 @@
 {
   "name": "threatdragon",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "description": "Desktop version OWASP Threat Dragon",
   "main": "main.js",
   "scripts": {
@@ -17,8 +17,13 @@
     "test-local": "npm run-script pretest && npm run-script test-client-chrome && npm run-script test-client-phantomjs",
     "citest": "./node_modules/.bin/karma start --single-run false --browsers Chrome",
     "codecov": "./node_modules/.bin/codecov",
+    "build-all": "npm run build-win && npm run build-osx && npm run packages-lin",
     "build-win": "npm run package-win && npm run installer-win",
-    "installer-win": "node ./installers/installer.js",
+    "build-osx": "npm run package-osx && npm run installer-osx",
+    "installer-win": "node ./installers/installer-win.js",
+    "installer-osx": "./node_modules/.bin/electron-installer-dmg ./packages/threatdragon-darwin-x64/threatdragon.app threatdragon --out=installers/osx-x64 --overwrite --icon=cupcakes.icns",
+    "package-osx": "./node_modules/.bin/electron-packager . --asar --overwrite  --out=./packages --ignore=\"installers|tests|.vscode|coverage\" --platform=darwin --arch=x64 --prune=true  --icon=cupcakes.icns",
+    "package-lin": "./node_modules/.bin/electron-packager . --asar --overwrite  --out=./packages --ignore=\"installers|tests|.vscode|coverage\" --platform=linux --arch=x64 --prune=true  --icon=cupcakes1024x1024.png",
     "package-win": "./node_modules/.bin/electron-packager . --asar --overwrite  --out=./packages --ignore=\"installers|tests|.vscode|coverage\" --platform=win32 --arch=x64 --prune=true  --icon=cupcakes.ico --win32metadata.CompanyName=OWASP --win32metadata.FileDescription=\"OWASP Threat Dragon\" --win32metadata.ProductName=\"OWASP Threat Dragon\""
   },
   "author": {

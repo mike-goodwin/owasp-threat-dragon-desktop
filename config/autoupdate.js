@@ -1,6 +1,7 @@
 //adapted from https://github.com/crilleengvall/electron-tutorial-app
 
 const electron = require('electron')
+const os = require('os').platform();
 const app = electron.app
 const fs = require('fs');
 const path = require('path');
@@ -14,7 +15,7 @@ const nativeImage = electron.nativeImage;
 if (fs.existsSync(path.resolve(path.dirname(process.execPath), '..', 'update.exe'))) {
 
     const autoUpdater = electron.autoUpdater;
-    const feedURL = 'https://threatdragondownloads.azurewebsites.net/update/win32/0.1.11';
+    const feedURL = 'https://threatdragondownloads.azurewebsites.net/update/' + os === 'darwin' ? 'osx' : 'win32' + '/0.1.12';
     autoUpdater.setFeedURL(feedURL);
     autoUpdater.on('update-downloaded', function () {
 
