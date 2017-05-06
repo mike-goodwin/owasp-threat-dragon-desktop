@@ -15,7 +15,14 @@ const nativeImage = electron.nativeImage;
 if (fs.existsSync(path.resolve(path.dirname(process.execPath), '..', 'update.exe'))) {
 
     const autoUpdater = electron.autoUpdater;
-    const feedURL = 'https://threatdragondownloads.azurewebsites.net/update/' + os === 'darwin' ? 'osx' : 'win32' + '/0.1.13';
+    var feedURL;
+
+    if (os === 'darwin') {
+        feedURL = 'https://threatdragondownloads.azurewebsites.net/update/osx/0.1.14';
+    } else {
+        feedURL = 'https://threatdragondownloads.azurewebsites.net/update/win32/0.1.14';
+    }
+
     autoUpdater.setFeedURL(feedURL);
     autoUpdater.on('update-downloaded', function () {
 
