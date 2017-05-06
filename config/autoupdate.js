@@ -18,9 +18,9 @@ if (os ==='darwin' || fs.existsSync(path.resolve(path.dirname(process.execPath),
     var feedURL;
 
     if (os === 'darwin') {
-        feedURL = 'https://threatdragondownloads.azurewebsites.net/update/osx/0.1.16';
+        feedURL = 'https://threatdragondownloads.azurewebsites.net/update/osx/0.1.17';
     } else {
-        feedURL = 'https://threatdragondownloads.azurewebsites.net/update/win32/0.1.16';
+        feedURL = 'https://threatdragondownloads.azurewebsites.net/update/win32/0.1.17';
     }
 
     autoUpdater.setFeedURL(feedURL);
