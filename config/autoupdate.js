@@ -18,9 +18,9 @@ if (fs.existsSync(path.resolve(path.dirname(process.execPath), '..', 'update.exe
     var feedURL;
 
     if (os === 'darwin') {
-        feedURL = 'https://threatdragondownloads.azurewebsites.net/update/osx/0.1.14';
+        feedURL = 'https://threatdragondownloads.azurewebsites.net/update/osx/0.1.15';
     } else {
-        feedURL = 'https://threatdragondownloads.azurewebsites.net/update/win32/0.1.14';
+        feedURL = 'https://threatdragondownloads.azurewebsites.net/update/win32/0.1.15';
     }
 
     autoUpdater.setFeedURL(feedURL);
