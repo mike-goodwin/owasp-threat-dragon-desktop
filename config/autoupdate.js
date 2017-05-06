@@ -10,17 +10,17 @@ const nativeImage = electron.nativeImage;
 
 //autoupdater setup
 
-//only do this when executing from the installed location
+//only do this when executing from the installed location on windows
 //https://github.com/electron/electron/issues/4535
-if (fs.existsSync(path.resolve(path.dirname(process.execPath), '..', 'update.exe'))) {
+if (os ==='darwin' || fs.existsSync(path.resolve(path.dirname(process.execPath), '..', 'update.exe'))) {
 
     const autoUpdater = electron.autoUpdater;
     var feedURL;
 
     if (os === 'darwin') {
-        feedURL = 'https://threatdragondownloads.azurewebsites.net/update/osx/0.1.15';
+        feedURL = 'https://threatdragondownloads.azurewebsites.net/update/osx/0.1.16';
     } else {
-        feedURL = 'https://threatdragondownloads.azurewebsites.net/update/win32/0.1.15';
+        feedURL = 'https://threatdragondownloads.azurewebsites.net/update/win32/0.1.16';
     }
 
     autoUpdater.setFeedURL(feedURL);
