@@ -1,19 +1,15 @@
 'use strict';
 
-const path = require('path');
-const electron = require('electron');
-const app = electron.app;
-
-
 //handle auto update etc.
 const setupEvents = require('./config/autoupdate');
 if (setupEvents.handleSquirrelEvent()) {
 	// squirrel event handled and app will exit in 1000ms, so don't do anything else
-	app.quit();
+	return;
 }
 
-// adds debug features like hotkeys for triggering dev tools and reload
-require('electron-debug')();
+const path = require('path');
+const electron = require('electron');
+const app = electron.app;
 
 // prevent window being garbage collected
 let mainWindow;
@@ -29,7 +25,7 @@ function createMainWindow() {
 	const { width, height } = electron.screen.getPrimaryDisplay().workAreaSize
 	var window = new electron.BrowserWindow({
 		title: "OWASP Threat Dragon",
-		icon: path.join(__dirname, 'cupcakes.ico'),
+		icon: path.join(__dirname, './content/icons/png/64x64.png'),
 		width: width,
 		height: height
 	});
