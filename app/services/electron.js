@@ -14,7 +14,9 @@ function electronservice() {
         },
         currentWindow: remote.getCurrentWindow(),
         shell: electron.shell,
-        Menu: electron.remote.Menu
+        Menu: remote.Menu,
+        app: remote.app,
+        autoUpdater: remote.autoUpdater
     };
 
     return service;

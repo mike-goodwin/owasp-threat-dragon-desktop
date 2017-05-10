@@ -1,7 +1,7 @@
 'use strict';
 
 //handle auto update etc.
-const setupEvents = require('./config/autoupdate');
+const setupEvents = require('./config/squirrel');
 if (setupEvents.handleSquirrelEvent()) {
 	// squirrel event handled and app will exit in 1000ms, so don't do anything else
 	return;
