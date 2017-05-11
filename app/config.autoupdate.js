@@ -21,9 +21,9 @@ function autoupdate(common, dialogs, electron) {
             var feedURL;
 
             if (os === 'darwin') {
-                feedURL = 'https://threatdragondownloads.azurewebsites.net/update/osx/0.1.18';
+                feedURL = 'https://threatdragondownloads.azurewebsites.net/update/osx/0.1.19';
             } else {
-                feedURL = 'https://threatdragondownloads.azurewebsites.net/update/win32/0.1.18';
+                feedURL = 'https://threatdragondownloads.azurewebsites.net/update/win32/0.1.19';
             }
 
             autoUpdater.setFeedURL(feedURL);
