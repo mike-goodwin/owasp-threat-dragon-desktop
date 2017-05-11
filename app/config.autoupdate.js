@@ -1,8 +1,9 @@
 'use strict'
 
-function autoupdate(common, dialogs, electron) {
+function autoupdate(common, dialogs, electron, VERSION) {
 
     var logInfo = common.logger.getLogFn('config.autoupdate', 'info');
+    var logError = common.logger.getLogFn('config.autoupdate', 'error');
 
     //adapted from https://github.com/crilleengvall/electron-tutorial-app
 
@@ -21,9 +22,9 @@ function autoupdate(common, dialogs, electron) {
             var feedURL;
 
             if (os === 'darwin') {
-                feedURL = 'https://threatdragondownloads.azurewebsites.net/update/osx/0.1.19';
+                feedURL = 'https://threatdragondownloads.azurewebsites.net/update/osx/' + VERSION;
             } else {
-                feedURL = 'https://threatdragondownloads.azurewebsites.net/update/win32/0.1.19';
+                feedURL = 'https://threatdragondownloads.azurewebsites.net/update/win32/' + VERSION;
             }
 
             autoUpdater.setFeedURL(feedURL);
@@ -32,16 +33,22 @@ function autoupdate(common, dialogs, electron) {
             });
 
             function onUpdate() {
-                autoUpdater.checkForUpdates();
+                autoUpdater.quitAndInstall()
             }
+
+            autoUpdater.checkForUpdates();
+
+            logInfo('Configured autoupdate');
 
         }
         catch (e) {
             //do nothing
+            logError('Failed to configure autoupdate');
+            logError(e.message);
         }
+    } else {
+        logInfo('Skipped autoupdate config');
     }
-
-    logInfo('configured autoupdate');
 }
 
 module.exports = autoupdate;

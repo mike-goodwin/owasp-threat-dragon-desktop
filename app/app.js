@@ -15,6 +15,9 @@ SVGElement.prototype.getTransformToElement = SVGElement.prototype.getTransformTo
 
 var app = angular.module('app', ['ui.bootstrap', 'ngRoute', 'xeditable', 'ngAnimate', 'templates', 'common', 'owasp-threat-dragon-core']);
 
+//version
+app.constant('VERSION', require('./package.json').version);
+
 //require custom modules, services, controllers and directives
 require('./app/config.route');
 require('./app/layout');
@@ -51,4 +54,4 @@ app.run(['editableOptions', function (editableOptions) {
 }]);
 
 //electron autoupdate
-app.run(['common', 'electron', 'dialogs', require('./app/config.autoupdate')]);
+app.run(['common', 'dialogs', 'electron', 'VERSION', require('./app/config.autoupdate')]);

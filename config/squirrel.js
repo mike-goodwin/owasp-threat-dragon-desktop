@@ -2,7 +2,7 @@
 
 //squirrel events
 module.exports = {
-    handleSquirrelEvent: function () {
+    handleSquirrelEvent: function (app) {
         if (process.argv.length === 1) {
             return false;
         }
