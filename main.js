@@ -1,15 +1,13 @@
 'use strict';
 
-//handle auto update etc.
-const setupEvents = require('./config/squirrel');
-if (setupEvents.handleSquirrelEvent()) {
-	// squirrel event handled and app will exit in 1000ms, so don't do anything else
-	return;
-}
-
 const path = require('path');
 const electron = require('electron');
 const app = electron.app;
+const setupEvents = require('./config/squirrel');
+if (setupEvents.handleSquirrelEvent(app)) {
+	// squirrel event handled and app will exit in 1000ms, so don't do anything else
+	return;
+}
 
 // prevent window being garbage collected
 let mainWindow;

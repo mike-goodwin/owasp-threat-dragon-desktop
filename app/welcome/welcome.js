@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-function welcome($scope, $location, $route, common, commonConfig, datacontext, electron) {
+function welcome($scope, $location, $route, common, commonConfig, datacontext, electron, VERSION) {
 
     /*jshint validthis: true */
     var controllerId = 'welcome';
@@ -10,6 +10,7 @@ function welcome($scope, $location, $route, common, commonConfig, datacontext, e
 
     // Bindable properties and functions are placed on vm
     vm.title = 'Welcome';
+    vm.version = VERSION;
     vm.openModel = openModel;
 
     activate();
