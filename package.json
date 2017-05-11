@@ -1,6 +1,6 @@
 {
   "name": "threatdragon",
-  "version": "0.1.17",
+  "version": "0.1.18",
   "description": "Desktop version OWASP Threat Dragon",
   "main": "main.js",
   "scripts": {
@@ -50,7 +50,7 @@
     "fs-promise": "2.0.2",
     "jquery": "3.0.0",
     "lodash": "4.13.1",
-    "owasp-threat-dragon-core": "0.4.17"
+    "owasp-threat-dragon-core": "0.4.18"
   },
   "devDependencies": {
     "angular-mocks": "1.6.3",

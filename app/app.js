@@ -49,3 +49,6 @@ app.run(['$route', '$rootScope', 'routemediator',
 app.run(['editableOptions', function (editableOptions) {
     editableOptions.theme = 'bs3';
 }]);
+
+//electron autoupdate
+app.run(['common', 'electron', 'dialogs', require('./app/config.autoupdate')]);
