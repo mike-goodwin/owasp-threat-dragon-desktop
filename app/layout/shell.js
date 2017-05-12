@@ -169,18 +169,6 @@ function shell($rootScope, $scope, $location, $route, common, config, datacontex
                     {
                         label: 'Dialog test',
                         click() {
-                            // var win = electron.currentWindow;
-                            // var options = {
-                            //     type: 'question',
-                            //     buttons: ['Not Now', 'Install'],
-                            //     defaultId: 1,
-                            //     title: 'Install Update?',
-                            //     noLink: true,
-                            //     message: 'A new version of OWASP Threat Dragon is available. Do you want to restart and install it?',
-                            //     icon: electron.nativeImage.createFromPath(path.join(__dirname, '../../content/icons/png/64x64.png'))
-                            // };
-                            // if (electron.dialog.showMessageBox(win, options) === 1) {
-                            // }
 
                             dialogs.confirm('./app/layout/update.html', function () { }, function () { return null; }, function () { });
 

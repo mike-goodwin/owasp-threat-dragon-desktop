@@ -19,6 +19,12 @@ function autoupdate(common, dialogs, electron, VERSION) {
         //temporary hack to get around lack of code signing in OSX
         try {
             const autoUpdater = electron.autoUpdater;
+
+            //update already dow loaded and user selected install later
+            if (electron.userData.set({location : 'threadragon-system', key: 'updateOnLaunch'})) {
+                onDoUpdate();
+            }
+
             var feedURL;
 
             if (os === 'darwin') {
@@ -29,11 +35,15 @@ function autoupdate(common, dialogs, electron, VERSION) {
 
             autoUpdater.setFeedURL(feedURL);
             autoUpdater.on('update-downloaded', function () {
-                dialogs.confirm('./app/layout/update.html', onUpdate, function () { return null; }, function () { });
+                dialogs.confirm('./app/layout/update.html', doUpdate, function () { return null; }, updateLater);
             });
 
-            function onUpdate() {
-                autoUpdater.quitAndInstall()
+            function doUpdate() {
+                autoUpdater.quitAndInstall();
+            }
+
+            function updateLater() {
+                electron.userData.set({location : 'threadragon-system', key: 'updateOnLaunch'}, true);
             }
 
             autoUpdater.checkForUpdates();
