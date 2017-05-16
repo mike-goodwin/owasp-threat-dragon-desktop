@@ -20,11 +20,12 @@ function autoupdate(common, dialogs, electron, VERSION) {
         try {
             const autoUpdater = electron.autoUpdater;
 
+            //this does not work - how to do update later
             //update already down loaded and user selected install later
-            if (electron.userData.get({configName : 'preferences', key: 'updateOnLaunch'})) {
-                electron.userData.set({configName : 'preferences', key: 'updateOnLaunch'}, false);
-                doUpdate();
-            }
+            // if (electron.userData.get({configName : 'preferences', key: 'updateOnLaunch'})) {
+            //     electron.userData.set({configName : 'preferences', key: 'updateOnLaunch'}, false);
+            //     doUpdate();
+            // }
 
             var feedURL;
 
@@ -44,7 +45,8 @@ function autoupdate(common, dialogs, electron, VERSION) {
             }
 
             function updateLater() {
-                electron.userData.set({configName : 'preferences', key: 'updateOnLaunch'}, true);
+                //this does not work - how to get it to update later
+                //electron.userData.set({configName : 'preferences', key: 'updateOnLaunch'}, true);
             }
 
             autoUpdater.checkForUpdates();

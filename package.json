@@ -1,6 +1,6 @@
 {
   "name": "threatdragon",
-  "version": "0.1.25",
+  "version": "0.1.26",
   "description": "Desktop version OWASP Threat Dragon",
   "main": "main.js",
   "scripts": {
@@ -20,7 +20,7 @@
     "build-all": "npm run build-win && npm run build-osx && npm run packages-lin",
     "build-win": "npm run package-win && npm run installer-win",
     "build-osx": "npm run package-osx && npm run installer-osx",
-    "installer-win": "node ./installers/installer-win.js",
+    "installer-win": "node ./installer-win.js",
     "installer-osx": "./node_modules/.bin/electron-installer-dmg ./packages/threatdragon-darwin-x64/threatdragon.app threatdragon --out=installers/osx-x64 --overwrite --icon=cupcakes.icns",
     "package-osx": "./node_modules/.bin/electron-packager . --asar --overwrite  --out=./packages --ignore=\"installers|tests|.vscode|coverage\" --platform=darwin --arch=x64 --prune=true  --icon=cupcakes.icns",
     "package-lin": "./node_modules/.bin/electron-packager . --asar --overwrite  --out=./packages --ignore=\"installers|tests|.vscode|coverage\" --platform=linux --arch=x64 --prune=true  --icon=cupcakes1024x1024.png",
