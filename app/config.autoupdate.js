@@ -20,9 +20,10 @@ function autoupdate(common, dialogs, electron, VERSION) {
         try {
             const autoUpdater = electron.autoUpdater;
 
-            //update already dow loaded and user selected install later
-            if (electron.userData.set({location : 'threadragon-system', key: 'updateOnLaunch'})) {
-                onDoUpdate();
+            //update already down loaded and user selected install later
+            if (electron.userData.get({configName : 'preferences', key: 'updateOnLaunch'})) {
+                electron.userData.set({configName : 'preferences', key: 'updateOnLaunch'}, false);
+                doUpdate();
             }
 
             var feedURL;
@@ -43,7 +44,7 @@ function autoupdate(common, dialogs, electron, VERSION) {
             }
 
             function updateLater() {
-                electron.userData.set({location : 'threadragon-system', key: 'updateOnLaunch'}, true);
+                electron.userData.set({configName : 'preferences', key: 'updateOnLaunch'}, true);
             }
 
             autoUpdater.checkForUpdates();
