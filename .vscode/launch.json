@@ -1,0 +1,50 @@
+{
+    // Use IntelliSense to learn about possible Node.js debug attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Debug Main Process",
+            "program": "${workspaceRoot}/main.js",
+            "stopOnEntry": false,
+            "args": [],
+            "cwd": "${workspaceRoot}",
+            "preLaunchTask": null,
+            "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron.cmd",
+            "console": "internalConsole",
+            "runtimeArgs": [
+                "--enable-logging",
+                "."
+            ],
+            "env": {},
+            "sourceMaps": false,
+            "outFiles": []
+        },
+        {
+            "name": "Attach",
+            "type": "node",
+            "request": "attach",
+            "port": 5858,
+            "address": "localhost",
+            "restart": false,
+            "sourceMaps": false,
+            "outFiles": [],
+            "localRoot": "${workspaceRoot}",
+            "remoteRoot": null
+        },
+        {
+            "name": "Debug Renderer Process",
+            "type": "chrome",
+            "request": "launch",
+            "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron.cmd",
+            "runtimeArgs": [
+                "${workspaceRoot}/main.js",
+                "--remote-debugging-port=9222"
+            ],
+            "webRoot": "${workspaceRoot}"
+        }
+    ]
+}

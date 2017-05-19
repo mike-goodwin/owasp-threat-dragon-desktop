@@ -47,7 +47,6 @@ Temporary Items
 .apdisk
 
 # custom
-.vscode/
 node_modules/
 coverage/
 typings/
