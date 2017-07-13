@@ -32,7 +32,7 @@ The desktop variant is a work-in-progress, but it basically works. To install an
 
 Then to run it on a Mac/Linux:
 
-`./node_modules/.bin/electron .`
+`npm start`
 
 Or on Windows:
 
