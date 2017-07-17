@@ -4,13 +4,13 @@
 
 # [OWASP](https://www.owasp.org) Threat Dragon #
 
-Threat Dragon is a free, open-source, cross-platform threat modelling application including system diagramming and a rule engine to auto-generate threats/mitigations. It is an [OWASP Incubator Project](https://www.owasp.org/index.php/OWASP_Threat_Dragon). The focus of the project is on great UX, a powerful rule engine and integration with other development lifecycle tools.
+Threat Dragon is a free, open-source, cross-platform threat modelling application including system diagramming and a rule engine to auto-generate threats/mitigation's. It is an [OWASP Incubator Project](https://www.owasp.org/index.php/OWASP_Threat_Dragon). The focus of the project is on great UX, a powerful rule engine and integration with other development lifecycle tools.
 
 The application comes in two variants:
 
-1. [**A web application**](https://github.com/mike-goodwin/owasp-threat-dragon): For the web application, models files are stored in GitHub (other storage will become available). We are currently maintaining [a working protoype](https://threatdragon.org) in sych with the master code branch.
+1. [**A web application**](https://github.com/mike-goodwin/owasp-threat-dragon): For the web application, models files are stored in GitHub (other storage will become available). We are currently maintaining [a working prototype](https://threatdragon.org) in synch with the master code branch.
 
-2. [**An desktop application**](https://github.com/mike-goodwin/owasp-threat-dragon-desktop): This is based on [Electon](https://electron.atom.io/). There are builds available for Windows and OSX (Linux will follow at some point). For this variant, models arfe stored on the local filesystem.
+2. [**An desktop application**](https://github.com/mike-goodwin/owasp-threat-dragon-desktop): This is based on [Electron](https://electron.atom.io/). There are builds available for Windows and OSX (Linux will follow at some point). For this variant, models are stored on the local filesystem.
 
 [End user help](http://docs.threatdragon.org/) is available for both variants.
 
@@ -37,7 +37,7 @@ Installers for OSX and Windows can be downloaded from the [releases folder](http
 
 The unit tests for the project are currently broken :(
 
-Due to a lack of code signing, you may get a warning when installing on Windows and AutoUopdate on OSX does not work.
+Due to a lack of code signing, you may get a warning when installing on Windows and AutoUpdate on OSX does not work.
 
 # Contributing #
 
