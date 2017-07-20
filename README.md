@@ -44,7 +44,7 @@ Installers for OSX and Windows can be downloaded from the [releases folder](http
 
 The unit tests for the project are currently broken :(
 
-Due to a lack of code signing, you may get a warning when installing on Windows and AutoUopdate on OSX does not work.
+Due to a lack of code signing, you may get a warning when installing on Windows and AutoUpdate on OSX does not work.
 
 # Contributing #
 
