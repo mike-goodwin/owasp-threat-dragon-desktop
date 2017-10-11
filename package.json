@@ -43,7 +43,7 @@
     "angular-ui-bootstrap": "2.5.0",
     "angular-xeditable": "0.6.0",
     "bootstrap": "3.3.7",
-    "electron": "1.6.2",
+    "electron": "1.6.8",
     "electron-debug": "1.1.0",
     "electron-squirrel-startup": "^1.0.0",
     "font-awesome": "4.7.0",
