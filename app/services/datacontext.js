@@ -3,7 +3,6 @@
 function datacontext($q, datacontextdemo, electron) {
 
     var fsp = require('fs-promise');
-    var loadedLocation = null;
     var threatModelLocation = null;
     var threatModel = null;
 

@@ -1,5 +1,4 @@
 ﻿'use strict';
-const path = require('path');
 
 function shell($rootScope, $scope, $location, $route, common, config, datacontext, electron, dialogs) {
     var controllerId = 'shell';

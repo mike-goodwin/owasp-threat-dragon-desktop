@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 function autoupdate(common, dialogs, electron, VERSION) {
 
@@ -8,9 +8,18 @@ function autoupdate(common, dialogs, electron, VERSION) {
     //adapted from https://github.com/crilleengvall/electron-tutorial-app
 
     const os = require('os').platform();
-    const app = electron.app
     const fs = require('fs');
     const path = require('path');
+    var autoUpdater;
+
+    function doUpdate() {
+        autoUpdater.quitAndInstall();
+    }
+
+    function updateLater() {
+        //this does not work - how to get it to update later
+        //electron.userData.set({configName : 'preferences', key: 'updateOnLaunch'}, true);
+    }
 
     // on windows only do this when executing from the installed location
     //https://github.com/electron/electron/issues/4535
@@ -18,7 +27,7 @@ function autoupdate(common, dialogs, electron, VERSION) {
 
         //temporary hack to get around lack of code signing in OSX
         try {
-            const autoUpdater = electron.autoUpdater;
+            autoUpdater = electron.autoUpdater;
 
             //this does not work - how to do update later
             //update already down loaded and user selected install later
@@ -40,19 +49,8 @@ function autoupdate(common, dialogs, electron, VERSION) {
                 dialogs.confirm('./app/layout/update.html', doUpdate, function () { return null; }, updateLater);
             });
 
-            function doUpdate() {
-                autoUpdater.quitAndInstall();
-            }
-
-            function updateLater() {
-                //this does not work - how to get it to update later
-                //electron.userData.set({configName : 'preferences', key: 'updateOnLaunch'}, true);
-            }
-
             autoUpdater.checkForUpdates();
-
             logInfo('Configured autoupdate');
-
         }
         catch (e) {
             //do nothing
