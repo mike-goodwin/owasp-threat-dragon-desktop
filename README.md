@@ -2,6 +2,10 @@
   <img src="https://mike-goodwin.github.io/owasp-threat-dragon/content/images/threatdragon_logo_image.svg" width="200" alt="Threat Dragon Logo"/>
 </p>
 
+[![Github All Releases](https://img.shields.io/github/downloads/mike-goodwin/owasp-threat-dragon-desktop/total.svg)]()
+[![Known Vulnerabilities](https://snyk.io/test/github/mike-goodwin/owasp-threat-dragon-desktop/badge.svg)](https://snyk.io/test/github/mike-goodwin/owasp-threat-dragon-desktop)
+[![GitHub license](https://img.shields.io/github/license/mike-goodwin/owasp-threat-dragon-core.svg)](LICENSE.txt)
+
 # [OWASP](https://www.owasp.org) Threat Dragon #
 
 Threat Dragon is a free, open-source, cross-platform [threat modeling](https://www.owasp.org/index.php/Category:Threat_Modeling) application including system diagramming and a rule engine to auto-generate threats/mitigations. It is an [OWASP Incubator Project](https://www.owasp.org/index.php/OWASP_Threat_Dragon). The focus of the project is on great UX, a powerful rule engine and integration with other development lifecycle tools.
