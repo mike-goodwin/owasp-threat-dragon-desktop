@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="http://mike-goodwin.github.io/owasp-threat-dragon/content/images/threatdragon_logo_image.svg" width="200" alt="Threat Dragon Logo"/>
+  <img src="https://mike-goodwin.github.io/owasp-threat-dragon/content/images/threatdragon_logo_image.svg" width="200" alt="Threat Dragon Logo"/>
 </p>
 
 # [OWASP](https://www.owasp.org) Threat Dragon #
@@ -39,6 +39,20 @@ Or on Windows:
 `.\node_modules\.bin\electron .`
 
 Installers for OSX and Windows can be downloaded from the [releases folder](https://github.com/mike-goodwin/owasp-threat-dragon-desktop/releases). A Linux version will follow soon.
+
+# Screenshots # 
+
+Here are a few screenshots of the app to give you a feel for what it looks like. First, the welcome screen
+
+![Welcome Screen](/screenshots/welcome.PNG)
+
+The diagramming screen:
+
+![Diagramming Screen](/screenshots/diagram.PNG)
+
+And the threat editing screen
+
+![Threat Editing Screen](/screenshots/threat.PNG)
 
 # Limitations #
 
