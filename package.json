@@ -44,7 +44,7 @@
     "angular-route": "1.6.6",
     "angular-ui-bootstrap": "2.5.6",
     "angular-xeditable": "0.8.1",
-    "bootstrap": "3.3.7",
+    "bootstrap": "4.0.0",
     "electron": "1.7.9",
     "electron-debug": "1.4.0",
     "electron-squirrel-startup": "^1.0.0",
@@ -52,7 +52,7 @@
     "fs-promise": "2.0.3",
     "jquery": "3.0.0",
     "lodash": "4.13.1",
-    "owasp-threat-dragon-core": "0.5.0",
+    "owasp-threat-dragon-core": "0.5.1",
     "snyk": "^1.53.0"
   },
   "devDependencies": {
