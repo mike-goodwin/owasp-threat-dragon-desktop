@@ -26,7 +26,8 @@
     "package-lin": "./node_modules/.bin/electron-packager . --asar --overwrite  --out=./packages --ignore=\"installers|tests|.vscode|coverage\" --platform=linux --arch=x64 --prune=true  --icon=cupcakes1024x1024.png",
     "package-win": "./node_modules/.bin/electron-packager . --asar --overwrite  --out=./packages --ignore=\"installers|tests|.vscode|coverage\" --platform=win32 --arch=x64 --prune=true  --icon=cupcakes.ico --win32metadata.CompanyName=OWASP --win32metadata.FileDescription=\"OWASP Threat Dragon\" --win32metadata.ProductName=\"OWASP Threat Dragon\"",
     "snyk-protect": "snyk protect",
-    "prepublish": "npm run snyk-protect"
+    "prepublish": "npm run snyk-protect",
+    "prepare": "npm run snyk-protect"
   },
   "author": {
     "name": "mike.goodwin",
@@ -53,7 +54,7 @@
     "jquery": "3.0.0",
     "lodash": "4.13.1",
     "owasp-threat-dragon-core": "0.5.1",
-    "snyk": "^1.53.0"
+    "snyk": "^1.88.1"
   },
   "devDependencies": {
     "angular-mocks": "1.6.8",
