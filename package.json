@@ -39,21 +39,21 @@
     "url": "git://github.com/mike-goodwin/owasp-threat-dragon-desktop.git"
   },
   "dependencies": {
-    "angular": "1.6.8",
+    "angular": "1.6.9",
     "angular-animate": "1.6.8",
     "angular-route": "1.6.8",
     "angular-ui-bootstrap": "2.5.6",
     "angular-xeditable": "0.8.1",
-    "bootstrap": "3.3.7",
-    "electron": "1.7.9",
+    "bootstrap": "3.4.1",
+    "electron": "2.0.18",
     "electron-debug": "1.4.0",
     "electron-squirrel-startup": "^1.0.0",
     "font-awesome": "4.7.0",
     "fs-promise": "2.0.3",
     "jquery": "3.0.0",
-    "lodash": "4.13.1",
+    "lodash": "4.17.11",
     "owasp-threat-dragon-core": "0.5.1",
-    "snyk": "^1.53.0"
+    "snyk": "^1.149.0"
   },
   "devDependencies": {
     "angular-mocks": "1.6.8",
