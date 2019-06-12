@@ -25,7 +25,10 @@ function createMainWindow() {
 		title: "OWASP Threat Dragon",
 		icon: path.join(__dirname, './content/icons/png/64x64.png'),
 		width: width,
-		height: height
+		height: height,
+		webPreferences: {
+			nodeIntegration: true
+		}
 	});
 
 	window.loadURL(`file://${__dirname}/index.html`);
