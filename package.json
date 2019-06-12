@@ -1,6 +1,6 @@
 {
   "name": "threatdragon",
-  "version": "0.1.26",
+  "version": "0.1.27",
   "description": "Desktop version OWASP Threat Dragon",
   "main": "main.js",
   "scripts": {
@@ -12,6 +12,7 @@
     "bundle-minify-css": "npm run-script bundle-css && npm run-script minify-css",
     "pretest": "node ./node_modules/jshint/bin/jshint --verbose --show-non-errors app",
     "test": "npm run-script test-client-phantomjs",
+    "test-client-electron": "./node_modules/.bin/karma start --single-run --browsers Electron",
     "test-client-chrome": "./node_modules/.bin/karma start --single-run --browsers Chrome",
     "test-client-phantomjs": "./node_modules/.bin/karma start --single-run --browsers PhantomJS",
     "test-local": "npm run-script pretest && npm run-script test-client-chrome && npm run-script test-client-phantomjs",
@@ -24,9 +25,7 @@
     "installer-osx": "./node_modules/.bin/electron-installer-dmg ./packages/threatdragon-darwin-x64/threatdragon.app threatdragon --out=installers/osx-x64 --overwrite --icon=cupcakes.icns",
     "package-osx": "./node_modules/.bin/electron-packager . --asar --overwrite  --out=./packages --ignore=\"installers|tests|.vscode|coverage\" --platform=darwin --arch=x64 --prune=true  --icon=cupcakes.icns",
     "package-lin": "./node_modules/.bin/electron-packager . --asar --overwrite  --out=./packages --ignore=\"installers|tests|.vscode|coverage\" --platform=linux --arch=x64 --prune=true  --icon=cupcakes1024x1024.png",
-    "package-win": "./node_modules/.bin/electron-packager . --asar --overwrite  --out=./packages --ignore=\"installers|tests|.vscode|coverage\" --platform=win32 --arch=x64 --prune=true  --icon=cupcakes.ico --win32metadata.CompanyName=OWASP --win32metadata.FileDescription=\"OWASP Threat Dragon\" --win32metadata.ProductName=\"OWASP Threat Dragon\"",
-    "snyk-protect": "snyk protect",
-    "prepublish": "npm run snyk-protect"
+    "package-win": "./node_modules/.bin/electron-packager . --asar --overwrite  --out=./packages --ignore=\"installers|tests|.vscode|coverage\" --platform=win32 --arch=x64 --prune=true  --icon=cupcakes.ico --win32metadata.CompanyName=OWASP --win32metadata.FileDescription=\"OWASP Threat Dragon\" --win32metadata.ProductName=\"OWASP Threat Dragon\""
   },
   "author": {
     "name": "mike.goodwin",
@@ -39,24 +38,24 @@
     "url": "git://github.com/mike-goodwin/owasp-threat-dragon-desktop.git"
   },
   "dependencies": {
-    "angular": "1.6.8",
-    "angular-animate": "1.6.8",
-    "angular-route": "1.6.8",
+    "angular": "1.7.8",
+    "angular-animate": "1.7.8",
+    "angular-route": "1.7.8",
     "angular-ui-bootstrap": "2.5.6",
-    "angular-xeditable": "0.8.1",
-    "bootstrap": "3.3.7",
-    "electron": "1.7.9",
-    "electron-debug": "1.4.0",
+    "angular-xeditable": "0.9.0",
+    "bootstrap": "3.4.1",
+    "electron": "5.0.3",
+    "electron-debug": "3.0.0",
     "electron-squirrel-startup": "^1.0.0",
     "font-awesome": "4.7.0",
     "fs-promise": "2.0.3",
-    "jquery": "3.0.0",
-    "lodash": "4.13.1",
-    "owasp-threat-dragon-core": "0.5.1",
+    "jquery": "3.3.1",
+    "lodash": "4.17.11",
+    "owasp-threat-dragon-core": "0.5.6",
     "snyk": "^1.53.0"
   },
   "devDependencies": {
-    "angular-mocks": "1.6.8",
+    "angular-mocks": "1.7.8",
     "browserify": "14.5.0",
     "browserify-css": "0.14.0",
     "browserify-istanbul": "3.0.1",
@@ -76,6 +75,7 @@
     "karma-browserify": "5.1.2",
     "karma-chrome-launcher": "2.2.0",
     "karma-coverage": "1.1.1",
+    "karma-electron": "^6.1.1",
     "karma-firefox-launcher": "1.0.1",
     "karma-ie-launcher": "1.0.0",
     "karma-jasmine": "1.1.1",
@@ -87,8 +87,8 @@
     "phantomjs-polyfill-find": "ptim/phantomjs-polyfill-find",
     "requirejs": "2.3.5",
     "rework-npm-cli": "0.1.3",
+    "spectron": "^5.0.0",
     "uglifycss": "0.0.27",
     "watchify": "3.9.0"
-  },
-  "snyk": true
+  }
 }
