@@ -52,7 +52,7 @@
     "fs-promise": "2.0.3",
     "jquery": "3.0.0",
     "lodash": "4.13.1",
-    "owasp-threat-dragon-core": "0.5.1",
+    "owasp-threat-dragon-core": "0.5.5",
     "snyk": "^1.53.0"
   },
   "devDependencies": {
