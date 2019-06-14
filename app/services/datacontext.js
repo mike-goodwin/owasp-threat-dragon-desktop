@@ -87,6 +87,7 @@ function datacontext($q, datacontextdemo, electron) {
     function close() {
         service.threatModel = null;
         service.threatModelLocation = null;
+        electron.currentWindow.setTitle('OWASP Threat Dragon');
     }
 
     function saveAs() {

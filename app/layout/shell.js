@@ -67,9 +67,16 @@ function shell($rootScope, $scope, $location, $route, common, config, datacontex
                     },
                     {
                         label: 'Save',
-                        accelerator: 'CmdOrCtrl+C',
+                        accelerator: 'CmdOrCtrl+S',
                         click() {
-                            datacontext.update();
+                            //fix for issue #43: https://github.com/mike-goodwin/owasp-threat-dragon-desktop/issues/43
+                            //feels like a hack - it involves copying data to the (grand)parent scope
+                            //can't think of another way to fix this now though - revist later
+                            if ($location.path().includes('/threatmodel/') && $location.path().includes('/diagram/') && $scope.vm.saveDiagram) {
+                                $scope.vm.saveDiagram();
+                            } else {
+                                datacontext.update();
+                            }
                         }
                     },
                     {
@@ -92,6 +99,15 @@ function shell($rootScope, $scope, $location, $route, common, config, datacontex
                             datacontext.close();
                             $location.path('/');
                             $scope.$apply();
+                        }
+                    },
+                    {
+                        label: 'Toggle Developer Tools',
+                        accelerator: process.platform === 'darwin' ? 'Alt+Command+I' : 'Ctrl+Shift+I',
+                        click(item, focusedWindow) {
+                            if (focusedWindow) {
+                                focusedWindow.webContents.toggleDevTools();
+                            }
                         }
                     },
                     {
@@ -163,14 +179,6 @@ function shell($rootScope, $scope, $location, $route, common, config, datacontex
                         label: 'Visit us on GitHub',
                         click() {
                             electron.shell.openExternal('https://github.com/mike-goodwin/owasp-threat-dragon-desktop');
-                        }
-                    },
-                    {
-                        label: 'Dialog test',
-                        click() {
-
-                            dialogs.confirm('./app/layout/update.html', function () { }, function () { return null; }, function () { });
-
                         }
                     }
                 ]
