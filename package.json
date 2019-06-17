@@ -12,7 +12,7 @@
     "bundle-minify-css": "npm run-script bundle-css && npm run-script minify-css",
     "pretest": "node ./node_modules/jshint/bin/jshint --verbose --show-non-errors app",
     "test": "./node_modules/.bin/karma start --single-run --browsers Electron",
-    "citest": "./node_modules/.bin/karma start --single-run false --browsers Chrome",
+    "citest": "./node_modules/.bin/karma start --single-run false --browsers Electron",
     "codecov": "./node_modules/.bin/codecov",
     "build-all": "npm run build-win && npm run build-osx && npm run packages-lin",
     "build-win": "npm run package-win && npm run installer-win",
