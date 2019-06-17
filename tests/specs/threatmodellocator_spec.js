@@ -40,10 +40,10 @@ describe('threatmodellocator service:', function () {
         var file = 'unencoded file'
 
         var params = {
-            file: file
+            location: file
         };
 
-        expect(threatmodellocator.getModelPath(params)).toEqual(encodeURI(file));
+        expect(threatmodellocator.getModelPath(params)).toEqual(file);
     });
 
     it('should return a model path based on route params', function () {
@@ -51,9 +51,15 @@ describe('threatmodellocator service:', function () {
         var file = 'unencoded file'
 
         var params = {
-            file: file
+            location: file
         };
 
         expect(threatmodellocator.getModelPathFromRouteParams(params)).toEqual(file);
+    });
+
+    it('should not move the threat model', function() {
+
+        expect(threatmodellocator.willMoveModel()).toBeFalsy();
+
     });
 });

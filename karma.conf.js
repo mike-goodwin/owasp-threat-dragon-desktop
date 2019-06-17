@@ -13,7 +13,7 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['phantomjs-shim', 'jasmine', 'browserify'],
+    frameworks: ['jasmine', 'browserify'],
 
     // list of files / patterns to load in the browser
     files: [
@@ -44,11 +44,19 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['spec', 'coverage'],
+    reporters: ['spec', 'coverage', 'threshold'],
 
     //config for coverage reporter
     coverageReporter: {
         reporters: [{ type: 'lcov' }]
+    },
+
+    //config for threshhold reporter
+    thresholdReporter: {
+      statements: 90,
+      branches: 80,
+      functions: 90,
+      lines: 90
     },
 
     //config for ngHtml2JsPreprocessor
@@ -73,7 +81,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome', 'Firefox', 'IE', 'PhantomJS', 'ChromeHeadless', 'Electron'],
+    browsers: ['Electron'],
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
