@@ -2,9 +2,10 @@
 
 function datacontext($q, datacontextdemo, electron) {
 
-    var fsp = require('fs-promise');
+    var fsp = require('promise-fs');
     var threatModelLocation = null;
     var threatModel = null;
+    var loadedLocation = null;
 
     var service = {
         load: load,
@@ -15,7 +16,8 @@ function datacontext($q, datacontextdemo, electron) {
         close: close,
         saveAs: saveAs,
         threatModelLocation: threatModelLocation,
-        threatModel: threatModel
+        threatModel: threatModel,
+        loadedLocation: loadedLocation
     };
 
     return service;
@@ -33,6 +35,7 @@ function datacontext($q, datacontextdemo, electron) {
 
         function onLoaded(model) {
             service.threatModel = model;
+            service.threatModelLocation = params.location;
             setLocation(service.threatModelLocation);
 
             return $q.resolve(service.threatModel);
@@ -41,6 +44,7 @@ function datacontext($q, datacontextdemo, electron) {
         function onLoadError(error) {
             service.threatModel = null;
             service.threatModelLocation = null;
+            service.loadedLocation = null;
             return $q.reject(error);
         }
     }
@@ -152,7 +156,7 @@ function datacontext($q, datacontextdemo, electron) {
     }
 
     function setLocation(location) {
-        service.loadFromFile = location;
+        service.loadedLocation = location;
         electron.currentWindow.setTitle('OWASP Threat Dragon (' + location + ')');
     }
 }
