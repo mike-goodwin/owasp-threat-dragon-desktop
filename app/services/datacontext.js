@@ -5,7 +5,7 @@ function datacontext($q, datacontextdemo, electron) {
     var fsp = require('promise-fs');
     var threatModelLocation = null;
     var threatModel = null;
-    var loadedLocation = null;
+    var lastLoadedLocation = null;
 
     var service = {
         load: load,
@@ -17,7 +17,7 @@ function datacontext($q, datacontextdemo, electron) {
         saveAs: saveAs,
         threatModelLocation: threatModelLocation,
         threatModel: threatModel,
-        loadedLocation: loadedLocation
+        lastLoadedLocation: lastLoadedLocation
     };
 
     return service;
@@ -35,7 +35,6 @@ function datacontext($q, datacontextdemo, electron) {
 
         function onLoaded(model) {
             service.threatModel = model;
-            service.threatModelLocation = params.location;
             setLocation(service.threatModelLocation);
 
             return $q.resolve(service.threatModel);
@@ -44,7 +43,7 @@ function datacontext($q, datacontextdemo, electron) {
         function onLoadError(error) {
             service.threatModel = null;
             service.threatModelLocation = null;
-            service.loadedLocation = null;
+            service.lastLoadedLocation = null;
             return $q.reject(error);
         }
     }
@@ -91,6 +90,7 @@ function datacontext($q, datacontextdemo, electron) {
     function close() {
         service.threatModel = null;
         service.threatModelLocation = null;
+        service.lastLoadedLocation = null;
         electron.currentWindow.setTitle('OWASP Threat Dragon');
     }
 
@@ -103,11 +103,10 @@ function datacontext($q, datacontextdemo, electron) {
         var deferred = $q.defer();
 
         if (service.threatModelLocation && service.threatModelLocation != 'demo') {
-            doSave();
+            doSave(service.threatModelLocation);
         } else {
             electron.dialog.save(function (fileName) {
-                service.threatModelLocation = fileName;
-                doSave();
+                doSave(fileName);
             },
                 onCancel()
             );
@@ -116,12 +115,17 @@ function datacontext($q, datacontextdemo, electron) {
         return deferred.promise;
 
         function onCancel() {
-            service.threatModelLocation = service.loadedLocation;
+            service.threatModelLocation = service.lastLoadedLocation;
             deferred.resolve({ model: service.threatModel, location: { file: service.threatModelLocation } });
         }
 
-        function doSave() {
-            fsp.writeJson(service.threatModelLocation, model).then(onSavedThreatModel, onSaveError);
+        function doSave(location) {
+            fsp.writeFile(location, JSON.stringify(model)).then(
+                function() {
+                    service.threatModelLocation = location;
+                    onSavedThreatModel();
+                }, 
+                onSaveError);
         }
 
         function onSavedThreatModel() {
@@ -130,13 +134,13 @@ function datacontext($q, datacontextdemo, electron) {
         }
 
         function onSaveError(err) {
-            service.threatModelLocation = service.loadedLocation;
+            service.threatModelLocation = service.lastLoadedLocation;
             deferred.reject(err);
         }
     }
 
     function loadFromFile(forceQuery) {
-        if (service.threatModel && !forceQuery && service.threatModelLocation === service.loadedLocation) {
+        if (service.threatModel && !forceQuery && service.lastLoadedLocation === service.threatModelLocation) {
             return $q.when(service.threatModel);
         }
 
@@ -147,6 +151,7 @@ function datacontext($q, datacontextdemo, electron) {
 
         function onLoadedThreatModel(result) {
             var model = JSON.parse(result);
+            service.lastLoadedLocation = service.threatModelLocation;
             deferred.resolve(model);
         }
 
@@ -156,8 +161,11 @@ function datacontext($q, datacontextdemo, electron) {
     }
 
     function setLocation(location) {
-        service.loadedLocation = location;
-        electron.currentWindow.setTitle('OWASP Threat Dragon (' + location + ')');
+        if (location) {
+            electron.currentWindow.setTitle('OWASP Threat Dragon (' + location + ')');
+        } else {
+            electron.currentWindow.setTitle('OWASP Threat Dragon');
+        }  
     }
 }
 

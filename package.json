@@ -47,7 +47,7 @@
     "font-awesome": "4.7.0",
     "jquery": "3.3.1",
     "lodash": "4.17.11",
-    "owasp-threat-dragon-core": "0.5.8",
+    "owasp-threat-dragon-core": "0.5.9",
     "promise-fs": "2.1.0"
   },
   "devDependencies": {

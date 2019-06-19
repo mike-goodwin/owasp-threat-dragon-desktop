@@ -37,6 +37,9 @@ function shell($rootScope, $scope, $location, $route, common, config, datacontex
                         label: 'New',
                         accelerator: 'CmdOrCtrl+N',
                         click() {
+                            datacontext.threatModelLocation = null;
+                            datacontext.lastLoadedLocation = null;
+                            electron.currentWindow.setTitle('OWASP Threat Dragon');
                             $location.path('/threatmodel/new');
                             $scope.$apply();
                         }
@@ -71,7 +74,7 @@ function shell($rootScope, $scope, $location, $route, common, config, datacontex
                         click() {
                             //fix for issue #43: https://github.com/mike-goodwin/owasp-threat-dragon-desktop/issues/43
                             //feels like a hack - it involves copying data to the (grand)parent scope
-                            //can't think of another way to fix this now though - revist later
+                            //can't think of another way to fix this now though - revisit later
                             if ($location.path().includes('/threatmodel/') && $location.path().includes('/diagram/') && $scope.vm.saveDiagram) {
                                 $scope.vm.saveDiagram();
                             } else {

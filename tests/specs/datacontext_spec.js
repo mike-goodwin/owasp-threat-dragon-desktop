@@ -45,7 +45,7 @@ describe('datacontext service:', function () {
         expect(datacontext).toBeDefined();
     });
 
-    it('should load from the demo contect', function() {
+    it('should load from the demo context', function() {
 
         spyOn(mockDataContextDemo, 'load').and.callThrough();
         var params = {
@@ -66,8 +66,8 @@ describe('datacontext service:', function () {
             location: testLocation
         };
         datacontext.threatModel = mockThreatModel;
-        datacontext.loadedLocation = testLocation;
         datacontext.threatModelLocation = testLocation;
+        datacontext.lastLoadedLocation = testLocation;
         fsp.readFile = function() {};
         spyOn(fsp, 'readFile').and.returnValue(Promise.resolve(null));
 
@@ -83,10 +83,11 @@ describe('datacontext service:', function () {
             title: 'new title'
         };
         var params = {
-            location: testLocation
+            location: 'file'
         };
         datacontext.threatModel = mockThreatModel;
-        datacontext.loadedLocation = testLocation;
+        datacontext.threatModelLocation = testLocation;
+        datacontext.lastLoadedLocation = testLocation;
         fsp.readFile = function() {
             return $q.when(JSON.stringify(newThreatModel));
         };
@@ -118,7 +119,6 @@ describe('datacontext service:', function () {
             location: testLocation
         };
         datacontext.threatModel = mockThreatModel;
-        datacontext.loadedLocation = testLocation;
         fsp.readFile = function() {
             return $q.reject(errorMessage);
         };
@@ -279,14 +279,14 @@ describe('datacontext service:', function () {
         spyOn(mockElectron.dialog, 'save');
         spyOn(mockElectron.currentWindow, 'setTitle');
 
-        fsp.writeJson = function() { return $q.when({}); };
-        spyOn(fsp, 'writeJson').and.callThrough();
+        fsp.writeFile = function() { return $q.when({}); };
+        spyOn(fsp, 'writeFile').and.callThrough();
 
         datacontext.update().then(
             function() {
             expect(mockElectron.dialog.save).not.toHaveBeenCalled();
-            expect(fsp.writeJson).toHaveBeenCalled();
-            expect(fsp.writeJson.calls.argsFor(0)).toEqual([testLocation, mockThreatModel]);
+            expect(fsp.writeFile).toHaveBeenCalled();
+            expect(fsp.writeFile.calls.argsFor(0)).toEqual([testLocation, JSON.stringify(mockThreatModel)]);
             expect(mockElectron.currentWindow.setTitle).toHaveBeenCalled();
             expect(mockElectron.currentWindow.setTitle.calls.argsFor(0)).toEqual(['OWASP Threat Dragon (' + testLocation + ')']);
             done();
@@ -317,14 +317,14 @@ describe('datacontext service:', function () {
         datacontext.threatModelLocation = testLocation;
         spyOn(mockElectron.dialog, 'save');
 
-        fsp.writeJson = function() { return $q.when({}); };
-        spyOn(fsp, 'writeJson').and.callThrough();
+        fsp.writeFile = function() { return $q.when({}); };
+        spyOn(fsp, 'writeFile').and.callThrough();
 
         datacontext.saveThreatModelDiagram(id, testDiagramData).then(
             function() {
-                expect(fsp.writeJson).toHaveBeenCalled();
+                expect(fsp.writeFile).toHaveBeenCalled();
                 expect(mockElectron.dialog.save).not.toHaveBeenCalled();
-                var savedModel = fsp.writeJson.calls.argsFor(0)[1];
+                var savedModel = JSON.parse(fsp.writeFile.calls.argsFor(0)[1]);
                 expect(savedModel.detail.diagrams[0].size).toEqual(testSize);
                 expect(savedModel.detail.diagrams[0].diagramJson).toEqual(testJson);
                 done();
@@ -356,15 +356,15 @@ describe('datacontext service:', function () {
         datacontext.threatModelLocation = testLocation;
         spyOn(mockElectron.dialog, 'save');
 
-        fsp.writeJson = function() { return $q.when({}); };
-        spyOn(fsp, 'writeJson').and.callThrough();
+        fsp.writeFile = function() { return $q.when({}); };
+        spyOn(fsp, 'writeFile').and.callThrough();
 
         datacontext.saveThreatModelDiagram(badId, testDiagramData).then(
             function() {
                 fail('should have failed');
                 done();
             }, function(reason) {
-                expect(fsp.writeJson).not.toHaveBeenCalled();
+                expect(fsp.writeFile).not.toHaveBeenCalled();
                 expect(mockElectron.dialog.save).not.toHaveBeenCalled();
                 expect(reason.message).toEqual('invalid diagram id');
                 done();
@@ -386,8 +386,8 @@ describe('datacontext service:', function () {
         spyOn(mockElectron.dialog, 'save');
         spyOn(mockElectron.currentWindow, 'setTitle');
 
-        fsp.writeJson = function() { return $q.reject(error); };
-        spyOn(fsp, 'writeJson').and.callThrough();
+        fsp.writeFile = function() { return $q.reject(error); };
+        spyOn(fsp, 'writeFile').and.callThrough();
 
         datacontext.update().then(
             function() {
@@ -395,8 +395,8 @@ describe('datacontext service:', function () {
             done();
         }, function(reason) {
             expect(mockElectron.dialog.save).not.toHaveBeenCalled();
-            expect(fsp.writeJson).toHaveBeenCalled();
-            expect(fsp.writeJson.calls.argsFor(0)).toEqual([testLocation, mockThreatModel]);
+            expect(fsp.writeFile).toHaveBeenCalled();
+            expect(fsp.writeFile.calls.argsFor(0)).toEqual([testLocation, JSON.stringify(mockThreatModel)]);
             expect(mockElectron.currentWindow.setTitle).not.toHaveBeenCalled();
             expect(reason).toEqual(error);
             done();
