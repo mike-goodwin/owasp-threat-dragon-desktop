@@ -1,8 +1,44 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.8.0
+version: v1.13.5
 ignore: {}
 # patches apply the minimum changes required to fix a vulnerability
 patch:
   'npm:uglify-js:20151024':
     - owasp-threat-dragon-core > nools > uglify-js:
         patched: '2017-12-03T22:34:47.344Z'
+  'npm:debug:20170905':
+    - electron-squirrel-startup > debug:
+        patched: '2019-06-21T22:16:45.044Z'
+    - electron > electron-download > sumchecker > debug:
+        patched: '2019-06-21T22:16:45.044Z'
+    - owasp-threat-dragon-core > json-rules-engine > selectn > debug:
+        patched: '2019-06-21T22:16:45.044Z'
+    - electron > electron-download > nugget > debug:
+        patched: '2019-06-21T22:16:45.044Z'
+  'npm:extend:20180424':
+    - electron > electron-download > nugget > request > extend:
+        patched: '2019-06-21T22:16:45.044Z'
+  'npm:hoek:20180212':
+    - electron > electron-download > nugget > request > hawk > hoek:
+        patched: '2019-06-21T22:16:45.044Z'
+    - electron > electron-download > nugget > request > hawk > boom > hoek:
+        patched: '2019-06-21T22:16:45.044Z'
+    - electron > electron-download > nugget > request > hawk > sntp > hoek:
+        patched: '2019-06-21T22:16:45.044Z'
+    - electron > electron-download > nugget > request > hawk > cryptiles > boom > hoek:
+        patched: '2019-06-21T22:16:45.044Z'
+  'npm:ms:20170412':
+    - electron-squirrel-startup > debug > ms:
+        patched: '2019-06-21T22:16:45.044Z'
+    - electron > electron-download > nugget > debug > ms:
+        patched: '2019-06-21T22:16:45.044Z'
+    - electron > electron-download > sumchecker > debug > ms:
+        patched: '2019-06-21T22:16:45.044Z'
+    - owasp-threat-dragon-core > json-rules-engine > selectn > debug > ms:
+        patched: '2019-06-21T22:16:45.044Z'
+  'npm:stringstream:20180511':
+    - electron > electron-download > nugget > request > stringstream:
+        patched: '2019-06-21T22:16:45.044Z'
+  'npm:tough-cookie:20170905':
+    - electron > electron-download > nugget > request > tough-cookie:
+        patched: '2019-06-21T22:16:45.044Z'
