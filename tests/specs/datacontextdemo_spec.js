@@ -1,7 +1,5 @@
 'use strict';
 
-require('phantomjs-polyfill-find'); 
-
 describe('datacontextdemo service:', function () {
 
     var datacontext;
