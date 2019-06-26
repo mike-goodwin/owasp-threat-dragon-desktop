@@ -17,7 +17,7 @@ app.factory('datacontext', ['$q', 'datacontextdemo', 'electron', require('../../
 
 // controllers
 app.controller('desktopreport', ['$q', '$routeParams', '$location', 'common', 'datacontext', require('../../app/threatmodels/desktopreport')]);
+// todo: welcome controller
+app.controller('welcome', ['$scope', '$location', '$route', 'common', 'commonConfig', 'datacontext', 'electron', 'VERSION', require('../../app/welcome/welcome')]);
 // todo: shell controller
 //require('../../app/layout');
-// todo: welcome controller
-//require('../../app/welcome');
