@@ -28,7 +28,6 @@ function shell($rootScope, $scope, $location, $route, common, config, datacontex
     );
 
     function menuConfigurator() {
-
         var template = [
             {
                 label: 'File',
@@ -36,7 +35,7 @@ function shell($rootScope, $scope, $location, $route, common, config, datacontex
                     {
                         label: 'New',
                         accelerator: 'CmdOrCtrl+N',
-                        click() {
+                        click: function() {
                             datacontext.threatModelLocation = null;
                             datacontext.lastLoadedLocation = null;
                             electron.currentWindow.setTitle('OWASP Threat Dragon');
@@ -47,7 +46,7 @@ function shell($rootScope, $scope, $location, $route, common, config, datacontex
                     {
                         label: 'Open',
                         accelerator: 'CmdOrCtrl+O',
-                        click() {
+                        click: function() {
                             electron.dialog.open(function (fileNames) {
                                 datacontext.threatModelLocation = fileNames[0];
                                 if ($location.path() == '/threatmodel/file') {
@@ -63,7 +62,7 @@ function shell($rootScope, $scope, $location, $route, common, config, datacontex
                     {
                         label: 'Open Demo Model',
                         accelerator: 'CmdOrCtrl+D',
-                        click() {
+                        click: function() {
                             $location.path('/threatmodel/demo');
                             $scope.$apply();
                         }
@@ -84,7 +83,7 @@ function shell($rootScope, $scope, $location, $route, common, config, datacontex
                     },
                     {
                         label: 'Save As',
-                        click() {
+                        click: function() {
                             datacontext.saveAs().then(onSaveAs, onSaveError);
 
                             function onSaveAs(result) {
@@ -96,9 +95,9 @@ function shell($rootScope, $scope, $location, $route, common, config, datacontex
                         }
                     },
                     {
-                        label: 'Close',
+                        label: 'Close Model',
                         accelerator: 'CmdOrCtrl+X',
-                        click() {
+                        click: function() {
                             datacontext.close();
                             $location.path('/');
                             $scope.$apply();
@@ -107,7 +106,7 @@ function shell($rootScope, $scope, $location, $route, common, config, datacontex
                     {
                         label: 'Toggle Developer Tools',
                         accelerator: process.platform === 'darwin' ? 'Alt+Command+I' : 'Ctrl+Shift+I',
-                        click(item, focusedWindow) {
+                        click: function(item, focusedWindow) {
                             if (focusedWindow) {
                                 focusedWindow.webContents.toggleDevTools();
                             }
@@ -128,7 +127,7 @@ function shell($rootScope, $scope, $location, $route, common, config, datacontex
                     {
                         label: 'Reload',
                         accelerator: 'CmdOrCtrl+R',
-                        click(item, focusedWindow) {
+                        click: function(item, focusedWindow) {
                             if (focusedWindow) focusedWindow.reload();
                         }
                     },
@@ -136,24 +135,28 @@ function shell($rootScope, $scope, $location, $route, common, config, datacontex
                         type: 'separator'
                     },
                     {
+                        accelerator: 'CmdOrCtrl+0',
                         role: 'resetzoom'
                     },
                     {
+                        accelerator: 'CmdOrCtrl+=',
                         role: 'zoomin'
                     },
                     {
+                        accelerator: 'CmdOrCtrl+-',
                         role: 'zoomout'
                     },
                     {
                         type: 'separator'
                     },
                     {
+                        accelerator: 'CmdOrCtrl+F11',
                         role: 'togglefullscreen'
                     }
                 ]
             },
             {
-                role: 'window',
+                label: 'Window',
                 submenu: [
                     {
                         role: 'minimize'
@@ -164,23 +167,23 @@ function shell($rootScope, $scope, $location, $route, common, config, datacontex
                 ]
             },
             {
-                role: 'help',
+                label: 'help',
                 submenu: [
                     {
                         label: 'Documentation',
-                        click() {
+                        click: function() {
                             electron.shell.openExternal('http://docs.threatdragon.org');
                         }
                     },
                     {
                         label: 'Submit an Issue',
-                        click() {
+                        click: function() {
                             electron.shell.openExternal('https://github.com/mike-goodwin/owasp-threat-dragon-desktop/issues/new');
                         }
                     },
                     {
                         label: 'Visit us on GitHub',
-                        click() {
+                        click: function() {
                             electron.shell.openExternal('https://github.com/mike-goodwin/owasp-threat-dragon-desktop');
                         }
                     }
@@ -190,7 +193,6 @@ function shell($rootScope, $scope, $location, $route, common, config, datacontex
 
         const menu = electron.Menu.buildFromTemplate(template);
         electron.Menu.setApplicationMenu(menu);
-
     }
 }
 
