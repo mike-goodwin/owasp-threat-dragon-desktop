@@ -4,7 +4,6 @@ function shell($rootScope, $scope, $location, $route, common, config, datacontex
     var controllerId = 'shell';
     var logSuccess = common.logger.getLogFn(controllerId, 'success');
     var logError = common.logger.getLogFn(controllerId, 'error');
-    var events = config.events;
 
     menuConfigurator();
 
@@ -19,14 +18,6 @@ function shell($rootScope, $scope, $location, $route, common, config, datacontex
         common.activateController([], controllerId);
     }
 
-    $rootScope.$on('$routeChangeStart',
-        function (event, next, current) { }
-    );
-
-    $rootScope.$on(events.controllerActivateSuccess,
-        function (data) { }
-    );
-
     function menuConfigurator() {
         var template = [
             {
@@ -36,9 +27,7 @@ function shell($rootScope, $scope, $location, $route, common, config, datacontex
                         label: 'New',
                         accelerator: 'CmdOrCtrl+N',
                         click: function() {
-                            datacontext.threatModelLocation = null;
-                            datacontext.lastLoadedLocation = null;
-                            electron.currentWindow.setTitle('OWASP Threat Dragon');
+                            datacontext.close();
                             $location.path('/threatmodel/new');
                             $scope.$apply();
                         }
@@ -96,7 +85,7 @@ function shell($rootScope, $scope, $location, $route, common, config, datacontex
                     },
                     {
                         label: 'Close Model',
-                        accelerator: 'CmdOrCtrl+X',
+                        accelerator: 'CmdOrCtrl+F4',
                         click: function() {
                             datacontext.close();
                             $location.path('/');
@@ -167,7 +156,7 @@ function shell($rootScope, $scope, $location, $route, common, config, datacontex
                 ]
             },
             {
-                label: 'help',
+                label: 'Help',
                 submenu: [
                     {
                         label: 'Documentation',
