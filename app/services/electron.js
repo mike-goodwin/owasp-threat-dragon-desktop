@@ -15,6 +15,7 @@ function electronservice(common) {
     var service = {
         dialog: {
             save: save,
+            savePDF: savePDF,
             open: open
         },
         currentWindow: remote.getCurrentWindow(),
@@ -36,6 +37,16 @@ function electronservice(common) {
 
     function save(onSave, onNoSave) {
         dialog.showSaveDialog(remote.getCurrentWindow(), { filters: [{ name: 'Threat Models', extensions: ['json'] }] }, function (fileName) {
+            if (_.isUndefined(fileName)) {
+                onNoSave();
+            } else {
+                onSave(fileName);
+            }
+        });
+    }
+
+    function savePDF(defaultPath, onSave, onNoSave) {
+        dialog.showSaveDialog(remote.getCurrentWindow(), { defaultPath: defaultPath, filters: [{name: 'PDF files', extensions: ['pdf'] }] }, function (fileName) {
             if (_.isUndefined(fileName)) {
                 onNoSave();
             } else {

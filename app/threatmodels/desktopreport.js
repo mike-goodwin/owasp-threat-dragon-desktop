@@ -1,6 +1,7 @@
 'use strict';
 
-function desktopreport($q, $routeParams, $location, common, datacontext, threatmodellocator) {
+function desktopreport($q, $routeParams, $location, common, datacontext, threatmodellocator, electron) {
+    var fsp = require('promise-fs');
     /*jshint validthis: true */
     var vm = this;
     var controllerId = 'desktopreport';
@@ -15,6 +16,7 @@ function desktopreport($q, $routeParams, $location, common, datacontext, threatm
     vm.loaded = false;
     vm.onLoaded = onLoaded;
     vm.onError = onError;
+    vm.print = print;
 
     activate();
 
@@ -47,6 +49,47 @@ function desktopreport($q, $routeParams, $location, common, datacontext, threatm
 
     function threatModelLocation() {
         return threatmodellocator.getModelLocation($routeParams);
+    }
+
+    function print(done) {
+        electron.currentWindow.webContents.printToPDF(pdfSettings, onPrinted);
+
+        function pdfSettings() {
+            var paperSizeArray = ["A4", "A5"];
+            var option = {
+                landscape: false,
+                marginsType: 0,
+                printBackground: false,
+                printSelectionOnly: false,
+                pageSize: paperSizeArray[settingCache.getPrintPaperSize()-1],
+            };
+
+            return option;
+        }
+        
+        function onPrinted(error, data) {
+            if (error) {
+                done();
+                onError(error);
+            } else {
+
+                var defaultPath = null;
+                if (datacontext.threatModelLocation) {
+                    var defaultPath = datacontext.threatModelLocation.replace('.json', '.pdf')
+                }
+
+                electron.dialog.savePDF(defaultPath, function (fileName) {
+                    fsp.writeFile(fileName, data).then(function() { 
+                        done();
+                    });
+                },
+                function() {
+                    log('Cancelled save threat model');
+                    done();
+                });
+            }
+        }
+
     }
 }
 
