@@ -1,7 +1,6 @@
 'use strict';
 
 function desktopreport($q, $routeParams, $location, common, datacontext, threatmodellocator) {
-    // Using 'Controller As' syntax, so we assign this to the vm variable (for viewmodel).
     /*jshint validthis: true */
     var vm = this;
     var controllerId = 'desktopreport';
@@ -11,11 +10,7 @@ function desktopreport($q, $routeParams, $location, common, datacontext, threatm
 
     // Bindable properties and functions are placed on vm.
     vm.title = 'Threat Model Report';
-    vm.threatModel = {
-        summary: {
-            title: 'blah'
-        }
-    };
+    vm.threatModel = {};
     vm.error = null;
     vm.loaded = false;
     vm.onLoaded = onLoaded;

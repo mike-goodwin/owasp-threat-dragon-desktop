@@ -5,14 +5,7 @@
     </div>
     <row>
         <div ng-if="!vm.error">
-            <div class="panel panel-default">
-                <div class="panel-heading panel-title">
-                    <h4>Outer Threat Model Report container placeholder...</h4>
-                </div>
-                <div class="panel-body">
-                    <tmt-threat-model-report loaded="vm.onLoaded()" model="vm.threatModel">
-                </div>
-            </div>
+            <tmt-threat-model-report loaded="vm.onLoaded()" model="vm.threatModel">
         </div>
     </row>
     <row>
