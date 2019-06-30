@@ -17,6 +17,7 @@ function desktopreport($q, $routeParams, $location, common, datacontext, threatm
     vm.onLoaded = onLoaded;
     vm.onError = onError;
     vm.savePDF = savePDF;
+    vm.printPDF = printPDF;
 
     activate();
 
@@ -89,7 +90,27 @@ function desktopreport($q, $routeParams, $location, common, datacontext, threatm
                 });
             }
         }
+    }
+    
+    function printPDF(done) {
 
+        //use default print options
+        var printSettings = {};
+
+        electron.currentWindow.webContents.print(printSettings, onPrinted);
+        
+        function onPrinted(success) {
+            if (success) {
+                log('Report printed successfully');
+                done();
+            } else {
+                // see Electron issue https://github.com/electron/electron/issues/19008
+                // application will "hang" if the print dialog is cancelled
+                // calling reload instead of done is a temporary workaround
+                logError('Report printing failed');
+                electron.currentWindow.webContents.reload();
+            }
+        }
     }
 }
 

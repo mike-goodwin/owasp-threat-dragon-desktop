@@ -5,7 +5,7 @@
     </div>
     <row>
         <div ng-if="!vm.error">
-            <tmt-threat-model-report loaded="vm.onLoaded()" save="vm.savePDF(done)" model="vm.threatModel">
+            <tmt-threat-model-report loaded="vm.onLoaded()" save="vm.savePDF(done)" print="vm.printPDF(done)" model="vm.threatModel">
         </div>
     </row>
     <row>
