@@ -55,18 +55,18 @@ function desktopreport($q, $routeParams, $location, common, datacontext, threatm
         electron.currentWindow.webContents.printToPDF(pdfSettings, onPrinted);
 
         function pdfSettings() {
-            var paperSizeArray = ["A4", "A5"];
+
             var option = {
                 landscape: false,
                 marginsType: 0,
                 printBackground: false,
                 printSelectionOnly: false,
-                pageSize: paperSizeArray[settingCache.getPrintPaperSize()-1],
+                pageSize: 'A4',
             };
 
             return option;
         }
-        
+
         function onPrinted(error, data) {
             if (error) {
                 done();
@@ -75,7 +75,7 @@ function desktopreport($q, $routeParams, $location, common, datacontext, threatm
 
                 var defaultPath = null;
                 if (datacontext.threatModelLocation) {
-                    var defaultPath = datacontext.threatModelLocation.replace('.json', '.pdf')
+                    defaultPath = datacontext.threatModelLocation.replace('.json', '.pdf');
                 }
 
                 electron.dialog.savePDF(defaultPath, function (fileName) {
