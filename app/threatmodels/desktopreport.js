@@ -16,7 +16,7 @@ function desktopreport($q, $routeParams, $location, common, datacontext, threatm
     vm.loaded = false;
     vm.onLoaded = onLoaded;
     vm.onError = onError;
-    vm.print = print;
+    vm.savePDF = savePDF;
 
     activate();
 
@@ -51,7 +51,7 @@ function desktopreport($q, $routeParams, $location, common, datacontext, threatm
         return threatmodellocator.getModelLocation($routeParams);
     }
 
-    function print(done) {
+    function savePDF(done) {
         electron.currentWindow.webContents.printToPDF(pdfSettings, onPrinted);
 
         function pdfSettings() {
