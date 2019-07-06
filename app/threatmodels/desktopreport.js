@@ -107,6 +107,7 @@ function desktopreport($q, $routeParams, $location, common, datacontext, threatm
                 // see Electron issue https://github.com/electron/electron/issues/19008
                 // application will "hang" if the print dialog is cancelled
                 // calling reload instead of done is a temporary workaround
+                // it looks bad but the app keeps working
                 logError('Report printing failed');
                 electron.currentWindow.webContents.reload();
             }

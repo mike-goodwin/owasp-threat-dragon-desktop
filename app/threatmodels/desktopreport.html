@@ -4,9 +4,7 @@
             <div class="spinner"></div>
     </div>
     <row>
-        <div ng-if="!vm.error">
-            <tmt-threat-model-report loaded="vm.onLoaded()" save="vm.savePDF(done)" print="vm.printPDF(done)" model="vm.threatModel">
-        </div>
+        <div ng-if="!vm.error"><tmt-threat-model-report loaded="vm.onLoaded()" save="vm.savePDF(done)" print="vm.printPDF(done)" model="vm.threatModel"></tmt-threat-model-report />
     </row>
     <row>
         <div ng-if="vm.error">

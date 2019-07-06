@@ -120,7 +120,7 @@ function datacontext($q, datacontextdemo, electron) {
         }
 
         function doSave(location) {
-            fsp.writeFile(location, JSON.stringify(model)).then(
+            fsp.writeFile(location, JSON.stringify(model,null, 2)).then(
                 function() {
                     service.threatModelLocation = location;
                     onSavedThreatModel();

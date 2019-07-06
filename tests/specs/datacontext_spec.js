@@ -286,7 +286,7 @@ describe('datacontext service:', function () {
             function() {
             expect(mockElectron.dialog.save).not.toHaveBeenCalled();
             expect(fsp.writeFile).toHaveBeenCalled();
-            expect(fsp.writeFile.calls.argsFor(0)).toEqual([testLocation, JSON.stringify(mockThreatModel)]);
+            expect(fsp.writeFile.calls.argsFor(0)).toEqual([testLocation, JSON.stringify(mockThreatModel, null, 2)]);
             expect(mockElectron.currentWindow.setTitle).toHaveBeenCalled();
             expect(mockElectron.currentWindow.setTitle.calls.argsFor(0)).toEqual(['OWASP Threat Dragon (' + testLocation + ')']);
             done();
@@ -396,7 +396,7 @@ describe('datacontext service:', function () {
         }, function(reason) {
             expect(mockElectron.dialog.save).not.toHaveBeenCalled();
             expect(fsp.writeFile).toHaveBeenCalled();
-            expect(fsp.writeFile.calls.argsFor(0)).toEqual([testLocation, JSON.stringify(mockThreatModel)]);
+            expect(fsp.writeFile.calls.argsFor(0)).toEqual([testLocation, JSON.stringify(mockThreatModel, null, 2)]);
             expect(mockElectron.currentWindow.setTitle).not.toHaveBeenCalled();
             expect(reason).toEqual(error);
             done();
