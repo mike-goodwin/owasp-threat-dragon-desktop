@@ -23,6 +23,7 @@ require('./app/config.route');
 require('./app/layout');
 require('./app/welcome');
 require('./app/services');
+require('./app/threatmodels');
 
 app.config(['$qProvider', function ($qProvider) {
     $qProvider.errorOnUnhandledRejections(false);
