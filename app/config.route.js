@@ -59,6 +59,14 @@ function getRoutes() {
                 }
             }
         }, {
+            url: '/threatmodel/report/:location',
+            config: {
+                templateUrl: './app/threatmodels/desktopreport.html',
+                title: 'Threat Model Report',
+                settings: {
+                }
+            }
+        }, {
             url: '/threatmodel/:location',
             config: {
                 templateUrl: 'threatmodels/threatmodeldetail.html',
