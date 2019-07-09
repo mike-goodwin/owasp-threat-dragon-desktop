@@ -16,7 +16,8 @@ function electronservice(common) {
         dialog: {
             save: save,
             savePDF: savePDF,
-            open: open
+            open: open,
+            messageBox: messageBox
         },
         currentWindow: remote.getCurrentWindow(),
         shell: electron.shell,
@@ -34,6 +35,10 @@ function electronservice(common) {
     };
 
     return service;
+
+    function messageBox(options) {
+        dialog.showMessageBox(remote.getCurrentWindow(), options);
+    }
 
     function save(onSave, onNoSave) {
         dialog.showSaveDialog(remote.getCurrentWindow(), { filters: [{ name: 'Threat Models', extensions: ['json'] }] }, function (fileName) {

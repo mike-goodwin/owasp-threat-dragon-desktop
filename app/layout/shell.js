@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-function shell($rootScope, $scope, $location, $route, common, config, datacontext, electron, dialogs) {
+function shell($rootScope, $scope, $location, $route, common, config, datacontext, electron, dialogs, VERSION) {
     var controllerId = 'shell';
     var logSuccess = common.logger.getLogFn(controllerId, 'success');
     var logError = common.logger.getLogFn(controllerId, 'error');
@@ -175,7 +175,21 @@ function shell($rootScope, $scope, $location, $route, common, config, datacontex
                         click: function() {
                             electron.shell.openExternal('https://github.com/mike-goodwin/owasp-threat-dragon-desktop');
                         }
+                    },
+                    {
+                        type: 'separator'
+                    },
+                    {
+                        label: 'About',
+                        click: function() {
+                            electron.dialog.messageBox({
+                                type: 'info',
+                                title: 'About OWASP Threat Dragon (Version ' + VERSION + ')',
+                                message: 'OWASP Threat Dragon is a free, open-source, cross-platform threat modeling application including system diagramming and a rule engine to auto-generate threats/mitigations. It is an OWASP Incubator Project.'
+                            });
+                        }
                     }
+
                 ]
             }
         ];

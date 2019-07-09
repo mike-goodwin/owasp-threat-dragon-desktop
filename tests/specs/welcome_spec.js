@@ -14,15 +14,12 @@ describe('welcome controller', function () {
     };
     var mockDatacontext = {
     };
-
-    var testVersion = 'version';
     
     beforeEach(function () {
         
         angular.mock.module('app');
         angular.mock.module(function ($provide) {
             $provide.value('electron', mockElectron);
-            $provide.value('VERSION', testVersion);
             $provide.value('datacontext', mockDatacontext);
         });
         
@@ -53,12 +50,6 @@ describe('welcome controller', function () {
     });
     
     describe('viewmodel tests', function () {
-        
-        it('should set the version', function () {
-
-            expect($scope.vm.version).toEqual(testVersion);
-
-        });
 
         it('should open a model file', function() {
             var testFileName = 'test file name';

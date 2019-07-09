@@ -17,7 +17,8 @@ describe('shell controller', function () {
             openExternal: function() {}
         },
         dialog: {
-            open: function() {}
+            open: function() {},
+            messageBox: function() {}
         }
     };
     var mockDatacontext = {
@@ -27,6 +28,7 @@ describe('shell controller', function () {
     };
     var testMenu = 'test menu';
     var templateMenu;
+    var testVersion = 'test version';
 
     beforeEach(function () {
 
@@ -36,6 +38,7 @@ describe('shell controller', function () {
         angular.mock.module(function ($provide) {
             $provide.value('electron', mockElectron);
             $provide.value('datacontext', mockDatacontext);
+            $provide.value('VERSION', testVersion);
         });
 
         angular.mock.inject(function ($rootScope, _$q_, _$controller_, _$httpBackend_, _$location_, _$route_) {
@@ -403,6 +406,21 @@ describe('shell controller', function () {
         spyOn(mockElectron.shell, 'openExternal');
         subMenu.submenu[2].click();
         expect(mockElectron.shell.openExternal.calls.argsFor(0)).toEqual(['https://github.com/mike-goodwin/owasp-threat-dragon-desktop']); 
+    });
+
+    it('Help menu fourth item should be a separator', function() {
+        var template = mockElectron.Menu.buildFromTemplate.calls.argsFor(0)[0];
+        var subMenu = getSubMenu(template, 'Help');
+        expect(subMenu.submenu[3].type).toEqual('separator');
+    });
+
+    it('Help menu fifth item should show a help about', function() {
+        var template = mockElectron.Menu.buildFromTemplate.calls.argsFor(0)[0];
+        var subMenu = getSubMenu(template, 'Help');
+        expect(subMenu.submenu[4].label).toEqual('About');
+        spyOn(mockElectron.dialog, 'messageBox');
+        subMenu.submenu[4].click();
+        expect(mockElectron.dialog.messageBox).toHaveBeenCalled();
     });
 
     function getSubMenu(template, label) {
