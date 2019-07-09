@@ -304,9 +304,63 @@ describe('shell controller', function () {
         expect(subMenu.submenu[8].role).toEqual('close');
     });
 
+    //Edit:
+    it('Edit menu first item should be Undo', function() {
+        var template = mockElectron.Menu.buildFromTemplate.calls.argsFor(0)[0];
+        var subMenu = getSubMenu(template, 'Edit');
+        expect(subMenu.submenu[0].label).toEqual('Undo');
+        expect(subMenu.submenu[0].accelerator).toEqual('CmdOrCtrl+Z');
+        expect(subMenu.submenu[0].selector).toEqual('undo:');
+    });
+
+    it('Edit menu second item should be Redo', function() {
+        var template = mockElectron.Menu.buildFromTemplate.calls.argsFor(0)[0];
+        var subMenu = getSubMenu(template, 'Edit');
+        expect(subMenu.submenu[1].label).toEqual('Redo');
+        expect(subMenu.submenu[1].accelerator).toEqual('Shift+CmdOrCtrl+Z');
+        expect(subMenu.submenu[1].selector).toEqual('redo:');
+    });
+
+    it('Edit menu third item should be a separator', function() {
+        var template = mockElectron.Menu.buildFromTemplate.calls.argsFor(0)[0];
+        var subMenu = getSubMenu(template, 'Edit');
+        expect(subMenu.submenu[2].type).toEqual('separator');
+    });
+
+    it('Edit menu fourth item should be Cut', function() {
+        var template = mockElectron.Menu.buildFromTemplate.calls.argsFor(0)[0];
+        var subMenu = getSubMenu(template, 'Edit');
+        expect(subMenu.submenu[3].label).toEqual('Cut');
+        expect(subMenu.submenu[3].accelerator).toEqual('CmdOrCtrl+X');
+        expect(subMenu.submenu[3].selector).toEqual('cut:');
+    });
+
+    it('Edit menu fifth item should be Copy', function() {
+        var template = mockElectron.Menu.buildFromTemplate.calls.argsFor(0)[0];
+        var subMenu = getSubMenu(template, 'Edit');
+        expect(subMenu.submenu[4].label).toEqual('Copy');
+        expect(subMenu.submenu[4].accelerator).toEqual('CmdOrCtrl+C');
+        expect(subMenu.submenu[4].selector).toEqual('copy:');
+    });
+
+    it('Edit menu sixth item should be Paste', function() {
+        var template = mockElectron.Menu.buildFromTemplate.calls.argsFor(0)[0];
+        var subMenu = getSubMenu(template, 'Edit');
+        expect(subMenu.submenu[5].label).toEqual('Paste');
+        expect(subMenu.submenu[5].accelerator).toEqual('CmdOrCtrl+V');
+        expect(subMenu.submenu[5].selector).toEqual('paste:');
+    });
+
+    it('Edit menu seventh item should be Select All', function() {
+        var template = mockElectron.Menu.buildFromTemplate.calls.argsFor(0)[0];
+        var subMenu = getSubMenu(template, 'Edit');
+        expect(subMenu.submenu[6].label).toEqual('Select All');
+        expect(subMenu.submenu[6].accelerator).toEqual('CmdOrCtrl+A');
+        expect(subMenu.submenu[6].selector).toEqual('selectAll:');
+    });
+
     //view:
     it('View menu first item should be Reload', function() {
-        // todo: test menu action
         var template = mockElectron.Menu.buildFromTemplate.calls.argsFor(0)[0];
         var subMenu = getSubMenu(template, 'View');
         expect(subMenu.submenu[0].label).toEqual('Reload');
