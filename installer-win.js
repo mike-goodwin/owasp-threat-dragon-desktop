@@ -37,6 +37,6 @@ rl.question('Relative path to code signing certificate file (<return> for no sig
       });
     }
     
-    resultPromise = electronInstaller.createWindowsInstaller(options);
+    var resultPromise = electronInstaller.createWindowsInstaller(options);
     resultPromise.then(() => console.log("It worked!"), (e) => console.log(`No dice: ${e.message}`));
 });
