@@ -1,8 +1,13 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.8.0
+version: v1.13.5
 ignore: {}
 # patches apply the minimum changes required to fix a vulnerability
 patch:
   'npm:uglify-js:20151024':
     - owasp-threat-dragon-core > nools > uglify-js:
         patched: '2017-12-03T22:34:47.344Z'
+  SNYK-JS-LODASH-450202:
+    - owasp-threat-dragon-core > lodash:
+        patched: '2019-07-13T21:26:48.781Z'
+    - owasp-threat-dragon-core > jointjs > lodash:
+        patched: '2019-07-13T21:26:48.781Z'
