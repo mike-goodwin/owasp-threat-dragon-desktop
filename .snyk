@@ -11,3 +11,7 @@ patch:
         patched: '2019-07-13T21:26:48.781Z'
     - owasp-threat-dragon-core > jointjs > lodash:
         patched: '2019-07-13T21:26:48.781Z'
+    - owasp-threat-dragon-core > lodash:
+        patched: '2019-07-14T20:56:33.357Z'
+    - owasp-threat-dragon-core > jointjs > lodash:
+        patched: '2019-07-14T20:56:33.357Z'
