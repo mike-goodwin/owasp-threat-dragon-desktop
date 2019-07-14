@@ -48,12 +48,10 @@ describe('datacontext service:', function () {
     it('should load from the demo context', function() {
 
         spyOn(mockDataContextDemo, 'load').and.callThrough();
-        var params = {
-            location: 'demo'
-        };
+        var location = 'demo';
 
         var forceQuery = true;
-        datacontext.load(params, forceQuery);
+        datacontext.load(location, forceQuery);
         expect(mockDataContextDemo.load).toHaveBeenCalled();
         expect(mockDataContextDemo.load.calls.argsFor(0)).toEqual([forceQuery]);
     });
@@ -62,16 +60,13 @@ describe('datacontext service:', function () {
 
         var testLocation = 'test location';
         var mockThreatModel = {};
-        var params = {
-            location: testLocation
-        };
         datacontext.threatModel = mockThreatModel;
         datacontext.threatModelLocation = testLocation;
         datacontext.lastLoadedLocation = testLocation;
         fsp.readFile = function() {};
         spyOn(fsp, 'readFile').and.returnValue(Promise.resolve(null));
 
-        datacontext.load(params, false);
+        datacontext.load(testLocation, false);
         expect(fsp.readFile).not.toHaveBeenCalled();
     });
 
@@ -82,9 +77,6 @@ describe('datacontext service:', function () {
         var newThreatModel = {
             title: 'new title'
         };
-        var params = {
-            location: 'file'
-        };
         datacontext.threatModel = mockThreatModel;
         datacontext.threatModelLocation = testLocation;
         datacontext.lastLoadedLocation = testLocation;
@@ -94,7 +86,7 @@ describe('datacontext service:', function () {
         spyOn(fsp, 'readFile').and.callThrough();
         spyOn(mockElectron.currentWindow, 'setTitle');
 
-        datacontext.load(params, true).then(
+        datacontext.load(testLocation, true).then(
             function() {
             expect(fsp.readFile).toHaveBeenCalled();
             expect(mockElectron.currentWindow.setTitle).toHaveBeenCalled();

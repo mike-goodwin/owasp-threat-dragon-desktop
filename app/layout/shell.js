@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-function shell($rootScope, $scope, $location, $route, common, config, datacontext, electron, dialogs, VERSION) {
+function shell($rootScope, $scope, $location, $route, common, datacontext, electron, threatmodellocator, VERSION) {
     var controllerId = 'shell';
     var logSuccess = common.logger.getLogFn(controllerId, 'success');
     var logError = common.logger.getLogFn(controllerId, 'error');
@@ -37,11 +37,11 @@ function shell($rootScope, $scope, $location, $route, common, config, datacontex
                         accelerator: 'CmdOrCtrl+O',
                         click: function() {
                             electron.dialog.open(function (fileNames) {
-                                datacontext.threatModelLocation = fileNames[0];
-                                if ($location.path() == '/threatmodel/file') {
+                                var path = threatmodellocator.getModelPath( fileNames[0]);
+                                if ($location.path() == '/threatmodel/' + path) {
                                     $route.reload();
                                 } else {
-                                    $location.path('/threatmodel/file');
+                                    $location.path('/threatmodel/' + path);
                                 }
                                 $scope.$apply();
                             },

@@ -23,38 +23,69 @@ describe('threatmodellocator service:', function () {
         expect(threatmodellocator.newModelLocation).toEqual('/threatmodel/new');
     });
 
-    it('should return a model location object', function () {
+    it('should return a file name from an encoded one', function () {
 
-        var file = 'file';
+        var file = 'c:\dir\file name.json';
+        var encoded = encodeURI(file);
 
         var params = {
-            file: file
+            location: encoded
         };
 
         var location = threatmodellocator.getModelLocation(params);
-        expect(location.file).toEqual(file);
+        expect(location).toEqual(file);
     });
 
-    it('should return a model path', function () {
+    it('should return a file name', function () {
 
-        var file = 'unencoded file'
+        var file = 'c:\dir\file name.json';
 
         var params = {
             location: file
         };
 
-        expect(threatmodellocator.getModelPath(params)).toEqual(file);
+        var location = threatmodellocator.getModelLocation(params);
+        expect(location).toEqual(file);
     });
 
-    it('should return a model path based on route params', function () {
+    it('should return encoded values unchanged', function () {
 
-        var file = 'unencoded file'
+        var file = 'c:\dir\file name.json';
+        var encoded = encodeURI(file);
+
+        expect(threatmodellocator.getModelPath(encoded)).toEqual(encoded);
+    });
+
+    it('should encoded values that look unencoded', function () {
+
+        var file = 'c:\dir\file name.json';
+        var encoded = encodeURI(file);
+
+        expect(threatmodellocator.getModelPath(file)).toEqual(encoded);
+    });
+
+    it('should return encoded route params location unchanged', function () {
+
+        var file = 'c:\dir\file name.json';
+        var encoded = encodeURI(file);
+
+        var params = {
+            location: encoded
+        };
+
+        expect(threatmodellocator.getModelPathFromRouteParams(params)).toEqual(encoded);
+    });
+
+    it('should encoded unencoded route params location', function () {
+
+        var file = 'c:\dir\file name.json';
+        var encoded = encodeURI(file);
 
         var params = {
             location: file
         };
 
-        expect(threatmodellocator.getModelPathFromRouteParams(params)).toEqual(file);
+        expect(threatmodellocator.getModelPathFromRouteParams(params)).toEqual(encoded);
     });
 
     it('should not move the threat model', function() {
