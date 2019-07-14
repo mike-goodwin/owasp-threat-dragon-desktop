@@ -47,8 +47,8 @@
     "electron-debug": "3.0.0",
     "electron-squirrel-startup": "1.0.0",
     "font-awesome": "4.7.0",
-    "jquery": "3.3.1",
-    "lodash": "4.17.11",
+    "jquery": "3.4.0",
+    "lodash": "4.17.12",
     "owasp-threat-dragon-core": "0.6.1",
     "promise-fs": "2.1.0",
     "snyk": "^1.193.1"
