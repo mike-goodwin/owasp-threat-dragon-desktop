@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-function welcome($scope, $location, $route, common, commonConfig, datacontext, electron) {
+function welcome($scope, $location, $route, common, electron, threatmodellocator) {
 
     /*jshint validthis: true */
     var controllerId = 'welcome';
@@ -20,11 +20,11 @@ function welcome($scope, $location, $route, common, commonConfig, datacontext, e
 
     function openModel() {
         electron.dialog.open(function (fileNames) {
-            datacontext.threatModelLocation = fileNames[0];
-            if ($location.path() == '/threatmodel/file') {
+            var path = threatmodellocator.getModelPath( fileNames[0]);
+            if ($location.path() == '/threatmodel/' + path) {
                 $route.reload();
             } else {
-                $location.path('/threatmodel/file');
+                $location.path('/threatmodel/' + path);
             }
             $scope.$apply();
         },

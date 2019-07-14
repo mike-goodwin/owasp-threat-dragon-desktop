@@ -99,9 +99,8 @@ describe('shell controller', function () {
         spyOn($location, 'path').and.callThrough();
         click();
         expect($location.path.calls.count()).toEqual(2);
-        expect($location.path()).toEqual('/threatmodel/file');
+        expect($location.path()).toEqual(encodeURI('/threatmodel/' + testFileName));
         expect($scope.$apply).toHaveBeenCalled();
-        expect(mockDatacontext.threatModelLocation).toEqual(testFileName);
     });
 
     it('File menu second item should be open a model - reload', function() {
@@ -117,12 +116,11 @@ describe('shell controller', function () {
         }
 
         spyOn($scope, '$apply').and.callThrough();
-        spyOn($location, 'path').and.returnValue('/threatmodel/file');
+        spyOn($location, 'path').and.returnValue('/threatmodel/' + encodeURI(testFileName));
         spyOn($route, 'reload').and.callThrough();
         click();
         expect($location.path.calls.count()).toEqual(1);
         expect($scope.$apply).toHaveBeenCalled();
-        expect(mockDatacontext.threatModelLocation).toEqual(testFileName);
         expect($route.reload).toHaveBeenCalled();
     });
 

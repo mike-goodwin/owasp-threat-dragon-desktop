@@ -22,12 +22,16 @@ function datacontext($q, datacontextdemo, electron) {
 
     return service;
 
-    function load(params, forceQuery) {
+    function load(location, forceQuery) {
         var result;
 
-        if (params.location === 'demo') {
+        if (location === 'demo') {
+            service.threatModelLocation = null;
+            service.lastLoadedLocation = null;
+            setLocation(service.threatModelLocation);
             result = datacontextdemo.load(forceQuery);
         } else {
+            service.threatModelLocation = location;
             result = loadFromFile(forceQuery);
         }
 
@@ -83,6 +87,7 @@ function datacontext($q, datacontextdemo, electron) {
 
             service.threatModel = null;
             service.threatModelLocation = null;
+            setLocation(null);
             return $q.resolve(null);
         }
     }
@@ -130,7 +135,7 @@ function datacontext($q, datacontextdemo, electron) {
 
         function onSavedThreatModel() {
             setLocation(service.threatModelLocation);
-            deferred.resolve({ model: service.threatModel, location: { file: service.threatModelLocation } });
+            deferred.resolve({ model: service.threatModel, location: service.threatModelLocation });
         }
 
         function onSaveError(err) {

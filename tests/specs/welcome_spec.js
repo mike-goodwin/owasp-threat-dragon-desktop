@@ -63,9 +63,8 @@ describe('welcome controller', function () {
             $scope.vm.openModel();
 
             expect($location.path.calls.count()).toEqual(2);
-            expect($location.path()).toEqual('/threatmodel/file');
+            expect($location.path()).toEqual(encodeURI('/threatmodel/' + testFileName));
             expect($scope.$apply).toHaveBeenCalled();
-            expect(mockDatacontext.threatModelLocation).toEqual(testFileName);
         });
 
         it('should not open a model - reload', function() {
@@ -76,12 +75,11 @@ describe('welcome controller', function () {
             }
         
             spyOn($scope, '$apply').and.callThrough();
-            spyOn($location, 'path').and.returnValue('/threatmodel/file');
+            spyOn($location, 'path').and.returnValue(encodeURI('/threatmodel/' + testFileName));
             spyOn($route, 'reload').and.callThrough();
             $scope.vm.openModel();
             expect($location.path.calls.count()).toEqual(1);
             expect($scope.$apply).toHaveBeenCalled();
-            expect(mockDatacontext.threatModelLocation).toEqual(testFileName);
             expect($route.reload).toHaveBeenCalled();
         });
     });

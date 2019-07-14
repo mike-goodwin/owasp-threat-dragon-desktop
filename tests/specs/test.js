@@ -17,5 +17,5 @@ app.factory('datacontext', ['$q', 'datacontextdemo', 'electron', require('../../
 
 // controllers
 app.controller('desktopreport', ['$q', '$routeParams', '$location', 'common', 'datacontext', 'threatmodellocator', 'electron', require('../../app/threatmodels/desktopreport')]);
-app.controller('welcome', ['$scope', '$location', '$route', 'common', 'commonConfig', 'datacontext', 'electron', require('../../app/welcome/welcome')]);
-app.controller('shell', ['$rootScope', '$scope', '$location', '$route', 'common', 'config', 'datacontext', 'electron', 'dialogs', 'VERSION', require('../../app/layout/shell')]);
+app.controller('welcome', ['$scope', '$location', '$route', 'common', 'electron', 'threatmodellocator', require('../../app/welcome/welcome')]);
+app.controller('shell', ['$rootScope', '$scope', '$location', '$route', 'common', 'datacontext', 'electron', 'threatmodellocator', 'VERSION', require('../../app/layout/shell')]);
