@@ -19,7 +19,7 @@ function threatmodellocator() {
         var result = params.location;
 
         while (checkEncoded(result)) {
-            result = decodeURI(result);
+            result = atob(result);
         }
 
         return result;
@@ -32,7 +32,7 @@ function threatmodellocator() {
         var result = location;
 
         if (!checkEncoded(result)) {
-            result = encodeURI(result);
+            result = btoa(result);
         }
 
         return result;
@@ -44,7 +44,7 @@ function threatmodellocator() {
         var result = params.location;
 
         if (!checkEncoded(result)) {
-            result = encodeURI(result);
+            result = btoa(result);
         }
 
         return result;
@@ -55,7 +55,8 @@ function threatmodellocator() {
     }
 
     function checkEncoded(value) {
-        return /\%/i.test(value);
+        var pattern = /\\|\//i;
+        return !pattern.test(value);
     }
 }
 
