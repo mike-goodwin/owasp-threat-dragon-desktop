@@ -25,8 +25,8 @@ describe('threatmodellocator service:', function () {
 
     it('should return a file name from an encoded one', function () {
 
-        var file = 'c:\dir\file name.json';
-        var encoded = encodeURI(file);
+        var file = 'c:\\dir\\file name.json';
+        var encoded = btoa(file);
 
         var params = {
             location: encoded
@@ -38,7 +38,7 @@ describe('threatmodellocator service:', function () {
 
     it('should return a file name', function () {
 
-        var file = 'c:\dir\file name.json';
+        var file = 'c:\\dir\\file name.json';
 
         var params = {
             location: file
@@ -50,16 +50,16 @@ describe('threatmodellocator service:', function () {
 
     it('should return encoded values unchanged', function () {
 
-        var file = 'c:\dir\file name.json';
-        var encoded = encodeURI(file);
+        var file = 'c:\\dir\\file name.json';
+        var encoded = btoa(file);
 
         expect(threatmodellocator.getModelPath(encoded)).toEqual(encoded);
     });
 
     it('should encoded values that look unencoded', function () {
 
-        var file = 'c:\dir\file name.json';
-        var encoded = encodeURI(file);
+        var file = 'c:\\dir\\file name.json';
+        var encoded = btoa(file);
 
         expect(threatmodellocator.getModelPath(file)).toEqual(encoded);
     });
@@ -78,8 +78,8 @@ describe('threatmodellocator service:', function () {
 
     it('should encoded unencoded route params location', function () {
 
-        var file = 'c:\dir\file name.json';
-        var encoded = encodeURI(file);
+        var file = 'c:\\dir\\file name.json';
+        var encoded = btoa(file);
 
         var params = {
             location: file
