@@ -99,7 +99,7 @@ describe('shell controller', function () {
         spyOn($location, 'path').and.callThrough();
         click();
         expect($location.path.calls.count()).toEqual(2);
-        expect($location.path()).toEqual(encodeURI('/threatmodel/' + testFileName));
+        expect($location.path()).toEqual('/threatmodel/' + testFileName);
         expect($scope.$apply).toHaveBeenCalled();
     });
 
@@ -116,7 +116,7 @@ describe('shell controller', function () {
         }
 
         spyOn($scope, '$apply').and.callThrough();
-        spyOn($location, 'path').and.returnValue('/threatmodel/' + encodeURI(testFileName));
+        spyOn($location, 'path').and.returnValue('/threatmodel/' + testFileName);
         spyOn($route, 'reload').and.callThrough();
         click();
         expect($location.path.calls.count()).toEqual(1);

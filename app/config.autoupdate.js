@@ -28,14 +28,6 @@ function autoupdate(common, dialogs, electron, VERSION) {
         //temporary hack to get around lack of code signing in OSX
         try {
             autoUpdater = electron.autoUpdater;
-
-            //this does not work - how to do update later
-            //update already down loaded and user selected install later
-            // if (electron.userData.get({configName : 'preferences', key: 'updateOnLaunch'})) {
-            //     electron.userData.set({configName : 'preferences', key: 'updateOnLaunch'}, false);
-            //     doUpdate();
-            // }
-
             var feedURL;
 
             if (os === 'darwin') {

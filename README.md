@@ -26,21 +26,17 @@ The application comes in two variants:
 
 This repository contains the files for the desktop variant.
 
-# Status #
+# Local installation #
 
-The desktop variant is a work-in-progress, but it basically works. To install and run it locally:
+To install and run it locally:
 
 `git clone https://github.com/mike-goodwin/owasp-threat-dragon-desktop`
 
 `npm install`
 
-Then to run it on a Mac/Linux:
+Then to run it:
 
-`npm start`
-
-Or on Windows:
-
-`.\node_modules\.bin\electron .`
+`npm run start`
 
 Installers for OSX and Windows can be downloaded from the [releases folder](https://github.com/mike-goodwin/owasp-threat-dragon-desktop/releases). A Linux version will follow soon.
 
@@ -57,12 +53,6 @@ The diagramming screen:
 And the threat editing screen
 
 ![Threat Editing Screen](/screenshots/threat.PNG)
-
-# Limitations #
-
-The unit tests for the project are currently broken :(
-
-Due to a lack of code signing, you may get a warning when installing on Windows and AutoUpdate on OSX does not work.
 
 # Contributing #
 
