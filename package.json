@@ -1,7 +1,7 @@
 {
   "name": "threatdragon",
   "productName": "OWASP Threat Dragon",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "description": "Desktop version OWASP Threat Dragon",
   "main": "main.js",
   "scripts": {
