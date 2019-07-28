@@ -5,7 +5,6 @@ function autoupdate(common, dialogs, electron, VERSION) {
     var logInfo = common.logger.getLogFn('config.autoupdate', 'info');
     var logError = common.logger.getLogFn('config.autoupdate', 'error');
 
-    //adapted from https://github.com/crilleengvall/electron-tutorial-app
 
     const os = require('os').platform();
     const fs = require('fs');
@@ -27,21 +26,12 @@ function autoupdate(common, dialogs, electron, VERSION) {
 
         //temporary hack to get around lack of code signing in OSX
         try {
-            autoUpdater = electron.autoUpdater;
-            var feedURL;
-
-            if (os === 'darwin') {
-                feedURL = 'https://threatdragondownloads.azurewebsites.net/update/osx/' + VERSION;
-            } else {
-                feedURL = 'https://threatdragondownloads.azurewebsites.net/update/win32/' + VERSION;
-            }
-
-            autoUpdater.setFeedURL(feedURL);
+            autoUpdater = require("electron-updater");
             autoUpdater.on('update-downloaded', function () {
                 dialogs.confirm('./app/layout/update.html', doUpdate, function () { return null; }, updateLater);
             });
 
-            autoUpdater.checkForUpdates();
+            autoUpdater.checkForUpdatesAndNotify();
             logInfo('Configured autoupdate');
         }
         catch (e) {

@@ -1,7 +1,7 @@
 {
   "name": "threatdragon",
   "productName": "OWASP Threat Dragon",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "description": "Desktop version OWASP Threat Dragon",
   "main": "main.js",
   "scripts": {
@@ -18,6 +18,7 @@
     "build-all": "npm run build-win && npm run build-osx && npm run packages-lin",
     "build-win": "npm run package-win && npm run installer-win",
     "build-osx": "npm run package-osx && npm run installer-osx",
+    "build-osx-2": "electron-builder -p always",
     "installer-win": "node ./installer-win.js",
     "installer-osx": "node ./installer-osx.js",
     "package-osx": "./node_modules/.bin/electron-packager . --asar --overwrite  --out=./packages --ignore=\"installers|tests|.vscode|coverage\" --platform=darwin --arch=x64 --prune=true  --osxSign=true --icon=cupcakes.icns",
@@ -44,7 +45,6 @@
     "angular-xeditable": "0.9.0",
     "any-promise": "1.3.0",
     "bootstrap": "3.4.1",
-    "electron": "5.0.5",
     "electron-debug": "3.0.0",
     "electron-squirrel-startup": "1.0.0",
     "font-awesome": "4.7.0",
@@ -55,6 +55,7 @@
     "snyk": "^1.193.1"
   },
   "devDependencies": {
+    "electron": "5.0.5",
     "angular-mocks": "1.7.8",
     "browserify": "14.5.0",
     "browserify-css": "0.14.0",
@@ -62,6 +63,7 @@
     "browserify-ng-html2js": "1.3.0",
     "codecov": "3.0.0",
     "copyfiles": "1.2.0",
+    "electron-builder": "^21.1.5",
     "electron-installer-dmg": "^3.0.0",
     "electron-packager": "13.1.1",
     "electron-winstaller": "3.0.4",
@@ -87,5 +89,30 @@
     "uglifycss": "0.0.27",
     "watchify": "3.9.0"
   },
-  "snyk": true
+  "snyk": true,
+  "build": {
+    "appId": "com.github.mike-goodwin.owasp-threat-dragon-desktop",
+    "files": [
+      "package.json",
+      "main.js",
+      "index.html",
+      "cupcakes.icns",
+      "public/**/*", 
+      "node_modules/**/*",
+      "fonts/**/*",
+      "content/**/*",
+      "config/**/*",
+      "app/**/*"
+    ],
+    "mac": {
+      "category": "public.app-category.developer-tools",
+      "icon": "cupcakes.icns",
+      "target": [
+        "dmg"
+      ]
+    },
+    "directories": {
+      "output": "./installers/osx-x64"
+    }
+  }
 }
