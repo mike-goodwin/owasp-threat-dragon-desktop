@@ -4,10 +4,10 @@ var readline = require('readline');
 const rootPath = path.join('./');
 
 var options = {
-  appDirectory: './packages/threatdragon-win32-x64',
+  appDirectory: './packages/OWASP Threat Dragon-win32-x64',
   outputDirectory: './installers/win32-x64',
   authors: 'OWASP',
-  exe: 'ThreatDragon.exe',
+  exe: 'OWASP Threat Dragon.exe',
   noMsi: true,
   loadingGif: './content/icons/png/cupcakes-installing.gif',
   iconUrl: 'https://raw.githubusercontent.com/mike-goodwin/owasp-threat-dragon-desktop/master/content/icons/win/td.ico',
