@@ -1,16 +1,27 @@
+// utility to create the linux distro files for OWASP Threat Dragon
+module.exports.all = async function () {
+  // these have to be done consequtively not concurrently,
+  // otherwise get 'files exist' errors
+  await debX86()
+  await debAmd64()
+  await rpmX86()
+  await rpmAmd64()
+  await snapX86()
+  await snapAmd64()
+}
+
 async function createRelease (installer, options) {
 
   try {
     await installer(options)
-    console.log(`Success, release at ${options.dest}`)
+    console.log(`** Success, release at ${options.dest}`)
   } catch (err) {
-    console.error("No dice : " + err.message)
+    console.error("** No dice : " + err.message)
   }
 }
 
-module.exports.deb = function () {
-  const createDeb = require('electron-installer-debian')
-  console.log('Creating release package for Debian .deb file')
+async function debX86 () {
+  console.log('** Creating Debian release .deb package for Intel x86 64 bit')
 
   const options = {
     arch: 'x86_64',
@@ -19,12 +30,24 @@ module.exports.deb = function () {
     src: './packages/OWASP-Threat-Dragon-linux-x64/',
   }
 
-  createRelease(createDeb, options)
+  await createRelease(require('electron-installer-debian'), options)
 }
 
-module.exports.rpm = function () {
-  const createRPM = require('electron-installer-redhat')
-  console.log('Creating release package for Redhat .rpm file')
+async function debAmd64 () {
+  console.log('** Creating Debian release .deb package for AMD 64 bit')
+
+  const options = {
+    arch: 'amd64',
+    dest: './installers/linux-x64',
+    icon: 'cupcakes.icns',
+    src: './packages/OWASP-Threat-Dragon-linux-x64/',
+  }
+
+  await createRelease(require('electron-installer-debian'), options)
+}
+
+async function rpmX86 () {
+  console.log('** Creating Fedora release .rpm package for Intel x86 64 bit')
 
   const options = {
     arch: 'x86_64',
@@ -33,23 +56,45 @@ module.exports.rpm = function () {
     src: './packages/OWASP-Threat-Dragon-linux-x64/',
   }
 
-  createRelease(createRPM, options)
+  await createRelease(require('electron-installer-redhat'), options)
 }
 
-module.exports.snap = function () {
-/* So far unable to get this to work
-  const createSnap = require('electron-installer-snap')
-  console.log('Creating release package for Snap .snap file')
+async function rpmAmd64 () {
+  console.log('** Creating Fedora release .rpm package for AMD 64 bit')
 
   const options = {
-    arch: 'x64',
+    arch: 'amd64',
     dest: './installers/linux-x64',
+    icon: 'cupcakes.icns',
+    src: './packages/OWASP-Threat-Dragon-linux-x64/',
+  }
+
+  await createRelease(require('electron-installer-redhat'), options)
+}
+
+async function snapX86 () {
+  console.log('** Creating Snap release .snap package for Intel x86 64 bit')
+
+  const options = {
+    arch: 'x86_64',
+    dest: __dirname + '/installers/linux-x64',
     name: 'threatdragon',
-    src: './packages/OWASP-Threat-Dragon-linux-x64/',
+    src: __dirname + '/packages/OWASP-Threat-Dragon-linux-x64/',
   }
 
-  createRelease(createSnap, options)
-*/
-  console.log('Snap files not supported yet')
+  await createRelease(require('electron-installer-snap'), options)
+}
+
+async function snapAmd64 () {
+  console.log('** Creating Snap release .snap package for AMD 64 bit')
+
+  const options = {
+    arch: 'amd64',
+    dest: __dirname + '/installers/linux-x64',
+    name: 'threatdragon',
+    src: __dirname + '/packages/OWASP-Threat-Dragon-linux-x64/',
+  }
+
+  await createRelease(require('electron-installer-snap'), options)
 }
 
