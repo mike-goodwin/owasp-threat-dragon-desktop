@@ -1,7 +1,7 @@
 {
   "name": "threatdragon",
   "productName": "OWASP-Threat-Dragon",
-  "version": "0.6.3",
+  "version": "1.0.0",
   "description": "Desktop version OWASP Threat Dragon",
   "main": "main.js",
   "scripts": {
@@ -22,7 +22,7 @@
     "installer-win": "node ./installer-win.js",
     "installer-osx": "node ./installer-osx.js",
     "installer-lin": "node -e 'require(\"./installer-lin\").all()'",
-    "package-osx": "./node_modules/.bin/electron-packager . --asar --overwrite  --out=./packages --ignore=\"installers|tests|.vscode|coverage\" --platform=darwin --arch=x64 --prune=true --osxSign=true --icon=cupcakes.icns",
+    "package-osx": "./node_modules/.bin/electron-packager . --asar --overwrite  --out=./packages --ignore=\"installers|tests|.vscode|coverage\" --platform=darwin --arch=x64 --prune=true --icon=cupcakes.icns",
     "package-lin": "./node_modules/.bin/electron-packager . --asar --overwrite  --out=./packages --ignore=\"installers|tests|.vscode|coverage\" --platform=linux --arch=x64 --prune=true --icon=cupcakes1024x1024.png --executableName=threatdragon",
     "package-win": "./node_modules/.bin/electron-packager . --asar --overwrite  --out=./packages --ignore=\"installers|tests|.vscode|coverage\" --platform=win32 --arch=x64 --prune=true --icon=cupcakes.ico --win32metadata.CompanyName=OWASP --win32metadata.FileDescription=\"OWASP Threat Dragon\" --win32metadata.ProductName=\"OWASP Threat Dragon\"",
     "snyk-protect": "snyk protect",
@@ -52,7 +52,7 @@
     "font-awesome": "4.7.0",
     "jquery": "3.4.0",
     "lodash": "4.17.12",
-    "owasp-threat-dragon-core": "0.6.1",
+    "owasp-threat-dragon-core": "0.7.0",
     "promise-fs": "2.1.0",
     "snyk": "^1.193.1"
   },
