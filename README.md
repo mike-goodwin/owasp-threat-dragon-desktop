@@ -20,7 +20,7 @@ The application comes in two variants:
 
 1. [**A web application**](https://github.com/mike-goodwin/owasp-threat-dragon): For the web application, models files are stored in GitHub (other storage will become available). We are currently maintaining [a working protoype](https://threatdragon.org) in synch with the master code branch.
 
-2. [**A desktop application**](https://github.com/mike-goodwin/owasp-threat-dragon-desktop): This is based on [Electron](https://electron.atom.io/). There are builds available for Windows and OSX (Linux will follow at some point). For this variant models are stored on the local filesystem.
+2. [**A desktop application**](https://github.com/mike-goodwin/owasp-threat-dragon-desktop): This is based on [Electron](https://electron.atom.io/). There are installers available for both Windows and Mac OSX, as well as rpm and debian packages for Linux. For this variant models are stored on the local filesystem.
 
 [End user help](http://docs.threatdragon.org/) is available for both variants.
 
@@ -28,7 +28,7 @@ This repository contains the files for the desktop variant.
 
 # Local installation #
 
-To install and run it locally:
+For the latest versions of code between releases, `npm` can be used to install and run Threat Dragon locally:
 
 `git clone https://github.com/mike-goodwin/owasp-threat-dragon-desktop`
 
@@ -38,7 +38,7 @@ Then to run it:
 
 `npm run start`
 
-Installers for OSX and Windows can be downloaded from the [releases folder](https://github.com/mike-goodwin/owasp-threat-dragon-desktop/releases). A Linux version will follow soon.
+Installers for OSX and Windows can be downloaded from the [releases folder](https://github.com/mike-goodwin/owasp-threat-dragon-desktop/releases), along with released packages for AMD64 / X86-64bit Debian and Fedora Linux.
 
 # Screenshots # 
 
