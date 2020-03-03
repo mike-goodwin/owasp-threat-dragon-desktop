@@ -1,9 +1,12 @@
-.vscode/
 node_modules/
 coverage/
 typings/
 npm-debug.log
 packages/
 installers/
+
 # ignore Apple's desktop store files
 **/.DS_Store
+# ignore VS and Eclipse files
+.vscode/
+.settings/
