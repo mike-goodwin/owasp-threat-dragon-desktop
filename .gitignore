@@ -5,3 +5,5 @@ typings/
 npm-debug.log
 packages/
 installers/
+# ignore Apple's desktop store files
+**/.DS_Store
