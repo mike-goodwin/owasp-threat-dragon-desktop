@@ -27,9 +27,19 @@ function shell($rootScope, $scope, $location, $route, common, datacontext, elect
                         label: 'New',
                         accelerator: 'CmdOrCtrl+N',
                         click: function() {
-                            datacontext.close();
-                            $location.path('/threatmodel/new');
-                            $scope.$apply();
+                            datacontext.threatModel = { summary: { title: "New Threat Model" }, detail: { contributors: [], diagrams: [] } };
+                            electron.dialog.save(function (fileName) {
+                                datacontext.threatModelLocation = fileName;
+                                datacontext.update();
+                                var path = threatmodellocator.getModelPath( fileName );
+                                if ($location.path() == '/threatmodel/' + path) {
+                                    $route.reload();
+                                } else {
+                                    $location.path('/threatmodel/' + path);
+                                }
+                                $scope.$apply();
+                            },
+                                function () { });
                         }
                     },
                     {
