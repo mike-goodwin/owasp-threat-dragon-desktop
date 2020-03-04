@@ -18,7 +18,8 @@ describe('shell controller', function () {
         },
         dialog: {
             open: function() {},
-            messageBox: function() {}
+            messageBox: function() {},
+            save: function() {}
         }
     };
     var mockDatacontext = {
@@ -74,13 +75,20 @@ describe('shell controller', function () {
         expect(subMenu.submenu[0].label).toEqual('New');
         expect(subMenu.submenu[0].accelerator).toEqual('CmdOrCtrl+N');
         var click = subMenu.submenu[0].click;
+        var testFileName = 'test file name';
+        var testFilenames = [testFileName];
+        mockElectron.dialog.save = function(f) {
+            f(testFilenames);
+        }
 
         spyOn($scope, '$apply').and.callThrough();
-        spyOn(mockDatacontext, 'close');
+        spyOn($location, 'path').and.callThrough();
+        spyOn(mockDatacontext, 'update');
         click();
-        expect($location.path()).toEqual('/threatmodel/new');
+        expect($location.path.calls.count()).toEqual(2);
+        expect($location.path()).toEqual('/threatmodel/' + testFileName);
         expect($scope.$apply).toHaveBeenCalled();
-        expect(mockDatacontext.close).toHaveBeenCalled();
+        expect(mockDatacontext.update).toHaveBeenCalled();
     });
 
     it('File menu second item should be open a model - open a file', function() {
