@@ -8,9 +8,13 @@
 
 # [OWASP](https://www.owasp.org) Threat Dragon #
 
-Threat Dragon is a free, open-source, cross-platform [threat modeling](https://www.owasp.org/index.php/Category:Threat_Modeling) application including system diagramming and a rule engine to auto-generate threats/mitigations. It is an [OWASP Incubator Project](https://www.owasp.org/index.php/OWASP_Threat_Dragon). The focus of the project is on great UX, a powerful rule engine and integration with other development lifecycle tools.
+Threat Dragon is a free, open-source, cross-platform [threat modeling](https://owasp.org/www-community/Threat_Modeling)
+application including system diagramming and a rule engine to auto-generate threats/mitigations. It is an
+[OWASP Incubator Project](https://owasp.org/www-project-threat-dragon/). The focus of the project is on great UX,
+a powerful rule engine and integration with other development lifecycle tools.
 
-There is a good overview of [threat modeling and risk assessment](https://www.owasp.org/index.php/Application_Threat_Modeling) from OWASP, and this expands on what Threat Dragon will achieve: 
+There is a good overview of [threat modeling and risk assessment](https://owasp.org/www-community/Application_Threat_Modeling)
+from OWASP, and this expands on what Threat Dragon will achieve: 
 * designing the data flow diagram
 * automatic determining and ranking threats
 * suggested mitigations
@@ -18,9 +22,13 @@ There is a good overview of [threat modeling and risk assessment](https://www.ow
 
 The application comes in two variants:
 
-1. [**A web application**](https://github.com/mike-goodwin/owasp-threat-dragon): For the web application, models files are stored in GitHub (other storage will become available). We are currently maintaining [a working protoype](https://threatdragon.org) in synch with the master code branch.
+1. [**A web application**](https://github.com/mike-goodwin/owasp-threat-dragon): For the web application, models files
+are stored in GitHub (other storage will become available). We are currently maintaining [a working protoype](https://threatdragon.org)
+in synch with the master code branch.
 
-2. [**A desktop application**](https://github.com/mike-goodwin/owasp-threat-dragon-desktop): This is based on [Electron](https://electron.atom.io/). There are installers available for both Windows and Mac OSX, as well as rpm and debian packages for Linux. For this variant models are stored on the local filesystem.
+2. [**A desktop application**](https://github.com/mike-goodwin/owasp-threat-dragon-desktop): This is based on
+[Electron](https://electron.atom.io/). There are installers available for both Windows and Mac OSX, as well as rpm and
+debian packages for Linux. For the desktop variant models are stored on the local filesystem.
 
 [End user help](http://docs.threatdragon.org/) is available for both variants.
 
@@ -38,7 +46,9 @@ Then to run it:
 
 `npm run start`
 
-Installers for OSX and Windows can be downloaded from the [releases folder](https://github.com/mike-goodwin/owasp-threat-dragon-desktop/releases), along with released packages for AMD64 / X86-64bit Debian and Fedora Linux.
+Installers for OSX and Windows can be downloaded from the
+[releases folder](https://github.com/mike-goodwin/owasp-threat-dragon-desktop/releases).
+In there you can also find packages for both Debian and Fedora Linux on AMD64 and X86-64bit platforms.
 
 # Screenshots # 
 
@@ -56,12 +66,14 @@ And the threat editing screen
 
 # Contributing #
 
-PRs, feature requests, bug reports and feedback of any kind are very welcome. We are trying to keep the test coverage relatively high, so please try to include tests in any PRs and make PRs on the development branch.
+PRs, feature requests, bug reports and feedback of any kind are very welcome. We are trying to keep the test coverage
+relatively high, so please try to include tests in any PRs and make PRs on the development branch.
 
 
 # Vulnerability disclosure #
 
-If you find a vulnerability in this project please let us know ASAP and we will fix it as a priority. For secure disclosure, please email mike.goodwin@owasp.org using the following PGP key:
+If you find a vulnerability in this project please let us know ASAP and we will fix it as a priority.
+For secure disclosure, please email mike.goodwin@owasp.org using the following PGP key:
 
 ```-----BEGIN PGP PUBLIC KEY BLOCK-----
 Version: FlowCrypt 5.1.8 Gmail Encryption flowcrypt.com
