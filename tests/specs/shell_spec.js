@@ -77,18 +77,39 @@ describe('shell controller', function () {
         var click = subMenu.submenu[0].click;
         var testFileName = 'test file name';
         var testFilenames = [testFileName];
-        mockElectron.dialog.save = function(f) {
-            f(testFilenames);
+        mockElectron.dialog.save = function(onSave, onNoSave) {
+            onSave(testFilenames);
         }
 
         spyOn($scope, '$apply').and.callThrough();
         spyOn($location, 'path').and.callThrough();
         spyOn(mockDatacontext, 'update');
         click();
-        expect($location.path.calls.count()).toEqual(2);
+        expect($location.path.calls.count()).toEqual(1);
         expect($location.path()).toEqual('/threatmodel/' + testFileName);
         expect($scope.$apply).toHaveBeenCalled();
         expect(mockDatacontext.update).toHaveBeenCalled();
+    });
+
+    it('File menu first item should be create a new model - cancel', function() {
+        var template = mockElectron.Menu.buildFromTemplate.calls.argsFor(0)[0];
+        var subMenu = getSubMenu(template, 'File');
+        expect(subMenu.submenu[0].label).toEqual('New');
+        expect(subMenu.submenu[0].accelerator).toEqual('CmdOrCtrl+N');
+        var click = subMenu.submenu[0].click;
+        var testFileName = 'test file name';
+        var testFilenames = [testFileName];
+        mockElectron.dialog.save = function(onSave, onNoSave) {
+            onNoSave();
+        }
+
+        spyOn($scope, '$apply').and.callThrough();
+        spyOn($location, 'path').and.callThrough();
+        spyOn(mockDatacontext, 'update');
+        click();
+        expect($location.path.calls.count()).toEqual(0);
+        expect($scope.$apply).not.toHaveBeenCalled();
+        expect(mockDatacontext.update).not.toHaveBeenCalled();
     });
 
     it('File menu second item should be open a model - open a file', function() {
