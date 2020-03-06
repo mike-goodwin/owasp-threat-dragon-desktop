@@ -3,8 +3,9 @@
 function welcome($scope, $location, $route, common, electron, threatmodellocator) {
 
     /*jshint validthis: true */
-    var fsp = require('fs');
+    var fs = require('fs');
     var controllerId = 'welcome';
+    var logError = common.logger.getLogFn(controllerId, 'error');
     var vm = this;
     var getLogFn = common.logger.getLogFn;
     var log = getLogFn(controllerId);
@@ -35,15 +36,19 @@ function welcome($scope, $location, $route, common, electron, threatmodellocator
 
     function openNewModel() {
         var model = { summary: { title: "New Threat Model" }, detail: { contributors: [], diagrams: [] } };
+        var success = true;
         electron.dialog.save(function (fileName) {
-            fsp.writeFileSync( fileName, JSON.stringify(model) );
-            var path = threatmodellocator.getModelPath( fileName );
-            if ($location.path() == '/threatmodel/' + path) {
-                $route.reload();
-            } else {
+            fs.writeFileSync( fileName, JSON.stringify(model), 'utf8', function (err) {
+                if (err) {
+                    logError(err);
+                    success = false;
+                }
+            });
+            if (success) {
+                var path = threatmodellocator.getModelPath( fileName );
                 $location.path('/threatmodel/' + path);
+                $scope.$apply();
             }
-            $scope.$apply();
         },
         function() {});
     }
