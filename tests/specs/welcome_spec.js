@@ -56,8 +56,8 @@ describe('welcome controller', function () {
         it('should create a new model file', function() {
             var testFileName = 'test file name';
             var testFilenames = [testFileName];
-            mockElectron.dialog.save = function(f) {
-                f(testFilenames);
+            mockElectron.dialog.save = function(onSave) {
+                onSave(testFilenames);
             }
             
             fs.writeFileSync = function() {};
@@ -73,10 +73,8 @@ describe('welcome controller', function () {
         });
 
         it('should not create a new model file - cancel', function() {
-            var testFileName = 'test file name';
-            var testFilenames = [testFileName];
-            mockElectron.dialog.save = function(f, g) {
-                g();
+            mockElectron.dialog.save = function(onSave, onNoSave) {
+                onNoSave();
             }
             
             fs.writeFileSync = function() {};
@@ -94,12 +92,12 @@ describe('welcome controller', function () {
             var testFileName = 'test file name';
             var testFilenames = [testFileName];
             var testError = 'test error';
-            mockElectron.dialog.save = function(f) {
-                f(testFilenames);
+            mockElectron.dialog.save = function(onSave) {
+                onSave(testFilenames);
             }
             
-            fs.writeFileSync = function(a, b, c, d) {
-                d(testError);
+            fs.writeFileSync = function(file, data, options, callback) {
+                callback(testError);
             };
             spyOn(fs, 'writeFileSync').and.callThrough();
             spyOn($scope, '$apply').and.callThrough();

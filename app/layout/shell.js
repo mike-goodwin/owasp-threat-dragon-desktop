@@ -32,11 +32,7 @@ function shell($rootScope, $scope, $location, $route, common, datacontext, elect
                                 datacontext.threatModelLocation = fileName;
                                 datacontext.update();
                                 var path = threatmodellocator.getModelPath( fileName );
-                                if ($location.path() == '/threatmodel/' + path) {
-                                    $route.reload();
-                                } else {
-                                    $location.path('/threatmodel/' + path);
-                                }
+                                $location.path('/threatmodel/' + path);
                                 $scope.$apply();
                             },
                                 function () { });

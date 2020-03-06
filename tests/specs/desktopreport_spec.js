@@ -12,10 +12,13 @@ describe('desktopreport controller', function () {
     var mockElectron = {
         currentWindow: {
             webContents: {
-                printToPDF: function() {}
+                print: function() {},
+                printToPDF: function() {},
+                reload: function() {}
             }
         },
         dialog: {
+            printPDF: function() {},
             savePDF: function() {}
         }
     };
@@ -218,6 +221,34 @@ describe('desktopreport controller', function () {
                 $scope.vm.savePDF(done);
 
                 expect(done).toHaveBeenCalled();
+            });
+
+            it('should print the PDF file', function() {
+
+                mockElectron.currentWindow.webContents.print = function(settings, callback) {
+                    callback(true);
+                };
+                var done = jasmine.createSpy('done');
+                spyOn(mockElectron.currentWindow.webContents, 'reload');
+                $controller('desktopreport as vm', { $scope: $scope });
+                $scope.vm.printPDF(done);
+
+                expect(done).toHaveBeenCalled();
+                expect(mockElectron.currentWindow.webContents.reload).not.toHaveBeenCalled();
+            });
+
+            it('should handle a print PDF error', function() {
+
+                mockElectron.currentWindow.webContents.print = function(settings, callback) {
+                    callback(false);
+                };
+                var done = jasmine.createSpy('done');
+                spyOn(mockElectron.currentWindow.webContents, 'reload');
+                $controller('desktopreport as vm', { $scope: $scope });
+                $scope.vm.printPDF(done);
+
+                expect(done).not.toHaveBeenCalled();
+                expect(mockElectron.currentWindow.webContents.reload).toHaveBeenCalled();
             });
         });
     });
