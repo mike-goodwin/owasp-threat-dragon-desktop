@@ -1,7 +1,7 @@
 {
   "name": "threatdragon",
   "productName": "OWASP-Threat-Dragon",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Desktop version OWASP Threat Dragon",
   "main": "main.js",
   "scripts": {
@@ -50,7 +50,7 @@
     "font-awesome": "4.7.0",
     "jquery": "3.4.0",
     "lodash": "4.17.12",
-    "owasp-threat-dragon-core": "0.7.0",
+    "owasp-threat-dragon-core": "0.7.1",
     "promise-fs": "2.1.0",
     "snyk": "^1.295.0"
   },
