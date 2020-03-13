@@ -61,7 +61,7 @@ function electronservice(common) {
     }
 
     function open(onOpen, onNoOpen) {
-        dialog.showOpenDialog(remote.getCurrentWindow(), { filters: [{ name: 'Threat Models', extensions: ['json'] }] }, function (fileNames) {
+        dialog.showOpenDialog(remote.getCurrentWindow(), { filters: [{ name: 'Threat Models', extensions: ['json'] }, { name: 'All Files', extensions: ['*'] }] }, function (fileNames) {
             if (!_.isUndefined(fileNames)) {
                 onOpen(fileNames);
             } else {
