@@ -41,7 +41,7 @@ function electronservice(common) {
     }
 
     function save(onSave, onNoSave) {
-        dialog.showSaveDialog(remote.getCurrentWindow(), { filters: [{ name: 'Threat Models', extensions: ['json'] }] }, function (fileName) {
+        dialog.showSaveDialog(remote.getCurrentWindow(), { defaultPath: "new-model.json", filters: [{ name: 'Threat Models', extensions: ['json'] }] }, function (fileName) {
             if (_.isUndefined(fileName)) {
                 onNoSave();
             } else {
@@ -61,7 +61,7 @@ function electronservice(common) {
     }
 
     function open(onOpen, onNoOpen) {
-        dialog.showOpenDialog(remote.getCurrentWindow(), { filters: [{ name: 'Threat Models', extensions: ['json'] }] }, function (fileNames) {
+        dialog.showOpenDialog(remote.getCurrentWindow(), { filters: [{ name: 'Threat Models', extensions: ['json'] }, { name: 'All Files', extensions: ['*'] }] }, function (fileNames) {
             if (!_.isUndefined(fileNames)) {
                 onOpen(fileNames);
             } else {

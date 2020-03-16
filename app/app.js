@@ -55,4 +55,6 @@ app.run(['editableOptions', function (editableOptions) {
 }]);
 
 //electron autoupdate
-app.run(['common', 'dialogs', 'electron', 'VERSION', require('./app/config.autoupdate')]);
+//Note: autoupdate has been disabled until this issue has been satisfied:
+//      https://github.com/mike-goodwin/owasp-threat-dragon-desktop/issues/101
+// app.run(['common', 'dialogs', 'electron', 'VERSION', require('./app/config.autoupdate')]);

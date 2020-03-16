@@ -27,9 +27,15 @@ function shell($rootScope, $scope, $location, $route, common, datacontext, elect
                         label: 'New',
                         accelerator: 'CmdOrCtrl+N',
                         click: function() {
-                            datacontext.close();
-                            $location.path('/threatmodel/new');
-                            $scope.$apply();
+                            datacontext.threatModel = { summary: { title: "New Threat Model" }, detail: { contributors: [], diagrams: [] } };
+                            electron.dialog.save(function (fileName) {
+                                datacontext.threatModelLocation = fileName;
+                                datacontext.update();
+                                var path = threatmodellocator.getModelPath( fileName );
+                                $location.path('/threatmodel/' + path);
+                                $scope.$apply();
+                            },
+                                function () { });
                         }
                     },
                     {
@@ -222,6 +228,7 @@ function shell($rootScope, $scope, $location, $route, common, datacontext, elect
                         click: function() {
                             electron.dialog.messageBox({
                                 type: 'info',
+                                buttons: ['OK'],
                                 title: 'About OWASP Threat Dragon',
                                 message: 'OWASP Threat Dragon is a free, open-source, cross-platform threat modeling application including system diagramming and a rule engine to auto-generate threats/mitigations. It is an OWASP Incubator Project. (Version ' + VERSION + ')'
                             });

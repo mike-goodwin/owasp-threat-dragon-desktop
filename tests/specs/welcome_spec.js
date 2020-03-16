@@ -7,9 +7,11 @@ describe('welcome controller', function () {
     var $httpBackend;
     var $location;
     var $route;
+    var fs = require('fs');
     var mockElectron = {
         dialog: {
-            open: function() {}
+            open: function() {},
+            save: function() {}
         }
     };
     var mockDatacontext = {
@@ -49,6 +51,65 @@ describe('welcome controller', function () {
         
     });
     
+    describe('newmodel tests', function () {
+
+        it('should create a new model file', function() {
+            var testFileName = 'test file name';
+            var testFilenames = [testFileName];
+            mockElectron.dialog.save = function(onSave) {
+                onSave(testFilenames);
+            }
+            
+            fs.writeFileSync = function() {};
+            spyOn(fs, 'writeFileSync').and.callThrough();
+            spyOn($scope, '$apply').and.callThrough();
+            spyOn($location, 'path').and.callThrough();
+            $scope.vm.openNewModel();
+
+            expect($location.path.calls.count()).toEqual(1);
+            expect($location.path()).toEqual('/threatmodel/' + testFileName);
+            expect(fs.writeFileSync).toHaveBeenCalled();
+            expect($scope.$apply).toHaveBeenCalled();
+        });
+
+        it('should not create a new model file - cancel', function() {
+            mockElectron.dialog.save = function(onSave, onNoSave) {
+                onNoSave();
+            }
+            
+            fs.writeFileSync = function() {};
+            spyOn(fs, 'writeFileSync').and.callThrough();
+            spyOn($scope, '$apply').and.callThrough();
+            spyOn($location, 'path').and.callThrough();
+            $scope.vm.openNewModel();
+
+            expect($location.path.calls.count()).toEqual(0);
+            expect(fs.writeFileSync).not.toHaveBeenCalled();
+            expect($scope.$apply).not.toHaveBeenCalled();
+        });
+
+        it('should handle a create file error', function() {
+            var testFileName = 'test file name';
+            var testFilenames = [testFileName];
+            var testError = 'test error';
+            mockElectron.dialog.save = function(onSave) {
+                onSave(testFilenames);
+            }
+            
+            fs.writeFileSync = function(file, data, options, callback) {
+                callback(testError);
+            };
+            spyOn(fs, 'writeFileSync').and.callThrough();
+            spyOn($scope, '$apply').and.callThrough();
+            spyOn($location, 'path').and.callThrough();
+            $scope.vm.openNewModel();
+
+            expect($location.path.calls.count()).toEqual(0);
+            expect(fs.writeFileSync).toHaveBeenCalled();
+            expect($scope.$apply).not.toHaveBeenCalled();
+        });
+    });
+    
     describe('viewmodel tests', function () {
 
         it('should open a model file', function() {
@@ -65,6 +126,21 @@ describe('welcome controller', function () {
             expect($location.path.calls.count()).toEqual(2);
             expect($location.path()).toEqual('/threatmodel/' + testFileName);
             expect($scope.$apply).toHaveBeenCalled();
+        });
+
+        it('should not open a model file - cancel', function() {
+            var testFileName = 'test file name';
+            var testFilenames = [testFileName];
+            mockElectron.dialog.open = function(f, g) {
+                g();
+            }
+            
+            spyOn($scope, '$apply').and.callThrough();
+            spyOn($location, 'path').and.callThrough();
+            $scope.vm.openModel();
+
+            expect($location.path.calls.count()).toEqual(0);
+            expect($scope.$apply).not.toHaveBeenCalled();
         });
 
         it('should not open a model - reload', function() {
@@ -84,7 +160,7 @@ describe('welcome controller', function () {
         });
     });
     
-    it('should note open a model - cancel', function() {
+    it('should not open a model - test location', function() {
         var testFileName = 'test file name';
         var testFilenames = [testFileName];
         var testLocation = 'test location';
