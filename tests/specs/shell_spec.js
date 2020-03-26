@@ -436,16 +436,20 @@ describe('shell controller', function () {
     });
 
     it('View menu sixth item should be a separator', function() {
-        var template = mockElectron.Menu.buildFromTemplate.calls.argsFor(0)[0];
-        var subMenu = getSubMenu(template, 'View');
-        expect(subMenu.submenu[5].type).toEqual('separator');
+        if (process.platform === 'win32') {
+            var template = mockElectron.Menu.buildFromTemplate.calls.argsFor(0)[0];
+            var subMenu = getSubMenu(template, 'View');
+            expect(subMenu.submenu[5].type).toEqual('separator');
+        }
     });
 
-    it('View menu seventh item should be togglefullscreen', function() {
-        var template = mockElectron.Menu.buildFromTemplate.calls.argsFor(0)[0];
-        var subMenu = getSubMenu(template, 'View');
-        expect(subMenu.submenu[6].role).toEqual('togglefullscreen');
-        expect(subMenu.submenu[6].accelerator).toEqual('CmdOrCtrl+F11');
+    it('View menu seventh item should toggle full screen', function() {
+        if (process.platform === 'win32') {
+            var template = mockElectron.Menu.buildFromTemplate.calls.argsFor(0)[0];
+            var subMenu = getSubMenu(template, 'View');
+            expect(subMenu.submenu[6].role).toEqual('togglefullscreen');
+            expect(subMenu.submenu[6].accelerator).toEqual('CmdOrCtrl+F11');
+        }
     });
 
     //window:
@@ -489,18 +493,27 @@ describe('shell controller', function () {
         expect(mockElectron.shell.openExternal.calls.argsFor(0)).toEqual(['https://github.com/mike-goodwin/owasp-threat-dragon-desktop']); 
     });
 
-    it('Help menu fourth item should be a separator', function() {
+    it('Help menu fourth item should browse to the OWASP project page', function() {
         var template = mockElectron.Menu.buildFromTemplate.calls.argsFor(0)[0];
         var subMenu = getSubMenu(template, 'Help');
-        expect(subMenu.submenu[3].type).toEqual('separator');
+        expect(subMenu.submenu[3].label).toEqual('Visit us at OWASP');
+        spyOn(mockElectron.shell, 'openExternal');
+        subMenu.submenu[3].click();
+        expect(mockElectron.shell.openExternal.calls.argsFor(0)).toEqual(['https://owasp.org/www-project-threat-dragon/']); 
     });
 
-    it('Help menu fifth item should show a help about', function() {
+    it('Help menu fifth item should be a separator', function() {
         var template = mockElectron.Menu.buildFromTemplate.calls.argsFor(0)[0];
         var subMenu = getSubMenu(template, 'Help');
-        expect(subMenu.submenu[4].label).toEqual('About');
+        expect(subMenu.submenu[4].type).toEqual('separator');
+    });
+
+    it('Help menu sixth item should show a help about', function() {
+        var template = mockElectron.Menu.buildFromTemplate.calls.argsFor(0)[0];
+        var subMenu = getSubMenu(template, 'Help');
+        expect(subMenu.submenu[5].label).toEqual('About');
         spyOn(mockElectron.dialog, 'messageBox');
-        subMenu.submenu[4].click();
+        subMenu.submenu[5].click();
         expect(mockElectron.dialog.messageBox).toHaveBeenCalled();
     });
 
