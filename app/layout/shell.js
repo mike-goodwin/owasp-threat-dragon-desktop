@@ -178,13 +178,6 @@ function shell($rootScope, $scope, $location, $route, common, datacontext, elect
                     {
                         accelerator: 'CmdOrCtrl+-',
                         role: 'zoomout'
-                    },
-                    {
-                        type: 'separator'
-                    },
-                    {
-                        accelerator: 'CmdOrCtrl+F11',
-                        role: 'togglefullscreen'
                     }
                 ]
             },
@@ -221,6 +214,12 @@ function shell($rootScope, $scope, $location, $route, common, datacontext, elect
                         }
                     },
                     {
+                        label: 'Visit us at OWASP',
+                        click: function() {
+                            electron.shell.openExternal('https://owasp.org/www-project-threat-dragon/');
+                        }
+                    },
+                    {
                         type: 'separator'
                     },
                     {
@@ -238,6 +237,19 @@ function shell($rootScope, $scope, $location, $route, common, datacontext, elect
                 ]
             }
         ];
+
+        // layout specific items
+        if (process.platform === 'win32') {
+            template[2].submenu.push(
+                {
+                    type: 'separator'
+                },
+                {
+                    accelerator: 'CmdOrCtrl+F11',
+                    role: 'togglefullscreen'
+                }
+            );
+        }
 
         const menu = electron.Menu.buildFromTemplate(template);
         electron.Menu.setApplicationMenu(menu);
