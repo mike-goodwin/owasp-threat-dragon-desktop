@@ -155,7 +155,12 @@ function datacontext($q, datacontextdemo, electron) {
         return deferred.promise;
 
         function onLoadedThreatModel(result) {
-            var model = JSON.parse(result);
+            var model;
+            try {
+                model = JSON.parse(result);
+            } catch(err) {
+                deferred.reject(err);
+            }
             service.lastLoadedLocation = service.threatModelLocation;
             deferred.resolve(model);
         }
