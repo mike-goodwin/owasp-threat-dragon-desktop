@@ -27,13 +27,11 @@
     "package-win": "./node_modules/.bin/electron-packager . --asar --overwrite  --out=./packages --ignore=\"installers|tests|.vscode|coverage\" --platform=win32 --arch=x64 --prune=true --icon=cupcakes.ico --win32metadata.CompanyName=OWASP --win32metadata.FileDescription=\"OWASP Threat Dragon\" --win32metadata.ProductName=\"OWASP Threat Dragon\"",
     "snyk-protect": "snyk protect",
     "prepublish": "npm run snyk-protect",
-    "dist": "electron-builder -l --publish always"
+    "dist": "electron-builder -mwl --publish always"
   },
   "build": {
       "publish": {
         "provider": "github",
-        "owner": "fajabird",
-        "token": "5b7e32fd469fac68530a5f084a87c0c21c63333c"
       },
     "mac": {
       "target": "dmg"
