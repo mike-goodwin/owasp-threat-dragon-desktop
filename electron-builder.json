@@ -1,51 +1,17 @@
 {
+  "appId": "org.owasp.threatdragon",
+  "productName": "OWASP-Threat-Dragon",
   "directories": {
-    "output": "installers",
-    "buildResources": "content"
+    "buildResources": "content/icons",
+    "output": "installers"
   },
   "publish": {
     "provider": "github"
   },
   "mac": {
+    "category": "public.app-category.developer-tools",
+    "icon": "./build/icons/icon.icns",
     "target": "dmg"
-  },
-  "linux": {
-    "target": [
-      {
-        "target": "AppImage",
-        "arch": [
-          "ia32",
-          "x64"
-        ]
-      }
-    ],
-    "target": [
-      {
-        "target": "snap",
-        "arch": [
-          "ia32",
-          "x64"
-        ]
-      }
-    ],
-    "target": [
-      {
-        "target": "deb",
-        "arch": [
-          "ia32",
-          "x64"
-        ]
-      }
-    ],
-    "target": [
-      {
-        "target": "rpm",
-        "arch": [
-          "ia32",
-          "x64"
-        ]
-      }
-    ]
   },
   "win": {
     "target": [
@@ -57,5 +23,20 @@
         ]
       }
     ]
+  },
+  "linux": {
+    "category": "Development",
+    "executableName": "threatdragon",
+    "icon": "./build/icons/png/256x256.png",
+    "synopsis": "OWASP Threat Dragon",
+    "target": [
+        "AppImage",
+        "snap",
+        "deb",
+        "rpm"
+    ]
+  },
+  "snap": {
+    "grade": "stable"
   }
 }
