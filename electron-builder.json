@@ -1,0 +1,61 @@
+{
+  "directories": {
+    "output": "installers",
+    "buildResources": "content"
+  },
+  "publish": {
+    "provider": "github"
+  },
+  "mac": {
+    "target": "dmg"
+  },
+  "linux": {
+    "target": [
+      {
+        "target": "AppImage",
+        "arch": [
+          "ia32",
+          "x64"
+        ]
+      }
+    ],
+    "target": [
+      {
+        "target": "snap",
+        "arch": [
+          "ia32",
+          "x64"
+        ]
+      }
+    ],
+    "target": [
+      {
+        "target": "deb",
+        "arch": [
+          "ia32",
+          "x64"
+        ]
+      }
+    ],
+    "target": [
+      {
+        "target": "rpm",
+        "arch": [
+          "ia32",
+          "x64"
+        ]
+      }
+    ]
+  },
+  "win": {
+    "target": [
+      {
+        "target": "nsis",
+        "arch": [
+          "ia32",
+          "x64"
+        ]
+      }
+    ]
+  }
+}
