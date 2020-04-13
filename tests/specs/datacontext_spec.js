@@ -133,6 +133,31 @@ describe('datacontext service:', function () {
         $rootScope.$apply();
     });
 
+    it('should handle a bad json format file', function(done) {
+
+        var testLocation = 'test location';
+        var mockThreatModel = {};
+        datacontext.threatModel = mockThreatModel;
+        datacontext.threatModelLocation = testLocation;
+        datacontext.lastLoadedLocation = testLocation;
+        fsp.readFile = function() {
+            return $q.when('bad json');
+        };
+        spyOn(fsp, 'readFile').and.callThrough();
+        spyOn(mockElectron.currentWindow, 'setTitle');
+
+        datacontext.load(testLocation, true).then(
+            function() {
+            fail('should have failed to load bad json');
+            done();
+        }, function(reason) {
+            expect(fsp.readFile).toHaveBeenCalled();
+            expect(mockElectron.currentWindow.setTitle).not.toHaveBeenCalled();
+            done();
+        });
+
+        $rootScope.$apply();
+    });
     it('should close the threat model', function() {
 
         var testLocation = 'test location';
