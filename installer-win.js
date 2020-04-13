@@ -4,7 +4,7 @@ var readline = require('readline');
 const rootPath = path.join('./');
 
 var options = {
-  appDirectory: './packages/OWASP-Threat-Dragon-win32-x64',
+  appDirectory: './build/OWASP-Threat-Dragon-win32-x64',
   outputDirectory: './installers/win32-x64',
   authors: 'OWASP',
   exe: 'OWASP-Threat-Dragon.exe',

@@ -26,8 +26,8 @@ async function debX86 () {
   const options = {
     arch: 'x86_64',
     dest: './installers/linux-x64',
-    icon: 'cupcakes.icns',
-    src: './packages/OWASP-Threat-Dragon-linux-x64/',
+    icon: './content/icons/icon.icns',
+    src: './build/OWASP-Threat-Dragon-linux-x64/',
   }
 
   await createRelease(require('electron-installer-debian'), options)
@@ -39,8 +39,8 @@ async function debAmd64 () {
   const options = {
     arch: 'amd64',
     dest: './installers/linux-x64',
-    icon: 'cupcakes.icns',
-    src: './packages/OWASP-Threat-Dragon-linux-x64/',
+    icon: './content/icons/icon.icns',
+    src: './build/OWASP-Threat-Dragon-linux-x64/',
   }
 
   await createRelease(require('electron-installer-debian'), options)
@@ -52,8 +52,8 @@ async function rpmX86 () {
   const options = {
     arch: 'x86_64',
     dest: './installers/linux-x64',
-    icon: 'cupcakes.icns',
-    src: './packages/OWASP-Threat-Dragon-linux-x64/',
+    icon: './content/icons/icon.icns',
+    src: './build/OWASP-Threat-Dragon-linux-x64/',
   }
 
   await createRelease(require('electron-installer-redhat'), options)
@@ -65,8 +65,8 @@ async function rpmAmd64 () {
   const options = {
     arch: 'amd64',
     dest: './installers/linux-x64',
-    icon: 'cupcakes.icns',
-    src: './packages/OWASP-Threat-Dragon-linux-x64/',
+    icon: './content/icons/icon.icns',
+    src: './build/OWASP-Threat-Dragon-linux-x64/',
   }
 
   await createRelease(require('electron-installer-redhat'), options)
@@ -79,7 +79,7 @@ async function snapX86 () {
     arch: 'x86_64',
     dest: __dirname + '/installers/linux-x64',
     name: 'threatdragon',
-    src: __dirname + '/packages/OWASP-Threat-Dragon-linux-x64/',
+    src: __dirname + '/build/OWASP-Threat-Dragon-linux-x64/',
   }
 
   await createRelease(require('electron-installer-snap'), options)
@@ -92,7 +92,7 @@ async function snapAmd64 () {
     arch: 'amd64',
     dest: __dirname + '/installers/linux-x64',
     name: 'threatdragon',
-    src: __dirname + '/packages/OWASP-Threat-Dragon-linux-x64/',
+    src: __dirname + '/build/OWASP-Threat-Dragon-linux-x64/',
   }
 
   await createRelease(require('electron-installer-snap'), options)

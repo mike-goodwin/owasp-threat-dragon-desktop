@@ -1,12 +1,14 @@
 {
   "name": "threatdragon",
   "productName": "OWASP-Threat-Dragon",
-  "version": "1.1.0",
-  "description": "Desktop version OWASP Threat Dragon",
+  "version": "1.2.0",
+  "description": "OWASP Threat Dragon desktop version",
   "main": "main.js",
   "scripts": {
     "start": "./node_modules/.bin/electron .",
-    "build-content": "npm run copy-fonts && npm run bundle-minify-css",
+    "build": "npm run-script pretest && npm run-script build-content && npm run-script builder",
+    "build-content": "npm run-script copy-fonts && npm run-script bundle-minify-css",
+    "builder": "electron-builder build --macos --win --linux --publish always --config electron-builder.json",
     "copy-fonts": "./node_modules/.bin/copyfiles -f ./node_modules/font-awesome/fonts/*.* ./node_modules/bootstrap/dist/fonts/*.* ./fonts",
     "bundle-css": "./node_modules/.bin/rework-npm ./content/app.css -o ./content/threatdragon.css",
     "minify-css": "./node_modules/.bin/uglifycss ./content/threatdragon.css > ./content/threatdragon.min.css",
@@ -15,76 +17,18 @@
     "test": "./node_modules/.bin/karma start --single-run --browsers Electron",
     "citest": "./node_modules/.bin/karma start --single-run false --browsers Electron",
     "codecov": "./node_modules/.bin/codecov",
-    "build-all": "npm run build-win && npm run build-osx && npm run build-lin",
-    "build-win": "npm run package-win && npm run installer-win",
-    "build-osx": "npm run package-osx && npm run installer-osx",
-    "build-lin": "npm run package-lin && npm run installer-lin",
+    "build-all": "npm run-script build-win && npm run-script build-osx && npm run-script build-lin",
+    "build-win": "npm run-script package-win && npm run-script installer-win",
+    "build-osx": "npm run-script package-osx && npm run-script installer-osx",
+    "build-lin": "npm run-script package-lin && npm run-script installer-lin",
     "installer-win": "node ./installer-win.js",
     "installer-osx": "node ./installer-osx.js",
     "installer-lin": "node -e 'require(\"./installer-lin\").all()'",
-    "package-osx": "./node_modules/.bin/electron-packager . --asar --overwrite  --out=./packages --ignore=\"installers|tests|.vscode|coverage\" --platform=darwin --arch=x64 --prune=true --icon=cupcakes.icns",
-    "package-lin": "./node_modules/.bin/electron-packager . --asar --overwrite  --out=./packages --ignore=\"installers|tests|.vscode|coverage\" --platform=linux --arch=x64 --prune=true --icon=cupcakes1024x1024.png --executableName=threatdragon",
-    "package-win": "./node_modules/.bin/electron-packager . --asar --overwrite  --out=./packages --ignore=\"installers|tests|.vscode|coverage\" --platform=win32 --arch=x64 --prune=true --icon=cupcakes.ico --win32metadata.CompanyName=OWASP --win32metadata.FileDescription=\"OWASP Threat Dragon\" --win32metadata.ProductName=\"OWASP Threat Dragon\"",
+    "package-osx": "./node_modules/.bin/electron-packager . --asar --overwrite  --out=./build --ignore=\"installers|tests|.vscode|coverage\" --platform=darwin --arch=x64 --prune=true --icon=content/icons/icon.icns",
+    "package-lin": "./node_modules/.bin/electron-packager . --asar --overwrite  --out=./build --ignore=\"installers|tests|.vscode|coverage\" --platform=linux --arch=x64 --prune=true --icon=content/icons/png/256x256.png --executableName=threatdragon",
+    "package-win": "./node_modules/.bin/electron-packager . --asar --overwrite  --out=./build --ignore=\"installers|tests|.vscode|coverage\" --platform=win32 --arch=x64 --prune=true --icon=content/icons/icon.ico --win32metadata.CompanyName=OWASP --win32metadata.FileDescription=\"OWASP Threat Dragon\" --win32metadata.ProductName=\"OWASP Threat Dragon\"",
     "snyk-protect": "snyk protect",
-    "prepublish": "npm run snyk-protect",
-    "dist": "electron-builder -mwl --publish always"
-  },
-  "build": {
-      "publish": {
-        "provider": "github"
-      },
-    "mac": {
-      "target": "dmg"
-    },
-    "linux": {
-      "target": [
-        {
-          "target": "AppImage",
-          "arch": [
-            "ia32",
-            "x64"
-          ]
-        }
-      ],
-      "target": [
-        {
-          "target": "snap",
-          "arch": [
-            "ia32",
-            "x64"
-          ]
-        }
-      ],
-      "target": [
-        {
-          "target": "deb",
-          "arch": [
-            "ia32",
-            "x64"
-          ]
-        }
-      ],
-      "target": [
-        {
-          "target": "rpm",
-          "arch": [
-            "ia32",
-            "x64"
-          ]
-        }
-      ]
-    },
-    "win": {
-      "target": [
-        {
-          "target": "nsis",
-          "arch": [
-            "ia32",
-            "x64"
-          ]
-        }
-      ]
-    }
+    "prepare": "npm run-script snyk-protect"
   },
   "author": {
     "name": "mike.goodwin",
@@ -108,7 +52,7 @@
     "font-awesome": "4.7.0",
     "jquery": "3.4.0",
     "lodash": "4.17.12",
-    "owasp-threat-dragon-core": "0.8.0",
+    "owasp-threat-dragon-core": "1.2.0",
     "promise-fs": "2.1.0",
     "snyk": "^1.295.0"
   },

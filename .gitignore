@@ -2,7 +2,7 @@ node_modules/
 coverage/
 typings/
 npm-debug.log
-packages/
+build/
 installers/
 
 # ignore Apple's desktop store files
