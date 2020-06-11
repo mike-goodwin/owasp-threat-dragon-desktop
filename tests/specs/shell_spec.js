@@ -481,7 +481,7 @@ describe('shell controller', function () {
         expect(subMenu.submenu[1].label).toEqual('Submit an Issue');
         spyOn(mockElectron.shell, 'openExternal');
         subMenu.submenu[1].click();
-        expect(mockElectron.shell.openExternal.calls.argsFor(0)).toEqual(['https://github.com/mike-goodwin/owasp-threat-dragon-desktop/issues/new']); 
+        expect(mockElectron.shell.openExternal.calls.argsFor(0)).toEqual(['https://github.com/owasp/threat-dragon-desktop/issues/new']); 
     });
 
     it('Help menu third item should browse to the GitHub repo page', function() {
@@ -490,7 +490,7 @@ describe('shell controller', function () {
         expect(subMenu.submenu[2].label).toEqual('Visit us on GitHub');
         spyOn(mockElectron.shell, 'openExternal');
         subMenu.submenu[2].click();
-        expect(mockElectron.shell.openExternal.calls.argsFor(0)).toEqual(['https://github.com/mike-goodwin/owasp-threat-dragon-desktop']); 
+        expect(mockElectron.shell.openExternal.calls.argsFor(0)).toEqual(['https://github.com/owasp/threat-dragon-desktop']); 
     });
 
     it('Help menu fourth item should browse to the OWASP project page', function() {

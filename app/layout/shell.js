@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 
 function shell($rootScope, $scope, $location, $route, common, datacontext, electron, threatmodellocator, VERSION) {
     var controllerId = 'shell';
@@ -204,13 +204,13 @@ function shell($rootScope, $scope, $location, $route, common, datacontext, elect
                     {
                         label: 'Submit an Issue',
                         click: function() {
-                            electron.shell.openExternal('https://github.com/mike-goodwin/owasp-threat-dragon-desktop/issues/new');
+                            electron.shell.openExternal('https://github.com/owasp/threat-dragon-desktop/issues/new');
                         }
                     },
                     {
                         label: 'Visit us on GitHub',
                         click: function() {
-                            electron.shell.openExternal('https://github.com/mike-goodwin/owasp-threat-dragon-desktop');
+                            electron.shell.openExternal('https://github.com/owasp/threat-dragon-desktop');
                         }
                     },
                     {
