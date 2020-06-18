@@ -59,7 +59,7 @@ const argv = require('yargs')
   .options({
     'verbose': {
       alias: 'v',
-      describe: 'Log with increaing levels of verbosity',
+      describe: 'Increasing levels of verbosity',
       type: 'boolean'
     }
   })

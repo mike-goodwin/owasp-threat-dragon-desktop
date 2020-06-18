@@ -28,7 +28,9 @@
     "package-lin": "./node_modules/.bin/electron-packager . --asar --overwrite  --out=./build --ignore=\"installers|tests|.vscode|coverage\" --platform=linux --arch=x64 --prune=true --icon=content/icons/png/256x256.png --executableName=threatdragon",
     "package-win": "./node_modules/.bin/electron-packager . --asar --overwrite  --out=./build --ignore=\"installers|tests|.vscode|coverage\" --platform=win32 --arch=x64 --prune=true --icon=content/icons/icon.ico --win32metadata.CompanyName=OWASP --win32metadata.FileDescription=\"OWASP Threat Dragon\" --win32metadata.ProductName=\"OWASP Threat Dragon\"",
     "snyk-protect": "snyk protect",
-    "prepare": "npm run-script snyk-protect"
+    "prepare": "npm run-script snyk-protect",
+    "help": "./node_modules/.bin/electron . help",
+    "pdf": "./node_modules/.bin/electron . pdf"
   },
   "author": {
     "name": "mike.goodwin",
