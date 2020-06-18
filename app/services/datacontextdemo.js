@@ -2,6 +2,9 @@
 
 function datacontextdemo($q, $http) {
 
+    const log = require('electron').remote.getGlobal('params').logger;
+    log.debug('Datacontext Demo logger verbosity level', log.transports.console.level);
+
     var threatModelUri = 'https://raw.githubusercontent.com/mike-goodwin/owasp-threat-dragon-demo/master/ThreatDragonModels/Demo%20Threat%20Model/Demo%20Threat%20Model.json';
 
     var service = {

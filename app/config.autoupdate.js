@@ -2,6 +2,7 @@
 
 function autoupdate(common, dialogs, electron, VERSION) {
 
+    const log = require('electron').remote.getGlobal('params').logger;
     var logInfo = common.logger.getLogFn('config.autoupdate', 'info');
     var logError = common.logger.getLogFn('config.autoupdate', 'error');
 
@@ -48,9 +49,11 @@ function autoupdate(common, dialogs, electron, VERSION) {
             //do nothing
             logError('Failed to configure autoupdate');
             logError(e.message);
+            log.error('Failed to configure autoupdate', e.message);
         }
     } else {
         logInfo('Skipped autoupdate config');
+        log.info('Skipped autoupdate config');
     }
 }
 

@@ -19,7 +19,7 @@ describe('desktopreport controller', function () {
         },
         dialog: {
             printPDF: function() {},
-            savePDF: function() {}
+            saveAsPDF: function() {}
         }
     };
     var mockDatacontext = {
@@ -145,10 +145,10 @@ describe('desktopreport controller', function () {
                 var file = 'test';
                 mockDatacontext.threatModelLocation = file + '.json';
                 var done = jasmine.createSpy('done');
-                mockElectron.dialog.savePDF = function(defaultPath, onSave, onCancel) {
+                mockElectron.dialog.saveAsPDF = function(defaultPath, onSave, onCancel) {
                     onSave();
                 }
-                spyOn(mockElectron.dialog, 'savePDF').and.callThrough();
+                spyOn(mockElectron.dialog, 'saveAsPDF').and.callThrough();
                 spyOn(fsp, 'writeFile').and.returnValue($q.when(null));
                 $controller('desktopreport as vm', { $scope: $scope });
                 $scope.$apply();
@@ -157,8 +157,8 @@ describe('desktopreport controller', function () {
 
                 expect(done).toHaveBeenCalled();
                 expect(fsp.writeFile).toHaveBeenCalled();
-                expect(mockElectron.dialog.savePDF).toHaveBeenCalled();
-                expect(mockElectron.dialog.savePDF.calls.argsFor(0)[0]).toEqual(file + '.pdf');
+                expect(mockElectron.dialog.saveAsPDF).toHaveBeenCalled();
+                expect(mockElectron.dialog.saveAsPDF.calls.argsFor(0)[0]).toEqual(file + '.pdf');
 
             });
 
@@ -169,13 +169,13 @@ describe('desktopreport controller', function () {
                     callback(null, testData);
                 };
                 var done = jasmine.createSpy('done');
-                mockElectron.dialog.savePDF = function(defaultPath, onSave, onCancel) {
+                mockElectron.dialog.saveAsPDF = function(defaultPath, onSave, onCancel) {
                     onSave();
                 }
                 if (mockDatacontext.threatModelLocation) {
                     delete mockDatacontext.threatModelLocation;
                 }
-                spyOn(mockElectron.dialog, 'savePDF').and.callThrough();
+                spyOn(mockElectron.dialog, 'saveAsPDF').and.callThrough();
                 spyOn(fsp, 'writeFile').and.returnValue($q.when(null));
                 $controller('desktopreport as vm', { $scope: $scope });
                 $scope.$apply();
@@ -184,8 +184,8 @@ describe('desktopreport controller', function () {
 
                 expect(done).toHaveBeenCalled();
                 expect(fsp.writeFile).toHaveBeenCalled();
-                expect(mockElectron.dialog.savePDF).toHaveBeenCalled();
-                expect(mockElectron.dialog.savePDF.calls.argsFor(0)[0]).toBeNull();
+                expect(mockElectron.dialog.saveAsPDF).toHaveBeenCalled();
+                expect(mockElectron.dialog.saveAsPDF.calls.argsFor(0)[0]).toBeNull();
 
             });
 
@@ -213,7 +213,7 @@ describe('desktopreport controller', function () {
                     callback(null, testData);
                 };
                 var done = jasmine.createSpy('done');
-                mockElectron.dialog.savePDF = function(defaultPath, onSave, onCancel) {
+                mockElectron.dialog.saveAsPDF = function(defaultPath, onSave, onCancel) {
                     onCancel();
                 }
                 $controller('desktopreport as vm', { $scope: $scope });

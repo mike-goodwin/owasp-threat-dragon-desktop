@@ -59,6 +59,14 @@ function getRoutes() {
                 }
             }
         }, {
+            url: '/threatmodel/export/:location',
+            config: {
+                templateUrl: './app/threatmodels/pdfexport.html',
+                title: 'Threat Model Export',
+                settings: {
+                }
+            }
+        }, {
             url: '/threatmodel/report/:location',
             config: {
                 templateUrl: './app/threatmodels/desktopreport.html',
