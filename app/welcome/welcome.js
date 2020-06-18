@@ -2,8 +2,8 @@
 
 function welcome($scope, $location, $route, common, electron, threatmodellocator) {
 
-    const log = require('electron').remote.getGlobal('params').logger;
-    log.debug('Welcome loaded with verbosity level', log.transports.console.level);
+    const log = electron.log;
+    log.debug('Welcome loaded with verbosity level', electron.logLevel);
 
     /*jshint validthis: true */
     var fs = require('fs');

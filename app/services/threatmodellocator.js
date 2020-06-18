@@ -2,9 +2,6 @@
 
 function threatmodellocator() {
 
-    const log = require('electron').remote.getGlobal('params').logger;
-    log.debug('Threat Model Locator logger verbosity level', log.transports.console.level);
-
     var service = {
         getModelLocation: getModelLocation,
         getModelPath: getModelPath,
@@ -28,7 +25,6 @@ function threatmodellocator() {
             }
         }
 
-        log.debug('Threat Model Locator -> getModelLocation', result);
         return result;
     }
 
@@ -36,7 +32,6 @@ function threatmodellocator() {
     //base64 encode it unless it already looks encoded
     //ignore demo
     function getModelPath(location) {
-        log.silly('Threat Model Locator -> getModelPath location', location);
 
         var result = location;
 

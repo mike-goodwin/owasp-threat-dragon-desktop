@@ -2,9 +2,9 @@
 
 function desktopreport($q, $routeParams, $location, common, datacontext, threatmodellocator, electron) {
 
-    const globals = require('electron').remote.getGlobal('params');
-    const log = globals.logger;
-    log.debug('Desktop Report logger verbosity level', log.transports.console.level);
+    const globals = electron.globals;
+    const log = electron.log;
+    log.debug('Desktop Report logging verbosity level', electron.logLevel);
 
     var fsp = require('promise-fs');
     /*jshint validthis: true */
@@ -30,10 +30,11 @@ function desktopreport($q, $routeParams, $location, common, datacontext, threatm
 
     function activate() {
         common.activateController([getThreatModel()], controllerId)
-            .then(function () { 
-                      log.info('Activated Desktop Report Controller');
-                      onActivated();
-                  });
+            .then(function () {
+                logInfo('Activated Desktop Report Controller');
+                log.info('Activated Desktop Report Controller');
+                onActivated();
+            });
     }
 
     function onActivated() {

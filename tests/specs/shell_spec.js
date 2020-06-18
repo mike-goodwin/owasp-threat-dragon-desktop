@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 
 describe('shell controller', function () {
 
@@ -20,6 +20,12 @@ describe('shell controller', function () {
             open: function() {},
             messageBox: function() {},
             save: function() {}
+        },
+        log: {
+            error: function() {},
+            debug: function() {},
+            info: function() {},
+            warn: function() {}
         }
     };
     var mockDatacontext = {

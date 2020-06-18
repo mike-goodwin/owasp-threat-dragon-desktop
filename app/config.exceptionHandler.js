@@ -5,7 +5,6 @@
 
     /*global angular*/
     var app = angular.module('app');
-    const log = require('electron').remote.getGlobal('params').logger;
 
     // Configure by setting an optional string value for appErrorPrefix.
     // Accessible via config.appErrorPrefix (via config value).
@@ -26,7 +25,6 @@
             var errorData = { exception: exception, cause: cause };
             var msg = appErrorPrefix + exception.message;
             logError(msg, errorData, true);
-            log.error(msg, errorData);
         };
     }
 })();

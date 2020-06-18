@@ -16,14 +16,6 @@ var command;
 const argv = require('yargs')
   .usage('Usage: $0 <command> [options]')
   .command({
-    command: 'run',
-    aliases: ['r', 'x'],
-    desc: 'Run threat dragon application',
-    handler: (argv) => {
-      command = 'run';
-    }
-  })
-  .command({
     command: 'edit <json>',
     aliases: ['e'],
     desc: 'Edit JSON threat model',
@@ -53,6 +45,14 @@ const argv = require('yargs')
     desc: 'Print JSON threat model',
     handler: (argv) => {
       command = 'print';
+    }
+  })
+  .command({
+    command: 'run',
+    aliases: ['r', 'x'],
+    desc: 'Run threat dragon application',
+    handler: (argv) => {
+      command = 'run';
     }
   })
   .demandCommand(0, 0, '', 'Command not recognised')

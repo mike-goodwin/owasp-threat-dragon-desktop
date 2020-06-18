@@ -4,14 +4,16 @@ var _ = require('lodash');
 const electron = require('electron');
 const remote = electron.remote;
 const dialog = remote.dialog;
+const globals = remote.getGlobal('params');
+const log = globals.logger;
+const logLevel = log.transports.console.level;
 const fs = require('fs');
 const path = require('path');
 const userDataPath = electron.remote.app.getPath('userData');
 
 function electronservice(common) {
 
-    const log = require('electron').remote.getGlobal('params').logger;
-    log.debug('Electron Service logger verbosity level', log.transports.console.level);
+    log.debug('Electron Service logging verbosity level', logLevel);
 
     var logInfo = common.logger.getLogFn('electron service', 'info');
     var logError = common.logger.getLogFn('electron service', 'error');
@@ -25,6 +27,9 @@ function electronservice(common) {
         },
         currentWindow: remote.getCurrentWindow(),
         shell: electron.shell,
+        globals: globals,
+        log: log,
+        logLevel: logLevel,
         Menu: remote.Menu,
         app: remote.app,
         autoUpdater: remote.autoUpdater,

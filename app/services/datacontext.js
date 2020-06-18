@@ -2,8 +2,8 @@
 
 function datacontext($q, datacontextdemo, electron) {
 
-    const log = require('electron').remote.getGlobal('params').logger;
-    log.debug('Datacontext logger verbosity level', log.transports.console.level);
+    const log = electron.log;
+    log.debug('Datacontext logging verbosity level', electron.logLevel);
 
     var fsp = require('promise-fs');
     var threatModelLocation = null;

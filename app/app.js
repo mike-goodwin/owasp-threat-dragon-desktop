@@ -14,8 +14,6 @@ SVGElement.prototype.getTransformToElement = SVGElement.prototype.getTransformTo
 };
 
 var app = angular.module('app', ['ui.bootstrap', 'ngRoute', 'xeditable', 'ngAnimate', 'templates', 'common', 'owasp-threat-dragon-core']);
-
-//version
 app.constant('VERSION', require('./package.json').version);
 
 //require custom modules, services, controllers and directives
@@ -27,7 +25,7 @@ require('./app/threatmodels');
 
 const globals = require('electron').remote.getGlobal('params');
 const log = globals.logger;
-log.info('App loaded with logger verbosity level:', log.transports.console.level);
+log.info('App loaded with logging verbosity level:', log.transports.console.level);
 log.debug('App global model file:', globals.modelFile);
 log.debug('App global command:', globals.command);
 log.debug('App global url:', globals.url);

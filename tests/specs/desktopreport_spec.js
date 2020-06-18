@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 
 describe('desktopreport controller', function () {
     
@@ -20,7 +20,14 @@ describe('desktopreport controller', function () {
         dialog: {
             printPDF: function() {},
             saveAsPDF: function() {}
-        }
+        },
+        log: {
+            error: function() {},
+            debug: function() {},
+            info: function() {},
+            warn: function() {}
+        },
+        logLevel: 'debug'
     };
     var mockDatacontext = {
         load: function() { return $q.when(null);}
@@ -32,6 +39,7 @@ describe('desktopreport controller', function () {
     beforeEach(function () {
 
         angular.mock.module('app');
+
         angular.mock.module(function ($provide) {
             $provide.value('electron', mockElectron);
             $provide.value('datacontext', mockDatacontext);

@@ -2,7 +2,7 @@
 
 function autoupdate(common, dialogs, electron, VERSION) {
 
-    const log = require('electron').remote.getGlobal('params').logger;
+    const log = electron.log;
     var logInfo = common.logger.getLogFn('config.autoupdate', 'info');
     var logError = common.logger.getLogFn('config.autoupdate', 'error');
 
