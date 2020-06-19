@@ -49,8 +49,21 @@ Then to run it:
 `npm run start`
 
 Installers for OSX and Windows can be downloaded from the
-[releases folder](https://github.com/mike-goodwin/owasp-threat-dragon-desktop/releases).
-In there you can also find packages for both Debian and Fedora Linux on AMD64 and X86-64bit platforms.
+[releases folder](https://github.com/mike-goodwin/owasp-threat-dragon-desktop/releases), along with packages
+for both Debian and Fedora Linux on AMD64 and X86-64bit platforms.
+
+## Running on MacOS ##
+At present Threat Dragon .dmg files are not code signed, so when running for the first time an error message
+will be shown. This is along the lines of 
+'OWASP Threat Dragon cannot be opened because the developer cannot be verified'. To launch the appplication:
+
+1. In the Finder  on your Mac, locate OWASP Threat Dragon. Don’t use Launchpad to do this, because
+Launchpad doesn’t allow you to access the shortcut menu
+2. Control-click the OWASP Threat Dragon icon, then choose Open from the shortcut menu
+3. Click Open
+
+Threat Dragon is now saved as an exception to your security settings, and you can open it in the future by
+double-clicking it just as you can any registered app.
 
 # Screenshots # 
 
