@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 
 var angular = require('angular');
 require('angular-ui-bootstrap');
@@ -14,8 +14,6 @@ SVGElement.prototype.getTransformToElement = SVGElement.prototype.getTransformTo
 };
 
 var app = angular.module('app', ['ui.bootstrap', 'ngRoute', 'xeditable', 'ngAnimate', 'templates', 'common', 'owasp-threat-dragon-core']);
-
-//version
 app.constant('VERSION', require('./package.json').version);
 
 //require custom modules, services, controllers and directives
@@ -24,6 +22,13 @@ require('./app/layout');
 require('./app/welcome');
 require('./app/services');
 require('./app/threatmodels');
+
+const globals = require('electron').remote.getGlobal('params');
+const log = globals.logger;
+log.info('App loaded with logging verbosity level:', log.transports.console.level);
+log.debug('App global model file:', globals.modelFile);
+log.debug('App global command:', globals.command);
+log.debug('App global url:', globals.url);
 
 app.config(['$qProvider', function ($qProvider) {
     $qProvider.errorOnUnhandledRejections(false);
@@ -36,6 +41,10 @@ app.run(['$q',
 
 app.run(['$rootScope', '$location',
     function ($rootScope, $location) {
+        log.debug('App.run with location.url', $location.url());
+        $location.url(globals.url);
+        log.debug('App.run with changed location.url', $location.url());
+        log.silly('App.run with location', $location);
         $rootScope.location = $location;
     }]);
 

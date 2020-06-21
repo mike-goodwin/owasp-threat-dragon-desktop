@@ -4,23 +4,32 @@ var _ = require('lodash');
 const electron = require('electron');
 const remote = electron.remote;
 const dialog = remote.dialog;
+const globals = remote.getGlobal('params');
+const log = globals.logger;
+const logLevel = log.transports.console.level;
 const fs = require('fs');
 const path = require('path');
 const userDataPath = electron.remote.app.getPath('userData');
 
 function electronservice(common) {
+
+    log.debug('Electron Service logging verbosity level', logLevel);
+
     var logInfo = common.logger.getLogFn('electron service', 'info');
     var logError = common.logger.getLogFn('electron service', 'error');
 
     var service = {
         dialog: {
             save: save,
-            savePDF: savePDF,
+            saveAsPDF: saveAsPDF,
             open: open,
             messageBox: messageBox
         },
         currentWindow: remote.getCurrentWindow(),
         shell: electron.shell,
+        globals: globals,
+        log: log,
+        logLevel: logLevel,
         Menu: remote.Menu,
         app: remote.app,
         autoUpdater: remote.autoUpdater,
@@ -41,30 +50,39 @@ function electronservice(common) {
     }
 
     function save(onSave, onNoSave) {
+        log.debug('Electron Service save');
         dialog.showSaveDialog(remote.getCurrentWindow(), { defaultPath: "new-model.json", filters: [{ name: 'Threat Models', extensions: ['json'] }] }, function (fileName) {
             if (_.isUndefined(fileName)) {
+                log.warn('Electron Service save unsuccessful');
                 onNoSave();
             } else {
+                log.info('Electron Service save to file', fileName);
                 onSave(fileName);
             }
         });
     }
 
-    function savePDF(defaultPath, onSave, onNoSave) {
+    function saveAsPDF(defaultPath, onSave, onNoSave) {
+        log.debug('Electron Service save PDF');
         dialog.showSaveDialog(remote.getCurrentWindow(), { defaultPath: defaultPath, filters: [{name: 'PDF files', extensions: ['pdf'] }] }, function (fileName) {
             if (_.isUndefined(fileName)) {
+                log.warn('Electron Service save PDF unsuccessful');
                 onNoSave();
             } else {
+                log.info('Electron Service save PDF to file', fileName);
                 onSave(fileName);
             }
         });
     }
 
     function open(onOpen, onNoOpen) {
+        log.debug('Electron Service open');
         dialog.showOpenDialog(remote.getCurrentWindow(), { filters: [{ name: 'Threat Models', extensions: ['json'] }, { name: 'All Files', extensions: ['*'] }] }, function (fileNames) {
             if (!_.isUndefined(fileNames)) {
+                log.info('Electron Service open file', fileNames);
                 onOpen(fileNames);
             } else {
+                log.info('Electron Service open unsuccessful');
                 onNoOpen();
             }
         });
@@ -73,6 +91,7 @@ function electronservice(common) {
     function getUserData(location) {
         const data = parseDataFile(location.configName, defaultPreferences);
         logInfo('got ' + data);
+        log.info('got', data);
         return data[location.key];
     }
 
@@ -84,9 +103,11 @@ function electronservice(common) {
             logInfo('writing: ' + JSON.stringify(data));
             fs.writeFileSync(getFilePath(configName), JSON.stringify(data), 'utf8');
             logInfo('wrote: ' + JSON.stringify(data));
+            log.info('wrote:', JSON.stringify(data));
         }
         catch (error) {
             logError('error on write: ' + error.message);
+            log.error('error on write:', error.message);
         }
     }
 
@@ -96,6 +117,7 @@ function electronservice(common) {
 
         var filePath = getFilePath(configName);
         logInfo('path = ' + filePath);
+        log.info('path =', filePath);
 
         try {
             return JSON.parse(fs.readFileSync(filePath), 'utf8');

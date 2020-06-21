@@ -18,11 +18,19 @@ describe('datacontext service:', function () {
 
         mockElectron = {
             currentWindow: {
-                setTitle: function() {}
+                setTitle: function() {},
+                getTitle: function() { return 'testTitle'; }
             },
             dialog: {
                 save: function() {}
-            }
+            },
+            log: {
+                error: function() {},
+                debug: function() {},
+                info: function() {},
+                warn: function() {}
+            },
+            logLevel: 'debug'
         };
 
         angular.mock.module('app');

@@ -1,6 +1,10 @@
 'use strict';
 
 function shell($rootScope, $scope, $location, $route, common, datacontext, electron, threatmodellocator, VERSION) {
+
+    const log = electron.log;
+    log.debug('Shell loaded with verbosity level', electron.logLevel);
+
     var controllerId = 'shell';
     var logSuccess = common.logger.getLogFn(controllerId, 'success');
     var logError = common.logger.getLogFn(controllerId, 'error');
@@ -8,6 +12,7 @@ function shell($rootScope, $scope, $location, $route, common, datacontext, elect
     menuConfigurator();
 
     $scope.$on('$viewContentLoaded', function () {
+        log.debug('Shell -> appLoaded at location.url', $location.url());
         $rootScope.appLoaded = true;
     });
 
@@ -15,10 +20,13 @@ function shell($rootScope, $scope, $location, $route, common, datacontext, elect
 
     function activate() {
         logSuccess('Threat Dragon loaded!', null, true);
+        log.info('Threat Dragon loaded');
+        log.debug('Shell -> activate at location.url', $location.url());
         common.activateController([], controllerId);
     }
 
     function menuConfigurator() {
+        log.debug('Shell -> menuConfigurator');
         var template = [
             {
                 label: 'File',
@@ -86,6 +94,7 @@ function shell($rootScope, $scope, $location, $route, common, datacontext, elect
 
                             function onSaveError(error) {
                                 logError(error);
+                                log.error(error);
                             }
                         }
                     },

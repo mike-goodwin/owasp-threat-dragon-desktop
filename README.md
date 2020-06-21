@@ -1,12 +1,12 @@
 Note that this repository has been migrated from Mike Goodwin's [original](https://github.com/mike-goodwin/owasp-threat-dragon-desktop) , which has the issues and pull requests from March 2017 up to June 2020.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/owasp/threat-dragon-desktop/master/content/images/threatdragon_logo_image.svg" width="200" alt="Threat Dragon Logo"/>
+  <img src="https://raw.githubusercontent.com/owasp/threat-dragon-desktop/main/content/images/threatdragon_logo_image.svg" width="200" alt="Threat Dragon Logo"/>
 </p>
 
 [![Github All Releases](https://img.shields.io/github/downloads/mike-goodwin/owasp-threat-dragon-desktop/total.svg)]()
 [![Known Vulnerabilities](https://snyk.io/test/github/mike-goodwin/owasp-threat-dragon-desktop/badge.svg)](https://snyk.io/test/github/mike-goodwin/owasp-threat-dragon-desktop)
-[![GitHub license](https://img.shields.io/github/license/mike-goodwin/owasp-threat-dragon-core.svg)](LICENSE.txt)
+[![GitHub license](https://img.shields.io/github/license/owasp/threat-dragon-core.svg)](LICENSE.txt)
 
 # [OWASP](https://www.owasp.org) Threat Dragon #
 
@@ -26,7 +26,7 @@ The application comes in two variants:
 
 1. [**A web application**](https://github.com/owasp/threat-dragon): For the web application, models files
 are stored in GitHub (other storage will become available). We are currently maintaining [a working protoype](https://threatdragon.org)
-in synch with the master code branch.
+in synch with the main code branch.
 
 2. [**A desktop application**](https://github.com/owasp/threat-dragon-desktop): This is based on
 [Electron](https://electron.atom.io/). There are installers available for both Windows and Mac OSX, as well as rpm and
@@ -48,6 +48,14 @@ Then to run it:
 
 `npm run start`
 
+There is a limited command line interface, with help:
+
+`npm run help`
+
+For example to export a given threat model file to pdf :
+
+`npm run pdf ./threat-model.json`
+
 Installers for OSX and Windows can be downloaded from the
 [releases folder](https://github.com/mike-goodwin/owasp-threat-dragon-desktop/releases), along with packages
 for both Debian and Fedora Linux on AMD64 and X86-64bit platforms.
@@ -64,6 +72,15 @@ Launchpad doesn’t allow you to access the shortcut menu
 
 Threat Dragon is now saved as an exception to your security settings, and you can open it in the future by
 double-clicking it just as you can any registered app.
+
+With an installed Threat Dragon, and if the executable is in the path, then
+the command line interface can be called, for example:
+
+`OWASP-Threat-Dragon help`
+
+And similarly to export to pdf:
+
+`OWASP-Threat-Dragon pdf ./threat-model.json --verbose`
 
 # Screenshots # 
 

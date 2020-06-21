@@ -10,7 +10,7 @@ var options = {
   exe: 'OWASP-Threat-Dragon.exe',
   noMsi: true,
   loadingGif: './content/icons/png/cupcakes-installing.gif',
-  iconUrl: 'https://raw.githubusercontent.com/owasp/threat-dragon-desktop/master/content/icons/win/td.ico',
+  iconUrl: 'https://raw.githubusercontent.com/owasp/threat-dragon-desktop/main/content/icons/win/td.ico',
   setupIcon: path.join(rootPath, 'content', 'icons', 'win', 'td.ico'),
   description: 'An open source threat modelling tool from OWASP',
   remoteReleases: "https://github.com/owasp/threat-dragon-desktop"

@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 
 describe('welcome controller', function () {
     
@@ -8,18 +8,27 @@ describe('welcome controller', function () {
     var $location;
     var $route;
     var fs = require('fs');
-    var mockElectron = {
-        dialog: {
-            open: function() {},
-            save: function() {}
-        }
-    };
-    var mockDatacontext = {
-    };
+    var mockElectron = {};
+    var mockDatacontext = {};
     
     beforeEach(function () {
         
+        mockElectron = {
+            dialog: {
+                open: function() {},
+                save: function() {}
+            },
+            log: {
+                error: function() {},
+                debug: function() {},
+                info: function() {},
+                warn: function() {}
+            },
+            logLevel: 'debug'
+        };
+
         angular.mock.module('app');
+
         angular.mock.module(function ($provide) {
             $provide.value('electron', mockElectron);
             $provide.value('datacontext', mockDatacontext);
