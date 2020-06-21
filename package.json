@@ -30,7 +30,10 @@
     "snyk-protect": "snyk protect",
     "prepare": "npm run-script snyk-protect",
     "help": "./node_modules/.bin/electron . help",
-    "pdf": "./node_modules/.bin/electron . pdf"
+    "pdf": "./node_modules/.bin/electron . pdf",
+    "edit": "./node_modules/.bin/electron . edit",
+    "open": "./node_modules/.bin/electron . open",
+    "print": "./node_modules/.bin/electron . print"
   },
   "author": {
     "name": "mike.goodwin",
