@@ -100,7 +100,7 @@ function shell($rootScope, $scope, $location, $route, common, datacontext, elect
                     },
                     {
                         label: 'Close Model',
-                        accelerator: 'CmdOrCtrl+F4',
+                        accelerator: process.platform === 'darwin' ? 'CmdOrCtrl+W' : 'CmdOrCtrl+F4',
                         click: function() {
                             datacontext.close();
                             $location.path('/');
@@ -120,8 +120,9 @@ function shell($rootScope, $scope, $location, $route, common, datacontext, elect
                         type: 'separator'
                     },
                     {
-                        label: 'Exit',
-                        role: 'close'
+                        label: process.platform === 'darwin' ? 'Quit' : 'Exit',
+                        accelerator: process.platform === 'darwin' ? 'CmdOrCtrl+Q' : 'CmdOrCtrl+W',
+                        role: process.platform === 'darwin' ? 'quit' : 'close'
                     }
                 ]
             },

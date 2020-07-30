@@ -289,7 +289,11 @@ describe('shell controller', function () {
         var template = mockElectron.Menu.buildFromTemplate.calls.argsFor(0)[0];
         var subMenu = getSubMenu(template, 'File');
         expect(subMenu.submenu[5].label).toEqual('Close Model');
-        expect(subMenu.submenu[5].accelerator).toEqual('CmdOrCtrl+F4');
+        if (process.platform === 'darwin') {
+            expect(subMenu.submenu[5].accelerator).toEqual('CmdOrCtrl+W');
+        } else {
+            expect(subMenu.submenu[5].accelerator).toEqual('CmdOrCtrl+F4');
+        }
         var click = subMenu.submenu[5].click;
 
         spyOn($scope, '$apply').and.callThrough();
@@ -333,7 +337,13 @@ describe('shell controller', function () {
     it('File menu ninth item should be exit', function() {
         var template = mockElectron.Menu.buildFromTemplate.calls.argsFor(0)[0];
         var subMenu = getSubMenu(template, 'File');
-        expect(subMenu.submenu[8].label).toEqual('Exit');
+        if (process.platform === 'darwin') {
+            expect(subMenu.submenu[8].label).toEqual('Quit');
+            expect(subMenu.submenu[8].accelerator).toEqual('CmdOrCtrl+Q');
+        } else {
+            expect(subMenu.submenu[8].label).toEqual('Exit');
+            expect(subMenu.submenu[8].accelerator).toEqual('CmdOrCtrl+W');
+        }
         expect(subMenu.submenu[8].role).toEqual('close');
     });
 
