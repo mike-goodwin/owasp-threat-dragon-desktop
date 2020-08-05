@@ -1,4 +1,5 @@
-Note that this repository has been migrated from Mike Goodwin's [original](https://github.com/mike-goodwin/owasp-threat-dragon-desktop) , which has the issues and pull requests from March 2017 up to June 2020.
+Note that this repository has been migrated from Mike Goodwin's [original](https://github.com/mike-goodwin/owasp-threat-dragon-desktop) ,
+which has the issues and pull requests from March 2017 up to June 2020.
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/owasp/threat-dragon-desktop/main/content/images/threatdragon_logo_image.svg" width="200" alt="Threat Dragon Logo"/>
@@ -98,11 +99,12 @@ And the threat editing screen
 
 # Contributing #
 
-PRs, feature requests, bug reports and feedback of any kind are very welcome. We are trying to keep the test coverage
-relatively high, so please try to include tests in any PRs and make PRs on the development branch.  There are some
-[developer notes](https://github.com/OWASP/threat-dragon-core/blob/main/dev-notes.md) in the core
-[threat dragon](https://github.com/OWASP/threat-dragon-core) repo to help get started with this project.
+Pull requests, feature requests, bug reports and feedback of any kind are very welcome, please refer to the page for
+[contributors](https://github.com/OWASP/threat-dragon-core/blob/main/CONTRIBUTING.md). 
 
+We are trying to keep the test coverage relatively high, so please try to update tests in any PRs and make PRs on the development branch.
+There are some [developer notes](https://github.com/OWASP/threat-dragon-core/blob/main/dev-notes.md) in the core
+[threat dragon](https://github.com/OWASP/threat-dragon-core) repo to help get started with this project.
 
 # Vulnerability disclosure #
 
