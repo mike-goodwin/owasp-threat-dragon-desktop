@@ -6,8 +6,10 @@ which has the issues and pull requests from March 2017 up to June 2020.
 </p>
 
 [![Github All Releases](https://img.shields.io/github/downloads/mike-goodwin/owasp-threat-dragon-desktop/total.svg)]()
-[![Known Vulnerabilities](https://snyk.io/test/github/mike-goodwin/owasp-threat-dragon-desktop/badge.svg)](https://snyk.io/test/github/mike-goodwin/owasp-threat-dragon-desktop)
-[![GitHub license](https://img.shields.io/github/license/owasp/threat-dragon-core.svg)](LICENSE.txt)
+[![Build Status](https://travis-ci.org/owasp/threat-dragon-desktop.svg?branch=main)](https://travis-ci.org/owasp/threat-dragon-desktop)
+ [![codecov.io](http://codecov.io/github/owasp/threat-dragon-desktop/coverage.svg?branch=main)](http://codecov.io/github/owasp/threat-dragon-desktop?branch=main)
+ [![GitHub license](https://img.shields.io/github/license/owasp/threat-dragon-desktop.svg)](LICENSE.txt)
+ [![Known Vulnerabilities](https://snyk.io/test/github/owasp/threat-dragon-desktop/badge.svg)](https://snyk.io/test/github/owasp/threat-dragon-desktop)
 
 # [OWASP](https://www.owasp.org) Threat Dragon #
 
