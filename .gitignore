@@ -1,3 +1,4 @@
+# the build artifacts
 node_modules/
 coverage/
 typings/
@@ -10,3 +11,7 @@ installers/
 # ignore VS and Eclipse files
 .vscode/
 .settings/
+
+# the prepare artifacts
+electron
+
