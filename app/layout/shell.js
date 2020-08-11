@@ -208,25 +208,40 @@ function shell($rootScope, $scope, $location, $route, common, datacontext, elect
                     {
                         label: 'Documentation',
                         click: function() {
-                            electron.shell.openExternal('http://docs.threatdragon.org');
-                        }
-                    },
-                    {
-                        label: 'Submit an Issue',
-                        click: function() {
-                            electron.shell.openExternal('https://github.com/owasp/threat-dragon-desktop/issues/new');
-                        }
-                    },
-                    {
-                        label: 'Visit us on GitHub',
-                        click: function() {
-                            electron.shell.openExternal('https://github.com/owasp/threat-dragon-desktop');
+                            electron.shell.openExternal('http://docs.threatdragon.org/');
                         }
                     },
                     {
                         label: 'Visit us at OWASP',
                         click: function() {
                             electron.shell.openExternal('https://owasp.org/www-project-threat-dragon/');
+                        }
+                    },
+                    {
+                        label: 'OWASP Cheat Sheets',
+                        click: function() {
+                            electron.shell.openExternal('https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html');
+                        }
+                    },
+                    {
+                        type: 'separator'
+                    },
+                    {
+                        label: 'Visit us on GitHub',
+                        click: function() {
+                            electron.shell.openExternal('https://github.com/owasp/threat-dragon-desktop/');
+                        }
+                    },
+                    {
+                        label: 'Submit an Issue',
+                        click: function() {
+                            electron.shell.openExternal('https://github.com/owasp/threat-dragon-desktop/issues/new/choose/');
+                        }
+                    },
+                    {
+                        label: 'Check for updates ...',
+                        click: function() {
+                            electron.shell.openExternal('https://github.com/OWASP/threat-dragon-desktop/releases/');
                         }
                     },
                     {

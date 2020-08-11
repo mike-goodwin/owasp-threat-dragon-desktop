@@ -482,54 +482,78 @@ describe('shell controller', function () {
     });
 
     //Help:
-    it('Help menu first item should browse to the documentation page', function() {
+    it('Help menu item should browse to the documentation page', function() {
         var template = mockElectron.Menu.buildFromTemplate.calls.argsFor(0)[0];
         var subMenu = getSubMenu(template, 'Help');
         expect(subMenu.submenu[0].label).toEqual('Documentation');
         spyOn(mockElectron.shell, 'openExternal');
         subMenu.submenu[0].click();
-        expect(mockElectron.shell.openExternal.calls.argsFor(0)).toEqual(['http://docs.threatdragon.org']);      
+        expect(mockElectron.shell.openExternal.calls.argsFor(0)).toEqual(['http://docs.threatdragon.org/']);      
     });
 
-    it('Help menu second item should browse to the GitHub issues page', function() {
+    it('Help menu item should browse to the OWASP project page', function() {
         var template = mockElectron.Menu.buildFromTemplate.calls.argsFor(0)[0];
         var subMenu = getSubMenu(template, 'Help');
-        expect(subMenu.submenu[1].label).toEqual('Submit an Issue');
+        expect(subMenu.submenu[1].label).toEqual('Visit us at OWASP');
         spyOn(mockElectron.shell, 'openExternal');
         subMenu.submenu[1].click();
-        expect(mockElectron.shell.openExternal.calls.argsFor(0)).toEqual(['https://github.com/owasp/threat-dragon-desktop/issues/new']); 
-    });
-
-    it('Help menu third item should browse to the GitHub repo page', function() {
-        var template = mockElectron.Menu.buildFromTemplate.calls.argsFor(0)[0];
-        var subMenu = getSubMenu(template, 'Help');
-        expect(subMenu.submenu[2].label).toEqual('Visit us on GitHub');
-        spyOn(mockElectron.shell, 'openExternal');
-        subMenu.submenu[2].click();
-        expect(mockElectron.shell.openExternal.calls.argsFor(0)).toEqual(['https://github.com/owasp/threat-dragon-desktop']); 
-    });
-
-    it('Help menu fourth item should browse to the OWASP project page', function() {
-        var template = mockElectron.Menu.buildFromTemplate.calls.argsFor(0)[0];
-        var subMenu = getSubMenu(template, 'Help');
-        expect(subMenu.submenu[3].label).toEqual('Visit us at OWASP');
-        spyOn(mockElectron.shell, 'openExternal');
-        subMenu.submenu[3].click();
         expect(mockElectron.shell.openExternal.calls.argsFor(0)).toEqual(['https://owasp.org/www-project-threat-dragon/']); 
     });
 
-    it('Help menu fifth item should be a separator', function() {
+    it('Help menu item should browse to the OWASP cheat sheets', function() {
         var template = mockElectron.Menu.buildFromTemplate.calls.argsFor(0)[0];
         var subMenu = getSubMenu(template, 'Help');
-        expect(subMenu.submenu[4].type).toEqual('separator');
+        expect(subMenu.submenu[2].label).toEqual('OWASP Cheat Sheets');
+        spyOn(mockElectron.shell, 'openExternal');
+        subMenu.submenu[2].click();
+        expect(mockElectron.shell.openExternal.calls.argsFor(0)).toEqual(['https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html']); 
     });
 
-    it('Help menu sixth item should show a help about', function() {
+    it('Help menu fourth item should be a separator', function() {
         var template = mockElectron.Menu.buildFromTemplate.calls.argsFor(0)[0];
         var subMenu = getSubMenu(template, 'Help');
-        expect(subMenu.submenu[5].label).toEqual('About');
-        spyOn(mockElectron.dialog, 'messageBox');
+        expect(subMenu.submenu[3].type).toEqual('separator');
+    });
+
+    it('Help menu item should browse to the GitHub repo page', function() {
+        var template = mockElectron.Menu.buildFromTemplate.calls.argsFor(0)[0];
+        var subMenu = getSubMenu(template, 'Help');
+        expect(subMenu.submenu[4].label).toEqual('Visit us on GitHub');
+        spyOn(mockElectron.shell, 'openExternal');
+        subMenu.submenu[4].click();
+        expect(mockElectron.shell.openExternal.calls.argsFor(0)).toEqual(['https://github.com/owasp/threat-dragon-desktop/']); 
+    });
+
+    it('Help menu item should browse to the GitHub issues page', function() {
+        var template = mockElectron.Menu.buildFromTemplate.calls.argsFor(0)[0];
+        var subMenu = getSubMenu(template, 'Help');
+        expect(subMenu.submenu[5].label).toEqual('Submit an Issue');
+        spyOn(mockElectron.shell, 'openExternal');
         subMenu.submenu[5].click();
+        expect(mockElectron.shell.openExternal.calls.argsFor(0)).toEqual(['https://github.com/owasp/threat-dragon-desktop/issues/new/choose/']); 
+    });
+
+    it('Help menu item should browse to check for updates', function() {
+        var template = mockElectron.Menu.buildFromTemplate.calls.argsFor(0)[0];
+        var subMenu = getSubMenu(template, 'Help');
+        expect(subMenu.submenu[6].label).toEqual('Check for updates ...');
+        spyOn(mockElectron.shell, 'openExternal');
+        subMenu.submenu[6].click();
+        expect(mockElectron.shell.openExternal.calls.argsFor(0)).toEqual(['https://github.com/OWASP/threat-dragon-desktop/releases/']); 
+    });
+
+    it('Help menu seventh item should be a separator', function() {
+        var template = mockElectron.Menu.buildFromTemplate.calls.argsFor(0)[0];
+        var subMenu = getSubMenu(template, 'Help');
+        expect(subMenu.submenu[7].type).toEqual('separator');
+    });
+
+    it('Help menu item should show a help about', function() {
+        var template = mockElectron.Menu.buildFromTemplate.calls.argsFor(0)[0];
+        var subMenu = getSubMenu(template, 'Help');
+        expect(subMenu.submenu[8].label).toEqual('About');
+        spyOn(mockElectron.dialog, 'messageBox');
+        subMenu.submenu[8].click();
         expect(mockElectron.dialog.messageBox).toHaveBeenCalled();
     });
 
