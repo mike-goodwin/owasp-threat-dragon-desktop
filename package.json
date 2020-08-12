@@ -60,7 +60,7 @@
     "jquery": "3.5.0",
     "lodash": "4.17.19",
     "owasp-threat-dragon-core": "1.3.0",
-    "promise-fs": "2.1.0",
+    "promise-fs": "2.1.1",
     "snyk": "^1.362.1",
     "yargs": "15.4.0"
   },
