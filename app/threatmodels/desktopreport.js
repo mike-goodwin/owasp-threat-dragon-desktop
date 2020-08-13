@@ -156,7 +156,7 @@ function desktopreport($q, $routeParams, $location, common, datacontext, threatm
                 log.info('Desktop Report printed successfully');
             } else {
                 logError('Report printing failed');
-                log.error('Desktop Report printing failed', errorType);
+                log.error('Desktop Report printing failed:', errorType);
             }
             done();
         });
