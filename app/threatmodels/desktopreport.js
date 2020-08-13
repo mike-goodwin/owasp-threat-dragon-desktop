@@ -83,105 +83,83 @@ function desktopreport($q, $routeParams, $location, common, datacontext, threatm
 
     function exportPDF() {
         log.debug('Desktop Report export PDF');
-        electron.currentWindow.webContents.printToPDF(pdfSettings, onExported);
+        electron.currentWindow.webContents.printToPDF({
+            landscape: false,
+            marginsType: 0,
+            printBackground: false,
+            printSelectionOnly: false,
+            pageSize: 'A4',
+        }).then(data => {
 
-        function pdfSettings() {
-
-            var option = {
-                landscape: false,
-                marginsType: 0,
-                printBackground: false,
-                printSelectionOnly: false,
-                pageSize: 'A4',
-            };
-
-            return option;
-        }
-
-        function onExported(error, data) {
-            log.debug('Desktop Report on export PDF');
             var pdfPath = datacontext.threatModelLocation.replace('.json', '.pdf');
-            if (error) {
-                onError(error);
-                //close the app after error
+            log.silly('Desktop Report on export PDF to', pdfPath);
+
+            fsp.writeFile(pdfPath, data).then(function() { 
+                log.debug('Desktop Report exported PDF to', pdfPath);
+                //close the app after export
                 exitApp();
-            } else {
-                fsp.writeFile(pdfPath, data).then(function() { 
-                    log.debug('Desktop Report exported PDF to', pdfPath);
-                    //close the app after export
-                    exitApp();
-                });
-            }
-        }
+            }).catch(error => {
+                onError(error);
+                //close the app on error
+                exitApp();
+            });
+
+        }).catch(error => {
+            onError(error);
+            //close the app on error
+            exitApp();
+        });
     }
 
     function savePDF(done) {
         log.debug('Desktop Report save PDF');
-        electron.currentWindow.webContents.printToPDF(pdfSettings, onSaved);
 
-        function pdfSettings() {
+        electron.currentWindow.webContents.printToPDF({
+            landscape: false,
+            marginsType: 0,
+            printBackground: false,
+            printSelectionOnly: false,
+            pageSize: 'A4',
+        }).then(data => {
 
-            var option = {
-                landscape: false,
-                marginsType: 0,
-                printBackground: false,
-                printSelectionOnly: false,
-                pageSize: 'A4',
-            };
-
-            return option;
-        }
-
-        function onSaved(error, data) {
+            var defaultPath = null;
             log.debug('Desktop Report on save PDF');
-            if (error) {
-                done();
-                onError(error);
-            } else {
 
-                var defaultPath = null;
-                if (datacontext.threatModelLocation) {
-                    defaultPath = datacontext.threatModelLocation.replace('.json', '.pdf');
-                }
+            if (datacontext.threatModelLocation) {
+                defaultPath = datacontext.threatModelLocation.replace('.json', '.pdf');
+            }
 
-                electron.dialog.saveAsPDF(defaultPath, function (fileName) {
-                    fsp.writeFile(fileName, data).then(function() { 
-                        log.debug('Desktop Report saved PDF');
-                        done();
-                    });
-                },
-                function() {
-                    logInfo('Cancelled save threat model');
-                    log.info('Cancelled save threat model');
+            electron.dialog.saveAsPDF(defaultPath, function (fileName) {
+                fsp.writeFile(fileName, data).then(function() { 
+                    log.debug('Desktop Report saved PDF');
                     done();
                 });
-            }
-        }
+            },
+            function() {
+                logInfo('Cancelled save threat model');
+                log.info('Cancelled save threat model');
+                done();
+            });
+
+        }).catch(error => {
+            done();
+            onError(error);
+        });
     }
-    
+
     function printPDF(done) {
         log.debug('Desktop Report print PDF');
-
         //use default print options
-        var printSettings = {};
-
-        electron.currentWindow.webContents.print(printSettings, onPrinted);
-        
-        function onPrinted(success) {
+        electron.currentWindow.webContents.print({}, (success, errorType) => {
             if (success) {
                 logSuccess('Report printed successfully');
                 log.info('Desktop Report printed successfully');
-                done();
             } else {
-                // see Electron issue https://github.com/electron/electron/issues/19008
-                // application will "hang" if the print dialog is cancelled
-                // calling reload instead of done is a temporary workaround
-                // it looks bad but the app keeps working
                 logError('Report printing failed');
-                log.error('Desktop Report printing failed');
-                electron.currentWindow.webContents.reload();
+                log.error('Desktop Report printing failed:', errorType);
             }
-        }
+            done();
+        });
     }
 }
 

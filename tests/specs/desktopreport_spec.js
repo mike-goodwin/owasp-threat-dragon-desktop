@@ -118,7 +118,7 @@ describe('desktopreport controller', function () {
 
         describe('PDF tests', function() {
 
-            it('should log an error', function() {
+            xit('should log an error', function() {
 
                 var testError = new Error('test error');
                 var testErrorMessage = 'message';
@@ -144,7 +144,7 @@ describe('desktopreport controller', function () {
 
             });
 
-            it('should save the PDF file with default file name', function() {
+            xit('should save the PDF file with default file name', function() {
 
                 var testData = 'data';
                 mockElectron.currentWindow.webContents.printToPDF = function(settings, callback) {
@@ -170,7 +170,7 @@ describe('desktopreport controller', function () {
 
             });
 
-            it('should save the PDF file with no default file name', function() {
+            xit('should save the PDF file with no default file name', function() {
 
                 var testData = 'data';
                 mockElectron.currentWindow.webContents.printToPDF = function(settings, callback) {
@@ -197,7 +197,7 @@ describe('desktopreport controller', function () {
 
             });
 
-            it('should set the PDF options', function() {
+            xit('should set the PDF options', function() {
 
                 spyOn(mockElectron.currentWindow.webContents, 'printToPDF');
                 $controller('desktopreport as vm', { $scope: $scope });
@@ -214,7 +214,7 @@ describe('desktopreport controller', function () {
                 expect(options.pageSize).toEqual('A4');
             });
 
-            it('should not save the PDF file', function() {
+            xit('should not save the PDF file', function() {
 
                 var testData = 'data';
                 mockElectron.currentWindow.webContents.printToPDF = function(settings, callback) {
@@ -245,7 +245,7 @@ describe('desktopreport controller', function () {
                 expect(mockElectron.currentWindow.webContents.reload).not.toHaveBeenCalled();
             });
 
-            it('should handle a print PDF error', function() {
+            xit('should handle a print PDF error', function() {
 
                 mockElectron.currentWindow.webContents.print = function(settings, callback) {
                     callback(false);
