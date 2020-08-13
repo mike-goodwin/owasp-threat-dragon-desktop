@@ -130,7 +130,7 @@ function doCommand() {
   return win;
 }
 
-function onClosed() {
+function winClosed() {
   // dereference the window
   mainWindow = null;
 }
@@ -162,17 +162,35 @@ function createMainWindow(show = true, displayWidth = -1, displayHeight = -1) {
   log.info('Calling Threat Dragon from command line');
 
   win.loadURL(modalPath);
-  win.on('closed', onClosed);
   win.webContents.on('new-window', function (e, url) {
     e.preventDefault();
     require('electron').shell.openExternal(url);
   });
 
+  win.on('closed', winClosed);
+
   return win;
 }
 
+app.on('before-quit', (e) => {
+  var choice = electron.dialog.showMessageBoxSync(null,
+    {
+      type: 'question',
+      buttons: ['Yes', 'No'],
+      title: 'Confirm',
+      message: 'Are you sure you want to quit?'
+    });
+
+  if (choice == 1) {
+    log.silly('cancel quitting app');
+    e.preventDefault();
+  } else {
+    log.silly('quitting app');
+  }
+});
+
 app.on('window-all-closed', () => {
-  log.debug('main window all closed');
+  log.silly('windows all closed');
   app.quit();
 });
 
@@ -198,7 +216,7 @@ app.on('ready', () => {
   }
 
   mainWindow.once('ready-to-show', () => {
-    log.debug('main window ready to show');
+    log.silly('main window ready to show');
     if (!isCliCommand()) {
       mainWindow.show();
       mainWindow.maximize();
