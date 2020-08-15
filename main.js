@@ -190,6 +190,8 @@ function createMainWindow(show = true, displayWidth = -1, displayHeight = -1) {
     require('electron').shell.openExternal(url);
   });
 
+  //Workaround: The before-quit seems to be called after quitting when used on Windows and Linux from the cmd line.
+  //An additional event 'close' is put on win to fix that
   win.on('close', winIsClosing);
 
   win.on('closed', winClosed);
@@ -197,8 +199,6 @@ function createMainWindow(show = true, displayWidth = -1, displayHeight = -1) {
   return win;
 }
 
-//Workaround: The before-quit seems to be called after quitting when used on Windows and Linux from the cmd line.
-//An additional event 'close' is put on win to fix that
 app.on('before-quit', (e) => {
   winIsClosing(e);
 });
