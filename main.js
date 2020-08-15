@@ -71,6 +71,8 @@ const argv = require('yargs')
 // prevent window being garbage collected
 let mainWindow;
 
+var windowIsClosed = false;
+
 // set the log level to one of error, warn, info, verbose, debug, silly
 const log = require('./app/logger').init(argv.verbose);
 
@@ -135,6 +137,27 @@ function winClosed() {
   mainWindow = null;
 }
 
+function winIsClosing(e) {
+  //To avoid showing the dialog box twice
+  if (!windowIsClosed) {
+    var choice = electron.dialog.showMessageBoxSync(null,
+      {
+        type: 'question',
+        buttons: ['Yes', 'No'],
+        title: 'Confirm',
+        message: 'Are you sure you want to quit?'
+      });
+
+    if (choice == 1) {
+      log.silly('cancel quitting app');
+      e.preventDefault();
+    } else {
+      windowIsClosed = true;
+      log.silly('quitting app');
+    }
+  }
+}
+
 function createMainWindow(show = true, displayWidth = -1, displayHeight = -1) {
 
   const modalPath = path.join('file://', __dirname, './index.html');
@@ -167,26 +190,17 @@ function createMainWindow(show = true, displayWidth = -1, displayHeight = -1) {
     require('electron').shell.openExternal(url);
   });
 
+  win.on('close', winIsClosing);
+
   win.on('closed', winClosed);
 
   return win;
 }
 
+//Workaround: The before-quit seems to be called after quitting when used on Windows and Linux from the cmd line.
+//An additional event 'close' is put on win to fix that
 app.on('before-quit', (e) => {
-  var choice = electron.dialog.showMessageBoxSync(null,
-    {
-      type: 'question',
-      buttons: ['Yes', 'No'],
-      title: 'Confirm',
-      message: 'Are you sure you want to quit?'
-    });
-
-  if (choice == 1) {
-    log.silly('cancel quitting app');
-    e.preventDefault();
-  } else {
-    log.silly('quitting app');
-  }
+  winIsClosing(e);
 });
 
 app.on('window-all-closed', () => {
