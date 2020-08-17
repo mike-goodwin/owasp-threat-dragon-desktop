@@ -85,6 +85,13 @@ global.params = {
   url: '/'
 }
 
+//Used to communicate with the ipcRenderer on threat-dragon-core to watch for unsaved changes
+var ipc = require('electron').ipcMain;
+var diagramIsDirty = false;
+ipc.on('vmIsDirty', function(event, data){
+  diagramIsDirty = data;
+});
+
 function isCliCommand() {
   return (command != null);
 }
@@ -139,13 +146,13 @@ function winClosed() {
 
 function winIsClosing(e) {
   //To avoid showing the dialog box twice
-  if (!windowIsClosed) {
+  if (!windowIsClosed && diagramIsDirty) {
     var choice = electron.dialog.showMessageBoxSync(null,
       {
         type: 'question',
         buttons: ['Yes', 'No'],
         title: 'Confirm',
-        message: 'Are you sure you want to quit?'
+        message: 'You have unsaved changes. Are you sure you want to quit?'
       });
 
     if (choice == 1) {
