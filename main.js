@@ -71,6 +71,8 @@ const argv = require('yargs')
 // prevent window being garbage collected
 let mainWindow;
 
+var windowIsClosed = false;
+
 // set the log level to one of error, warn, info, verbose, debug, silly
 const log = require('./app/logger').init(argv.verbose);
 
@@ -82,6 +84,13 @@ global.params = {
   modelFile: argv.json,
   url: '/'
 }
+
+//Used to communicate with the ipcRenderer on threat-dragon-core to watch for unsaved changes
+var ipc = require('electron').ipcMain;
+var diagramIsDirty = false;
+ipc.on('vmIsDirty', function(event, data){
+  diagramIsDirty = data;
+});
 
 function isCliCommand() {
   return (command != null);
@@ -130,9 +139,30 @@ function doCommand() {
   return win;
 }
 
-function onClosed() {
+function winClosed() {
   // dereference the window
   mainWindow = null;
+}
+
+function winIsClosing(e) {
+  //To avoid showing the dialog box twice
+  if (!windowIsClosed && diagramIsDirty) {
+    var choice = electron.dialog.showMessageBoxSync(null,
+      {
+        type: 'question',
+        buttons: ['Yes', 'No'],
+        title: 'Confirm',
+        message: 'You have unsaved changes. Are you sure you want to quit?'
+      });
+
+    if (choice == 1) {
+      log.silly('cancel quitting app');
+      e.preventDefault();
+    } else {
+      windowIsClosed = true;
+      log.silly('quitting app');
+    }
+  }
 }
 
 function createMainWindow(show = true, displayWidth = -1, displayHeight = -1) {
@@ -162,17 +192,26 @@ function createMainWindow(show = true, displayWidth = -1, displayHeight = -1) {
   log.info('Calling Threat Dragon from command line');
 
   win.loadURL(modalPath);
-  win.on('closed', onClosed);
   win.webContents.on('new-window', function (e, url) {
     e.preventDefault();
     require('electron').shell.openExternal(url);
   });
 
+  //Workaround: The before-quit seems to be called after quitting when used on Windows and Linux from the cmd line.
+  //An additional event 'close' is put on win to fix that
+  win.on('close', winIsClosing);
+
+  win.on('closed', winClosed);
+
   return win;
 }
 
+app.on('before-quit', (e) => {
+  winIsClosing(e);
+});
+
 app.on('window-all-closed', () => {
-  log.debug('main window all closed');
+  log.silly('windows all closed');
   app.quit();
 });
 
@@ -198,7 +237,7 @@ app.on('ready', () => {
   }
 
   mainWindow.once('ready-to-show', () => {
-    log.debug('main window ready to show');
+    log.silly('main window ready to show');
     if (!isCliCommand()) {
       mainWindow.show();
       mainWindow.maximize();
