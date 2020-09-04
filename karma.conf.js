@@ -53,10 +53,10 @@ module.exports = function(config) {
 
     //config for threshhold reporter
     thresholdReporter: {
-      statements: 90,
-      branches: 90,
-      functions: 90,
-      lines: 90
+      statements: 80,
+      branches: 75,
+      functions: 80,
+      lines: 80
     },
 
     //config for ngHtml2JsPreprocessor

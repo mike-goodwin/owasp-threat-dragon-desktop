@@ -1,6 +1,10 @@
-﻿'use strict';
+'use strict';
 
 function shell($rootScope, $scope, $location, $route, common, datacontext, electron, threatmodellocator, VERSION) {
+
+    const log = electron.log;
+    log.debug('Shell loaded with verbosity level', electron.logLevel);
+
     var controllerId = 'shell';
     var logSuccess = common.logger.getLogFn(controllerId, 'success');
     var logError = common.logger.getLogFn(controllerId, 'error');
@@ -8,6 +12,7 @@ function shell($rootScope, $scope, $location, $route, common, datacontext, elect
     menuConfigurator();
 
     $scope.$on('$viewContentLoaded', function () {
+        log.debug('Shell -> appLoaded at location.url', $location.url());
         $rootScope.appLoaded = true;
     });
 
@@ -15,10 +20,13 @@ function shell($rootScope, $scope, $location, $route, common, datacontext, elect
 
     function activate() {
         logSuccess('Threat Dragon loaded!', null, true);
+        log.info('Threat Dragon loaded');
+        log.debug('Shell -> activate at location.url', $location.url());
         common.activateController([], controllerId);
     }
 
     function menuConfigurator() {
+        log.debug('Shell -> menuConfigurator');
         var template = [
             {
                 label: 'File',
@@ -86,12 +94,13 @@ function shell($rootScope, $scope, $location, $route, common, datacontext, elect
 
                             function onSaveError(error) {
                                 logError(error);
+                                log.error(error);
                             }
                         }
                     },
                     {
                         label: 'Close Model',
-                        accelerator: 'CmdOrCtrl+F4',
+                        accelerator: process.platform === 'darwin' ? 'CmdOrCtrl+W' : 'CmdOrCtrl+F4',
                         click: function() {
                             datacontext.close();
                             $location.path('/');
@@ -111,8 +120,9 @@ function shell($rootScope, $scope, $location, $route, common, datacontext, elect
                         type: 'separator'
                     },
                     {
-                        label: 'Exit',
-                        role: 'close'
+                        label: process.platform === 'darwin' ? 'Quit' : 'Exit',
+                        accelerator: process.platform === 'darwin' ? 'CmdOrCtrl+Q' : 'CmdOrCtrl+W',
+                        role: process.platform === 'darwin' ? 'quit' : 'close'
                     }
                 ]
             },
@@ -198,25 +208,40 @@ function shell($rootScope, $scope, $location, $route, common, datacontext, elect
                     {
                         label: 'Documentation',
                         click: function() {
-                            electron.shell.openExternal('http://docs.threatdragon.org');
-                        }
-                    },
-                    {
-                        label: 'Submit an Issue',
-                        click: function() {
-                            electron.shell.openExternal('https://github.com/mike-goodwin/owasp-threat-dragon-desktop/issues/new');
-                        }
-                    },
-                    {
-                        label: 'Visit us on GitHub',
-                        click: function() {
-                            electron.shell.openExternal('https://github.com/mike-goodwin/owasp-threat-dragon-desktop');
+                            electron.shell.openExternal('http://docs.threatdragon.org/');
                         }
                     },
                     {
                         label: 'Visit us at OWASP',
                         click: function() {
                             electron.shell.openExternal('https://owasp.org/www-project-threat-dragon/');
+                        }
+                    },
+                    {
+                        label: 'OWASP Cheat Sheets',
+                        click: function() {
+                            electron.shell.openExternal('https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html');
+                        }
+                    },
+                    {
+                        type: 'separator'
+                    },
+                    {
+                        label: 'Visit us on GitHub',
+                        click: function() {
+                            electron.shell.openExternal('https://github.com/owasp/threat-dragon-desktop/');
+                        }
+                    },
+                    {
+                        label: 'Submit an Issue',
+                        click: function() {
+                            electron.shell.openExternal('https://github.com/owasp/threat-dragon-desktop/issues/new/choose/');
+                        }
+                    },
+                    {
+                        label: 'Check for updates ...',
+                        click: function() {
+                            electron.shell.openExternal('https://github.com/OWASP/threat-dragon-desktop/releases/');
                         }
                     },
                     {
