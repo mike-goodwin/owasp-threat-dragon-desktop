@@ -6,8 +6,6 @@ module.exports.all = async function () {
   await debAmd64()
   await rpmX86()
   await rpmAmd64()
-  await snapX86()
-  await snapAmd64()
 }
 
 async function createRelease (installer, options) {
@@ -70,31 +68,5 @@ async function rpmAmd64 () {
   }
 
   await createRelease(require('electron-installer-redhat'), options)
-}
-
-async function snapX86 () {
-  console.log('** Creating Snap release .snap package for Intel x86 64 bit')
-
-  const options = {
-    arch: 'x86_64',
-    dest: __dirname + '/installers/linux-x64',
-    name: 'threatdragon',
-    src: __dirname + '/build/OWASP-Threat-Dragon-linux-x64/',
-  }
-
-  await createRelease(require('electron-installer-snap'), options)
-}
-
-async function snapAmd64 () {
-  console.log('** Creating Snap release .snap package for AMD 64 bit')
-
-  const options = {
-    arch: 'amd64',
-    dest: __dirname + '/installers/linux-x64',
-    name: 'threatdragon',
-    src: __dirname + '/build/OWASP-Threat-Dragon-linux-x64/',
-  }
-
-  await createRelease(require('electron-installer-snap'), options)
 }
 
