@@ -208,7 +208,7 @@ function shell($rootScope, $scope, $location, $route, common, datacontext, elect
                     {
                         label: 'Documentation',
                         click: function() {
-                            electron.shell.openExternal('http://docs.threatdragon.org/');
+                            electron.shell.openExternal('https://threatdragon.github.io/');
                         }
                     },
                     {

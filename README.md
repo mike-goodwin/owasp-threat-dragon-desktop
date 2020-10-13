@@ -35,7 +35,7 @@ in synch with the main code branch.
 [Electron](https://electron.atom.io/). There are installers available for both Windows and Mac OSX, as well as rpm and
 debian packages for Linux. For the desktop variant models are stored on the local filesystem.
 
-[End user help](http://docs.threatdragon.org/) is available for both variants.
+[End user help](https://threatdragon.github.io/) is available for both variants.
 
 This repository contains the files for the desktop variant.
 
