@@ -59,7 +59,7 @@ For example to export a given threat model file to pdf :
 
 `npm run pdf ./threat-model.json`
 
-## Installation for MacOS ##
+## Desktop installation for MacOS ##
 The .dmg installer for MacOS can be downloaded from the
 [releases folder](https://github.com/mike-goodwin/owasp-threat-dragon-desktop/releases).
 Open the download and drag 'OWASP Threat  Dragon' to the application directory. When the copy has
@@ -81,18 +81,18 @@ _macOS cannot verify that this app is free from malware_ . To resolve this:
 Threat Dragon is now saved as an exception to your security settings, and you can run it in the future by
 double-clicking it just as you can any registered app.
 
-## Installation for Windows ##
+## Desktop installation for Windows ##
 The .exe installer for Windows can be downloaded from the
 [releases folder](https://github.com/mike-goodwin/owasp-threat-dragon-desktop/releases).
 
-## Installation for Linux ##
+## Desktop installation for Linux ##
 Packages for both Debian and Fedora Linux on AMD64 and X86-64bit platforms can be downloaded from the
 [releases folder](https://github.com/mike-goodwin/owasp-threat-dragon-desktop/releases), along with
 snap and AppImage installers.
 
-# Running from command line #
-With an installed Threat Dragon, and if the executable is in the path, then the command line interface
-can be called. Run this command to get help :
+## Optionally run from command line ##
+With the desktop version of Threat Dragon installed then run the application as normal. Additionally there is a command
+line interface which can be used if the executable is in the environment path. Run this command to get help :
 
 `OWASP-Threat-Dragon help`
 
