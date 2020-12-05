@@ -9,7 +9,6 @@ which has the issues and pull requests from March 2017 up to June 2020.
 [![Build Status](https://travis-ci.org/owasp/threat-dragon-desktop.svg?branch=main)](https://travis-ci.org/owasp/threat-dragon-desktop)
 [![codecov.io](http://codecov.io/github/owasp/threat-dragon-desktop/coverage.svg?branch=main)](http://codecov.io/github/owasp/threat-dragon-desktop?branch=main)
 [![GitHub license](https://img.shields.io/github/license/owasp/threat-dragon-desktop.svg)](LICENSE.txt)
-[![Known Vulnerabilities](https://snyk.io/test/github/owasp/threat-dragon-desktop/badge.svg)](https://snyk.io/test/github/owasp/threat-dragon-desktop)
 
 # [OWASP](https://www.owasp.org) Threat Dragon #
 
@@ -39,7 +38,7 @@ debian packages for Linux. For the desktop variant models are stored on the loca
 
 This repository contains the files for the desktop variant.
 
-# Local installation #
+## Installation from command line ##
 
 For the latest versions of code between releases, `npm` can be used to install and run Threat Dragon locally:
 
@@ -59,31 +58,50 @@ For example to export a given threat model file to pdf :
 
 `npm run pdf ./threat-model.json`
 
-Installers for OSX and Windows can be downloaded from the
-[releases folder](https://github.com/mike-goodwin/owasp-threat-dragon-desktop/releases), along with packages
-for both Debian and Fedora Linux on AMD64 and X86-64bit platforms.
+## Desktop installation for MacOS ##
+The .dmg installer for MacOS can be downloaded from the
+[releases folder](https://github.com/mike-goodwin/owasp-threat-dragon-desktop/releases).
+Open the download and drag 'OWASP Threat  Dragon' to the application directory. When the copy has
+finished then Threat  Dragon can be run from launchpad or Finder -> Applications.
 
-## Running on MacOS ##
-At present Threat Dragon .dmg files are not code signed, so when running for the first time an error message
-will be shown. This is along the lines of 
-'OWASP Threat Dragon cannot be opened because the developer cannot be verified'. To launch the appplication:
+The Threat Dragon .dmg files are not code signed, so when running for the first time an error message
+will probably be shown in a pop-up window. This is along the lines of 
+_'OWASP Threat Dragon cannot be opened because the developer cannot be verified'_ or 
+_“OWASP ZAP” cannot be opened because the developer cannot be verified,_
+_macOS cannot verify that this app is free from malware_ . To resolve this:
 
-1. In the Finder  on your Mac, locate OWASP Threat Dragon. Don’t use Launchpad to do this, because
-Launchpad doesn’t allow you to access the shortcut menu
-2. Control-click the OWASP Threat Dragon icon, then choose Open from the shortcut menu
-3. Click Open
+1. close the error message popup
+2. from the MacOS 'Apple', top left of display, go to "System Preferences" > "Security & Privacy"
+3. at the bottom of the dialog, see message saying that "OWASP-Threat-Dragon" was blocked. Next to it, click "Open anyway"
+4. the initial error message will pop up again, but this time have the option to click "Open" to run Threat Dragon despite the warning
+5. click 'Open' and Threat Dragon now runs OK
+6. this only has to be done once, after this Threat Dragon can be run as normal
 
-Threat Dragon is now saved as an exception to your security settings, and you can open it in the future by
+Threat Dragon is now saved as an exception to your security settings, and you can run it in the future by
 double-clicking it just as you can any registered app.
 
-With an installed Threat Dragon, and if the executable is in the path, then
-the command line interface can be called, for example:
+## Desktop installation for Windows ##
+The .exe installer for Windows can be downloaded from the
+[releases folder](https://github.com/mike-goodwin/owasp-threat-dragon-desktop/releases).
+
+## Desktop installation for Linux ##
+Packages for both Debian and Fedora Linux on AMD64 and X86-64bit platforms can be downloaded from the
+[releases folder](https://github.com/mike-goodwin/owasp-threat-dragon-desktop/releases), along with
+snap and AppImage installers.
+
+## Optionally run from command line ##
+With the desktop version of Threat Dragon installed then run the application as normal. Additionally there is a command
+line interface which can be used if the executable is in the environment path. Run this command to get help :
 
 `OWASP-Threat-Dragon help`
 
-And similarly to export to pdf:
+For example to export a given threat model file to pdf :
 
 `OWASP-Threat-Dragon pdf ./threat-model.json --verbose`
+
+or on Windows:
+
+`OWASP-Threat-Dragon pdf .\threat-model.json --verbose`
 
 # Screenshots # 
 
