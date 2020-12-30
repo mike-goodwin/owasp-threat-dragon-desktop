@@ -64,21 +64,12 @@ The .dmg installer for MacOS can be downloaded from the
 Open the download and drag 'OWASP Threat  Dragon' to the application directory. When the copy has
 finished then Threat  Dragon can be run from launchpad or Finder -> Applications.
 
-The Threat Dragon .dmg files are not code signed, so when running for the first time an error message
-will probably be shown in a pop-up window. This is along the lines of 
+If an error message pops up when running for the first time, along the lines of 
 _'OWASP Threat Dragon cannot be opened because the developer cannot be verified'_ or 
 _“OWASP ZAP” cannot be opened because the developer cannot be verified,_
-_macOS cannot verify that this app is free from malware_ . To resolve this:
-
-1. close the error message popup
-2. from the MacOS 'Apple', top left of display, go to "System Preferences" > "Security & Privacy"
-3. at the bottom of the dialog, see message saying that "OWASP-Threat-Dragon" was blocked. Next to it, click "Open anyway"
-4. the initial error message will pop up again, but this time have the option to click "Open" to run Threat Dragon despite the warning
-5. click 'Open' and Threat Dragon now runs OK
-6. this only has to be done once, after this Threat Dragon can be run as normal
-
-Threat Dragon is now saved as an exception to your security settings, and you can run it in the future by
-double-clicking it just as you can any registered app.
+_macOS cannot verify that this app is free from malware_ then follow
+[this FAQ](https://github.com/OWASP/threat-dragon-desktop/wiki/FAQs#why-do-i-get-developer-can-not-be-verified-errors-after-installing-on-macos)
+to resolve this.
 
 ## Desktop installation for Windows ##
 The .exe installer for Windows can be downloaded from the
