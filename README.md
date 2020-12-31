@@ -38,20 +38,9 @@ in synch with the main code branch.
 
 Install instructions [are here](https://github.com/OWASP/threat-dragon-desktop/wiki#install-instructions).
 
-## Optionally run from command line
-With the desktop version of Threat Dragon installed the application will run using a graphical innterface.
-Additionally there is a command line interface which can be used if the executable is in the environment path.
-For example run this command to get help :
-
-`OWASP-Threat-Dragon help`
-
-And to export a given threat model file to pdf :
-
-`OWASP-Threat-Dragon pdf ./threat-model.json --verbose`
-
-or on Windows:
-
-`OWASP-Threat-Dragon.exe pdf .\threat-model.json --verbose`
+In addition to the Threat Dragon graphical user interface, there is a
+[command line interface](https://github.com/OWASP/threat-dragon-desktop/wiki/FAQs#can-i-run-threat--dragon-from-a-command-line)
+for scripting and build pipelines.
 
 # Screenshots
 
