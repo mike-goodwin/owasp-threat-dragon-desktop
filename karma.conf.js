@@ -1,15 +1,8 @@
-var cover = require('browserify-istanbul');
-var coverOptions = { ignore: ['test/**/*.js'], defaultIgnore: true };
-
 module.exports = function(config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
-
-    //set high to avoid PhantomJS timeout
-    //https://github.com/karma-runner/karma-phantomjs-launcher/issues/126
-    browserNoActivityTimeout: 120000,
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
@@ -17,21 +10,17 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'tests/specs/*.js'
+      'test/spec/**/*.js'
     ],
-
 
     // list of files to exclude
-    exclude: [
-
-    ],
-
+    exclude: [],
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
         'app/**/*.html': ['ng-html2js'],
-        'tests/specs/*.js': ['browserify']
+        'test/spec/**/*.js': ['browserify']
     },
 
     browserify: {
@@ -42,7 +31,6 @@ module.exports = function(config) {
     },
 
     // test results reporter to use
-    // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
     reporters: ['spec', 'coverage', 'threshold'],
 
