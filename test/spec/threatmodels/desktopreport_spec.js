@@ -233,30 +233,34 @@ describe('desktopreport controller', function () {
 
             it('should print the PDF file', function() {
 
+                var logSuccess = spyOn(common.logger, 'logSuccess');
+                var logError = spyOn(common.logger, 'logError');
                 mockElectron.currentWindow.webContents.print = function(settings, callback) {
                     callback(true);
                 };
                 var done = jasmine.createSpy('done');
-                spyOn(mockElectron.currentWindow.webContents, 'reload');
                 $controller('desktopreport as vm', { $scope: $scope });
                 $scope.vm.printPDF(done);
 
+                expect(logSuccess).toHaveBeenCalled();
+                expect(logError).not.toHaveBeenCalled();
                 expect(done).toHaveBeenCalled();
-                expect(mockElectron.currentWindow.webContents.reload).not.toHaveBeenCalled();
             });
 
-            xit('should handle a print PDF error', function() {
+            it('should handle a print PDF error', function() {
 
+                var logSuccess = spyOn(common.logger, 'logSuccess');
+                var logError = spyOn(common.logger, 'logError');
                 mockElectron.currentWindow.webContents.print = function(settings, callback) {
                     callback(false);
                 };
                 var done = jasmine.createSpy('done');
-                spyOn(mockElectron.currentWindow.webContents, 'reload');
                 $controller('desktopreport as vm', { $scope: $scope });
                 $scope.vm.printPDF(done);
 
-                expect(done).not.toHaveBeenCalled();
-                expect(mockElectron.currentWindow.webContents.reload).toHaveBeenCalled();
+                expect(logSuccess).not.toHaveBeenCalled();
+                expect(logError).toHaveBeenCalled();
+                expect(done).toHaveBeenCalled();
             });
         });
     });
