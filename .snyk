@@ -1,5 +1,5 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.14.1
+version: v1.21.5
 ignore: {}
 # patches apply the minimum changes required to fix a vulnerability
 patch:
@@ -20,3 +20,14 @@ patch:
   'npm:mime:20170907':
     - owasp-threat-dragon-core > rework-npm-cli > rework > mime:
         patched: '2020-02-22T17:10:05.207Z'
+  SNYK-JS-LODASH-567746:
+    - electron-installer-debian > lodash:
+        patched: '2021-07-08T05:53:56.317Z'
+    - electron-installer-redhat > lodash:
+        patched: '2021-07-08T05:53:56.317Z'
+    - electron-installer-debian > electron-installer-common > lodash:
+        patched: '2021-07-08T05:53:56.317Z'
+    - electron-installer-redhat > electron-installer-common > lodash:
+        patched: '2021-07-08T05:53:56.317Z'
+    - electron-installer-snap > electron-installer-common > lodash:
+        patched: '2021-07-08T05:53:56.317Z'
