@@ -54,7 +54,7 @@
     "lodash": "4.17.12",
     "owasp-threat-dragon-core": "1.2.0",
     "promise-fs": "2.1.0",
-    "snyk": "^1.295.0"
+    "snyk": "^1.996.0"
   },
   "devDependencies": {
     "angular-mocks": "1.7.8",
